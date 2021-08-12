@@ -2,19 +2,23 @@ package com.tbs.purecolorcollector.ui.main
 
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
-import android.content.ContentResolver
-import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.palette.graphics.Palette
 import com.skydoves.colorpickerview.ColorEnvelope
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
+import com.tbs.purecolorcollector.MainActivity
 import com.tbs.purecolorcollector.R
 import com.tbs.purecolorcollector.databinding.MainFragmentBinding
+import com.tbs.purecolorcollector.utils.StatusBarUtils
 
 class MainFragment : BaseFragment() {
 
@@ -45,8 +49,15 @@ class MainFragment : BaseFragment() {
 
         binding.colorPickerView.setColorListener(object : ColorEnvelopeListener {
             override fun onColorSelected(envelope: ColorEnvelope?, fromUser: Boolean) {
-                envelope?.let { binding.tvShowColor.setBackgroundColor(it.color) }
+//                envelope?.let { binding.tvShowColor.setBackgroundColor(it.color) }
                 binding.tvShowColor.setText("#" + envelope?.hexCode)
+
+                envelope?.let { StatusBarUtils.setColor(activity!!, it.color) }
+
+//                envelope?.let { binding.toolbar.setBackgroundColor(it.color) }
+                if (activity is MainActivity) {
+                    envelope?.let { (activity as MainActivity).setToolBarBg(it.color) }
+                }
             }
         })
 
@@ -65,6 +76,23 @@ class MainFragment : BaseFragment() {
         }
 
         binding.colorPickerView.setPaletteDrawable(context?.getDrawable(R.drawable.big_mouth_bird))
+
+        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.big_mouth_bird)
+        createPaletteAsync(bitmap)
+
+    }
+
+
+    fun createPaletteAsync(bitmap: Bitmap) {
+
+//        Palette.Builder
+
+        Palette.from(bitmap).generate {
+            val color = it?.getLightVibrantColor(Color.BLACK)
+            if (color != null) {
+                binding.tvPalette.setBackgroundColor(color)
+            }
+        }
     }
 
 
@@ -74,8 +102,10 @@ class MainFragment : BaseFragment() {
             if (resultCode == RESULT_OK) {
                 val imageUri = data?.data
                 val selectImage = imageUri?.let { activity?.contentResolver?.openInputStream(it) }
+
                 val drawable = BitmapDrawable(resources, selectImage)
                 binding.colorPickerView.setPaletteDrawable(drawable)
+                createPaletteAsync(drawable.bitmap)
             }
         }
     }
