@@ -1,11 +1,12 @@
-package com.litesuits.common.utils;
+package com.tbs.purecolorcollector.utils.common.utils;
 
 import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Build;
 import android.text.format.Formatter;
-import com.litesuits.android.log.Log;
+
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 /**
  * Get memory info.

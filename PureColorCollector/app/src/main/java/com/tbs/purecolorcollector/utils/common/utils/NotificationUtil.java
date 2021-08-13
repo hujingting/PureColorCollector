@@ -1,4 +1,4 @@
-package com.litesuits.common.utils;
+package com.tbs.purecolorcollector.utils.common.utils;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -12,7 +12,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import com.litesuits.android.log.Log;
+
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 import java.util.ArrayList;
 
@@ -81,7 +82,7 @@ public class NotificationUtil {
         } else {
             // 创建一个NotificationManager的引用
             NotificationManager notificationManager = (NotificationManager) context
-                    .getSystemService(android.content.Context.NOTIFICATION_SERVICE);
+                    .getSystemService(Context.NOTIFICATION_SERVICE);
             // 定义Notification的各种属性
             Notification notification = new Notification(icon, ticker, System.currentTimeMillis());
             notification.flags |= Notification.FLAG_ONGOING_EVENT | Notification.FLAG_SHOW_LIGHTS;
@@ -90,7 +91,7 @@ public class NotificationUtil {
             notification.ledOnMS = 5000; //闪光时间，毫秒
 
             notification.tickerText = ticker;
-            notification.setLatestEventInfo(context, title, msg, pendingIntent);
+//            notification.setLatestEventInfo(context, title, msg, pendingIntent);
             // 把Notification传递给NotificationManager
             notificationManager.notify(id, notification);
         }

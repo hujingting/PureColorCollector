@@ -1,4 +1,4 @@
-package com.litesuits.common.utils;
+package com.tbs.purecolorcollector.utils.common.utils;
 
 /**
  * reference apache commons <a
