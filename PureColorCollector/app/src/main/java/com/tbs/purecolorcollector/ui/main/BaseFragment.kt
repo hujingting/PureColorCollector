@@ -29,7 +29,7 @@ open class BaseFragment : Fragment() {
         mListener = listener
         val requestPermissionList = ArrayList<String>()
         for (permission in permissions) {
-            if (ContextCompat.checkSelfPermission(activity!!, permission) != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(requireActivity(), permission) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissionList.add(permission)
             }
         }

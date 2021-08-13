@@ -1,2 +1,3 @@
 rootProject.name = "PureColorCollector"
-include ':app'
+include ':app', ':matisse'
+//project(":matisse").projectDir = new File("../../matisse")
