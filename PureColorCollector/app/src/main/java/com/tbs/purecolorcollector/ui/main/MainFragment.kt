@@ -10,10 +10,13 @@ import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
@@ -65,19 +68,30 @@ class MainFragment : BaseFragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         // TODO: Use the ViewModel
 
-
         /**
          * 观察 LiveData 对象
          */
         viewModel.currentColor.observe(viewLifecycleOwner, Observer {
+
             binding.tvShowColor.setText("#" + it.hexCode)
 
+            binding.main.setBackgroundColor(it.color)
+
             it?.let { StatusBarUtils.setColor(requireActivity(), it.color) }
+
             if (activity is MainActivity) {
                 it?.let { (activity as MainActivity).setToolBarBg(it.color) }
                 (activity as MainActivity).setCurrentColor("#" + it?.hexCode)
             }
         })
+
+        binding.tvShowColor.addTextChangedListener {
+
+            if (activity != null) {
+                (activity as MainActivity).setCurrentColor(it.toString())
+            }
+        }
+
 
         /**
          * 选中颜色回调

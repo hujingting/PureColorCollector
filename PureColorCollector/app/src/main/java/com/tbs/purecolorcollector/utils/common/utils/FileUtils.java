@@ -12,6 +12,7 @@ import com.tbs.purecolorcollector.MyApplication;
 import com.tbs.purecolorcollector.utils.PureColorUtils;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class FileUtils {
 
@@ -27,7 +28,7 @@ public class FileUtils {
         if (saveToSdcard) {
             f = new File(Environment.getExternalStorageDirectory() + File.separator + dirName);
         } else {
-            f = new File(context.getExternalFilesDir(null) + File.separator + dirName);
+            f = new File(Arrays.toString(context.getExternalFilesDirs(null)) + File.separator + dirName);
         }
         if (!f.exists()) {
             if (f.mkdirs())

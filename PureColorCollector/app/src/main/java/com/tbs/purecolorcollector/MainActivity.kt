@@ -16,6 +16,7 @@ import com.tbs.purecolorcollector.utils.ScreenUtils
 import com.tbs.purecolorcollector.utils.common.utils.BitmapUtil
 import com.tbs.purecolorcollector.utils.common.utils.FileUtils
 import java.util.*
+import kotlin.contracts.Returns
 
 class MainActivity : AppCompatActivity() {
 
@@ -51,28 +52,39 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
 
         R.id.action_settings -> {
-            val bitmap = Bitmap.createBitmap(ScreenUtils.screenWidth, ScreenUtils.screenHeight, Bitmap.Config.RGB_565)
-            val canvas = Canvas(bitmap)
-            canvas.drawColor(Color.parseColor(currentColor))
 
-            val wallpaperManager = WallpaperManager.getInstance(baseContext)
-            wallpaperManager.setBitmap(bitmap)
-            Toast.makeText(this, "已设置", Toast.LENGTH_SHORT).show()
+            if (!HexColorUtil.validate(currentColor)) {
+                Toast.makeText(this, "请输入正确的色值", Toast.LENGTH_SHORT).show()
+            } else {
+                val bitmap = Bitmap.createBitmap(ScreenUtils.screenWidth, ScreenUtils.screenHeight, Bitmap.Config.RGB_565)
+                val canvas = Canvas(bitmap)
+                canvas.drawColor(Color.parseColor(currentColor))
+
+                val wallpaperManager = WallpaperManager.getInstance(baseContext)
+                wallpaperManager.setBitmap(bitmap)
+                Toast.makeText(this, "已设置", Toast.LENGTH_SHORT).show()
+            }
+
             true
         }
 
         R.id.action_download -> {
 
-            val bitmap = Bitmap.createBitmap(ScreenUtils.screenWidth, ScreenUtils.screenHeight, Bitmap.Config.RGB_565)
-            val canvas = Canvas(bitmap)
-            canvas.drawColor(Color.parseColor(currentColor))
+            if (!HexColorUtil.validate(currentColor)) {
+                Toast.makeText(this, "请输入正确的色值", Toast.LENGTH_SHORT).show()
+            } else {
+                val bitmap = Bitmap.createBitmap(ScreenUtils.screenWidth, ScreenUtils.screenHeight, Bitmap.Config.RGB_565)
+                val canvas = Canvas(bitmap)
+                canvas.drawColor(Color.parseColor(currentColor))
 
-            val imagePathString = FileUtils.getFilePath(this, UUID.randomUUID().toString() + "_" + currentColor + ".png")
-            val file = BitmapUtil.saveBitmapToFile(bitmap, imagePathString)
-            FileUtils.saveImageToMediaStore(this, file)
 
+                val imagePathString = FileUtils.getFilePath(this, UUID.randomUUID().toString() + "_" + currentColor + ".png")
+                val file = BitmapUtil.saveBitmapToFile(bitmap, imagePathString)
+                FileUtils.saveImageToMediaStore(this, file)
 
-            Toast.makeText(this, "已保存", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "已保存", Toast.LENGTH_SHORT).show()
+            }
+
             true
         }
 
