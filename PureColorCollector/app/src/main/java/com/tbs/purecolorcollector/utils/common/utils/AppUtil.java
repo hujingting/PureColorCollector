@@ -1,4 +1,4 @@
-package com.litesuits.common.utils;
+package com.tbs.purecolorcollector.utils.common.utils;
 
 import android.app.ActivityManager;
 import android.content.ComponentName;
@@ -28,7 +28,7 @@ public class AppUtil {
      * 获取当前进程名字
      */
     public static String getCurrentProcessName(Context context) {
-        int pid = android.os.Process.myPid();
+        int pid = Process.myPid();
         ActivityManager mActivityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningAppProcessInfo appProcess : mActivityManager.getRunningAppProcesses()) {
             if (appProcess.pid == pid) {
@@ -66,6 +66,20 @@ public class AppUtil {
         return false;
     }
 
+    public static String getAppName(Context context) {
+        if (context == null) {
+            return "";
+        }
+
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            return String.valueOf(packageManager.getApplicationLabel(context.getApplicationInfo()));
+        } catch (Throwable e) {
+
+        }
+        return "";
+    }
+
     /**
      * 获取App包 信息版本号
      */
@@ -81,7 +95,7 @@ public class AppUtil {
     }
 
     public static void killTheApp() {
-        android.os.Process.killProcess(Process.myPid());
+        Process.killProcess(Process.myPid());
         System.exit(0);
     }
 }

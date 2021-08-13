@@ -1,10 +1,11 @@
-package com.litesuits.common.assist;
+package com.tbs.purecolorcollector.utils.common.assist;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
-import com.litesuits.android.log.Log;
+
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 import java.lang.reflect.Method;
 

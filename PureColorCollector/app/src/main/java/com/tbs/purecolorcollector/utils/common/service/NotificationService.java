@@ -1,4 +1,4 @@
-package com.litesuits.common.service;
+package com.tbs.purecolorcollector.utils.common.service;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -12,7 +12,8 @@ import android.provider.Settings;
 import android.service.notification.NotificationListenerService;
 import android.service.notification.StatusBarNotification;
 import android.text.TextUtils;
-import com.litesuits.android.log.Log;
+
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 /**
  * note: VERSION_CODE >= API_18
@@ -152,7 +153,7 @@ public class NotificationService extends NotificationListenerService {
         /**
          * Implement this method to learn about new notifications as they are posted by apps.
          *
-         * @param sbn A data structure encapsulating the original {@link android.app.Notification}
+         * @param sbn A data structure encapsulating the original {@link Notification}
          *            object as well as its identifying information (tag and id) and source
          *            (package name).
          */
@@ -166,13 +167,13 @@ public class NotificationService extends NotificationListenerService {
          * <p/>
          * NOTE: The {@link StatusBarNotification} object you receive will be "light"; that is, the
          * result from {@link StatusBarNotification#getNotification} may be missing some heavyweight
-         * fields such as {@link android.app.Notification#contentView} and
-         * {@link android.app.Notification#largeIcon}. However, all other fields on
+         * fields such as {@link Notification#contentView} and
+         * {@link Notification#largeIcon}. However, all other fields on
          * {@link StatusBarNotification}, sufficient to match this call with a prior call to
          * {@link #onNotificationPosted(StatusBarNotification)}, will be intact.
          *
          * @param sbn A data structure encapsulating at least the original information (tag and id)
-         *            and source (package name) used to post the {@link android.app.Notification} that
+         *            and source (package name) used to post the {@link Notification} that
          *            was just removed.
          */
         public abstract void onNotificationRemoved(StatusBarNotification sbn);

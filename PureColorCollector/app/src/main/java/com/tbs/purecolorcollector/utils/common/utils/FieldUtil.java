@@ -1,4 +1,4 @@
-package com.litesuits.common.utils;
+package com.tbs.purecolorcollector.utils.common.utils;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;

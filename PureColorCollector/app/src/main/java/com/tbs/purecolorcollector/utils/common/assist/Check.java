@@ -1,4 +1,4 @@
-package com.litesuits.common.assist;
+package com.tbs.purecolorcollector.utils.common.assist;
 
 import java.util.Collection;
 import java.util.Map;

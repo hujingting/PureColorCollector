@@ -1,4 +1,4 @@
-package com.litesuits.common.utils;
+package com.tbs.purecolorcollector.utils.common.utils;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

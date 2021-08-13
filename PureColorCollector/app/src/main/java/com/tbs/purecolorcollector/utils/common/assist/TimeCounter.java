@@ -1,6 +1,6 @@
-package com.litesuits.common.assist;
+package com.tbs.purecolorcollector.utils.common.assist;
 
-import com.litesuits.android.log.Log;
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 /**
  * Time Counter.

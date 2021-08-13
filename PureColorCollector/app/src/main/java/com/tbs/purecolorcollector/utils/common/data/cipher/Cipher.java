@@ -1,4 +1,4 @@
-package com.litesuits.common.data.cipher;
+package com.tbs.purecolorcollector.utils.common.data.cipher;
 
 /**
  * @author MaTianyu

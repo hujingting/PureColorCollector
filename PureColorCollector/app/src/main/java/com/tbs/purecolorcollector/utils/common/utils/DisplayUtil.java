@@ -1,8 +1,8 @@
-package com.litesuits.common.utils;
+package com.tbs.purecolorcollector.utils.common.utils;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
-import com.litesuits.android.log.Log;
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 /**
  * @author MaTianyu

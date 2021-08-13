@@ -1,4 +1,4 @@
-package com.litesuits.common.assist;
+package com.tbs.purecolorcollector.utils.common.assist;
 
 import android.content.Context;
 import android.widget.Toast;

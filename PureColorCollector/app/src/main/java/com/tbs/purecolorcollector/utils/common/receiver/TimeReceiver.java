@@ -1,11 +1,12 @@
-package com.litesuits.common.receiver;
+package com.tbs.purecolorcollector.utils.common.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import com.litesuits.android.log.Log;
+
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 /**
  * 时间广播

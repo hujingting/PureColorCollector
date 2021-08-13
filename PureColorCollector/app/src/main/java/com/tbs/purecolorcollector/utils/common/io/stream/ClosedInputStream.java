@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.litesuits.common.io.stream;
+package com.tbs.purecolorcollector.utils.common.io.stream;
 
 import java.io.InputStream;
 

@@ -1,7 +1,8 @@
-package com.litesuits.common.utils;
+package com.tbs.purecolorcollector.utils.common.utils;
 
-import com.litesuits.android.log.Log;
-import com.litesuits.common.assist.Check;
+
+import com.tbs.purecolorcollector.utils.common.assist.Check;
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 import java.io.*;
 import java.util.regex.Pattern;

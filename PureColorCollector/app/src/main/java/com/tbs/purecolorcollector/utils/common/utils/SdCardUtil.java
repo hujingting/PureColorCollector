@@ -1,10 +1,11 @@
-package com.litesuits.common.utils;
+package com.tbs.purecolorcollector.utils.common.utils;
 
 import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
-import com.litesuits.android.log.Log;
+
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class SdCardUtil {
     }
 
     /**
-     * Get {@link android.os.StatFs}.
+     * Get {@link StatFs}.
      */
     public static StatFs getStatFs(String path) {
         return new StatFs(path);
@@ -181,7 +182,7 @@ public class SdCardUtil {
 
 
     /**
-     * see more {@link android.os.StatFs}
+     * see more {@link StatFs}
      */
     public static class SDCardInfo {
         public boolean isExist;

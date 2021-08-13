@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.litesuits.common.assist;
+package com.tbs.purecolorcollector.utils.common.assist;
 
 import java.io.UnsupportedEncodingException;
 

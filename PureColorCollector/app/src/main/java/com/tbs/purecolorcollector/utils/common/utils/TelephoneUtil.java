@@ -1,8 +1,9 @@
-package com.litesuits.common.utils;
+package com.tbs.purecolorcollector.utils.common.utils;
 
 import android.content.Context;
 import android.telephony.TelephonyManager;
-import com.litesuits.android.log.Log;
+
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

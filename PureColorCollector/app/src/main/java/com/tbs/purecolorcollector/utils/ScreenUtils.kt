@@ -1,4 +1,4 @@
-package com.quxianggif.util
+package com.tbs.purecolorcollector.utils
 
 import android.annotation.SuppressLint
 import android.content.Context

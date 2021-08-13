@@ -1,7 +1,7 @@
-package com.litesuits.common.data.cipher;
+package com.tbs.purecolorcollector.utils.common.data.cipher;
 
 
-import com.litesuits.common.assist.Base64;
+import com.tbs.purecolorcollector.utils.common.assist.Base64;
 
 /**
  * @author MaTianyu

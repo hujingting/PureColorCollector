@@ -1,4 +1,4 @@
-package com.litesuits.common.receiver;
+package com.tbs.purecolorcollector.utils.common.receiver;
 
 import android.content.*;
 import android.net.Uri;
@@ -6,7 +6,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
-import com.litesuits.android.log.Log;
+
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 import java.util.List;
 

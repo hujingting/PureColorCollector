@@ -14,6 +14,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.palette.graphics.Palette
 import com.skydoves.colorpickerview.ColorEnvelope
@@ -62,20 +65,34 @@ class MainFragment : BaseFragment() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         // TODO: Use the ViewModel
 
+
+        /**
+         * 观察 LiveData 对象
+         */
+        viewModel.currentColor.observe(viewLifecycleOwner, Observer {
+            binding.tvShowColor.setText("#" + it.hexCode)
+
+            it?.let { StatusBarUtils.setColor(requireActivity(), it.color) }
+            if (activity is MainActivity) {
+                it?.let { (activity as MainActivity).setToolBarBg(it.color) }
+                (activity as MainActivity).setCurrentColor("#" + it?.hexCode)
+            }
+        })
+
         /**
          * 选中颜色回调
          */
         binding.colorPickerView.setColorListener(object : ColorEnvelopeListener {
             override fun onColorSelected(envelope: ColorEnvelope?, fromUser: Boolean) {
 //                envelope?.let { binding.tvShowColor.setBackgroundColor(it.color) }
-                binding.tvShowColor.setText("#" + envelope?.hexCode)
-
-                envelope?.let { StatusBarUtils.setColor(activity!!, it.color) }
+//                binding.tvShowColor.setText("#" + envelope?.hexCode)
+                viewModel.currentColor.value = envelope
 
 //                envelope?.let { binding.toolbar.setBackgroundColor(it.color) }
-                if (activity is MainActivity) {
-                    envelope?.let { (activity as MainActivity).setToolBarBg(it.color) }
-                }
+//                if (activity is MainActivity) {
+//                    envelope?.let { (activity as MainActivity).setToolBarBg(it.color) }
+//                    (activity as MainActivity).setCurrentColor("#" + envelope?.hexCode)
+//                }
             }
         })
 
@@ -119,22 +136,27 @@ class MainFragment : BaseFragment() {
             binding.colorPickerView.setHsvPaletteDrawable()
         }
 
+        /**
+         * 设置默认实例图片
+         */
         binding.colorPickerView.setPaletteDrawable(context?.getDrawable(R.drawable.big_mouth_bird))
 
+        /**
+         * 解析默认图片主题色
+         */
         val bitmap = BitmapFactory.decodeResource(resources, R.drawable.big_mouth_bird)
         createPaletteAsync(bitmap)
 
     }
 
-
     private fun createPaletteAsync(bitmap: Bitmap) {
 
-        Palette.from(bitmap).generate {
-            val color = it?.getLightVibrantColor(Color.BLACK)
-            if (color != null) {
-                binding.tvPalette.setBackgroundColor(color)
-            }
-        }
+//        Palette.from(bitmap).generate {
+//            val color = it?.getLightVibrantColor(Color.BLACK)
+//            if (color != null) {
+//                binding.tvPalette.setBackgroundColor(color)
+//            }
+//        }
     }
 
 

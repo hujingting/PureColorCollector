@@ -9,13 +9,13 @@ import android.os.Looper
  * author jingting
  * date : 2021/8/13上午10:23
  */
+@SuppressLint("StaticFieldLeak")
 object PureColorUtils {
     /**
      * 获取全局Context，在代码的任意位置都可以调用，随时都能获取到全局Context对象。
      *
      * @return 全局Context对象。
      */
-    @SuppressLint("StaticFieldLeak")
     var context: Context? = null
         private set
 

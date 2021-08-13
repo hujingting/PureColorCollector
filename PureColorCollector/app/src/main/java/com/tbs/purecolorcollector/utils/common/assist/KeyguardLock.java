@@ -1,9 +1,10 @@
-package com.litesuits.common.assist;
+package com.tbs.purecolorcollector.utils.common.assist;
 
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.os.Build;
-import com.litesuits.android.log.Log;
+
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 /**
  * <!-- 解锁 -->

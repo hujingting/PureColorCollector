@@ -1,4 +1,4 @@
-package com.app.baseproduct.utils;
+package com.tbs.purecolorcollector.utils.common.utils;
 
 import android.content.ContentResolver;
 import android.content.ContentValues;
@@ -7,13 +7,17 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 
+import com.bumptech.glide.util.Util;
+import com.tbs.purecolorcollector.MyApplication;
+import com.tbs.purecolorcollector.utils.PureColorUtils;
+
 import java.io.File;
 
 public class FileUtils {
 
-    private static final String DIR_NAME = "black_card";
+    private static final String DIR_NAME = AppUtil.getAppName(PureColorUtils.INSTANCE.getContext());
 
-    public static String getImagePath(Context context, String imgName) {
+    public static String getFilePath(Context context, String imgName) {
         return getPath(context, imgName, DIR_NAME, false);
     }
 

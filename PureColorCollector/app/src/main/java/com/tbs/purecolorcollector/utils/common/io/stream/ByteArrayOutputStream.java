@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.litesuits.common.io.stream;
+package com.tbs.purecolorcollector.utils.common.io.stream;
  
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -179,7 +179,7 @@ public class ByteArrayOutputStream extends OutputStream {
      * @param in the input stream to read from
      * @return total number of bytes read from the input stream
      *         (and written to this stream)
-     * @throws java.io.IOException if an I/O error occurs while reading the input stream
+     * @throws IOException if an I/O error occurs while reading the input stream
      * @since 1.4
      */
     public synchronized int write(InputStream in) throws IOException {
@@ -212,7 +212,7 @@ public class ByteArrayOutputStream extends OutputStream {
      * this class can be called after the stream has been closed without
      * generating an <tt>IOException</tt>.
      *
-     * @throws java.io.IOException never (this method should not declare this exception
+     * @throws IOException never (this method should not declare this exception
      * but it has to now due to backwards compatability)
      */
     @Override
@@ -235,8 +235,8 @@ public class ByteArrayOutputStream extends OutputStream {
      * specified output stream.
      *
      * @param out  the output stream to write to
-     * @throws java.io.IOException if an I/O error occurs, such as if the stream is closed
-     * @see java.io.ByteArrayOutputStream#writeTo(java.io.OutputStream)
+     * @throws IOException if an I/O error occurs, such as if the stream is closed
+     * @see java.io.ByteArrayOutputStream#writeTo(OutputStream)
      */
     public synchronized void writeTo(OutputStream out) throws IOException {
         int remaining = count;
@@ -268,7 +268,7 @@ public class ByteArrayOutputStream extends OutputStream {
      * 
      * @param input Stream to be fully buffered.
      * @return A fully buffered stream.
-     * @throws java.io.IOException if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      * @since 2.0
      */
     public static InputStream toBufferedInputStream(InputStream input)
@@ -347,7 +347,7 @@ public class ByteArrayOutputStream extends OutputStream {
      *
      * @param enc  the name of the character encoding
      * @return the string converted from the byte array
-     * @throws java.io.UnsupportedEncodingException if the encoding is not supported
+     * @throws UnsupportedEncodingException if the encoding is not supported
      * @see java.io.ByteArrayOutputStream#toString(String)
      */
     public String toString(String enc) throws UnsupportedEncodingException {

@@ -1,10 +1,11 @@
-package com.litesuits.common.assist;
+package com.tbs.purecolorcollector.utils.common.assist;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
-import com.litesuits.common.utils.ShellUtil;
+
+import com.tbs.purecolorcollector.utils.common.utils.ShellUtil;
 
 import java.io.File;
 

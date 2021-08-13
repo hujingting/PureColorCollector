@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.litesuits.common.io;
+package com.tbs.purecolorcollector.utils.common.io;
 
 import java.io.*;
 import java.math.BigInteger;
@@ -210,7 +210,7 @@ public class FileUtils {
     }
 
     /**
-     * Returns a {@link java.io.File} representing the system temporary directory.
+     * Returns a {@link File} representing the system temporary directory.
      *
      * @return the system temporary directory.
      * @since 2.0
@@ -230,7 +230,7 @@ public class FileUtils {
     }
 
     /**
-     * Returns a {@link java.io.File} representing the user's home directory.
+     * Returns a {@link File} representing the user's home directory.
      *
      * @return the user's home directory.
      * @since 2.0
@@ -242,7 +242,7 @@ public class FileUtils {
     //-----------------------------------------------------------------------
 
     /**
-     * Opens a {@link java.io.FileInputStream} for the specified file, providing better
+     * Opens a {@link FileInputStream} for the specified file, providing better
      * error messages than simply calling <code>new FileInputStream(file)</code>.
      * <p/>
      * At the end of the method either the stream will be successfully opened,
@@ -253,10 +253,10 @@ public class FileUtils {
      * An exception is thrown if the file exists but cannot be read.
      *
      * @param file the file to open for input, must not be {@code null}
-     * @return a new {@link java.io.FileInputStream} for the specified file
-     * @throws java.io.FileNotFoundException if the file does not exist
-     * @throws java.io.IOException           if the file object is a directory
-     * @throws java.io.IOException           if the file cannot be read
+     * @return a new {@link FileInputStream} for the specified file
+     * @throws FileNotFoundException if the file does not exist
+     * @throws IOException           if the file object is a directory
+     * @throws IOException           if the file cannot be read
      * @since 1.3
      */
     public static FileInputStream openInputStream(File file) throws IOException {
@@ -276,7 +276,7 @@ public class FileUtils {
     //-----------------------------------------------------------------------
 
     /**
-     * Opens a {@link java.io.FileOutputStream} for the specified file, checking and
+     * Opens a {@link FileOutputStream} for the specified file, checking and
      * creating the parent directory if it does not exist.
      * <p/>
      * At the end of the method either the stream will be successfully opened,
@@ -289,10 +289,10 @@ public class FileUtils {
      * An exception is thrown if the parent directory cannot be created.
      *
      * @param file the file to open for output, must not be {@code null}
-     * @return a new {@link java.io.FileOutputStream} for the specified file
-     * @throws java.io.IOException if the file object is a directory
-     * @throws java.io.IOException if the file cannot be written to
-     * @throws java.io.IOException if a parent directory needs creating but that fails
+     * @return a new {@link FileOutputStream} for the specified file
+     * @throws IOException if the file object is a directory
+     * @throws IOException if the file cannot be written to
+     * @throws IOException if a parent directory needs creating but that fails
      * @since 1.3
      */
     public static FileOutputStream openOutputStream(File file) throws IOException {
@@ -300,7 +300,7 @@ public class FileUtils {
     }
 
     /**
-     * Opens a {@link java.io.FileOutputStream} for the specified file, checking and
+     * Opens a {@link FileOutputStream} for the specified file, checking and
      * creating the parent directory if it does not exist.
      * <p/>
      * At the end of the method either the stream will be successfully opened,
@@ -315,10 +315,10 @@ public class FileUtils {
      * @param file   the file to open for output, must not be {@code null}
      * @param append if {@code true}, then bytes will be added to the
      *               end of the file rather than overwriting
-     * @return a new {@link java.io.FileOutputStream} for the specified file
-     * @throws java.io.IOException if the file object is a directory
-     * @throws java.io.IOException if the file cannot be written to
-     * @throws java.io.IOException if a parent directory needs creating but that fails
+     * @return a new {@link FileOutputStream} for the specified file
+     * @throws IOException if the file object is a directory
+     * @throws IOException if the file cannot be written to
+     * @throws IOException if a parent directory needs creating but that fails
      * @since 2.1
      */
     public static FileOutputStream openOutputStream(File file, boolean append) throws IOException {
@@ -410,7 +410,7 @@ public class FileUtils {
      * creates parent directories if they do not exist.
      *
      * @param file the File to touch
-     * @throws java.io.IOException If an I/O problem occurs
+     * @throws IOException If an I/O problem occurs
      */
     public static void touch(File file) throws IOException {
         if (!file.exists()) {
@@ -469,7 +469,7 @@ public class FileUtils {
      * @param file2 the second file
      * @return true if the content of the files are equal or they both don't
      * exist, false otherwise
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      */
     public static boolean contentEquals(File file1, File file2) throws IOException {
         boolean file1Exists = file1.exists();
@@ -525,8 +525,8 @@ public class FileUtils {
      *                    May be null, in which case the platform default is used
      * @return true if the content of the files are equal or neither exists,
      * false otherwise
-     * @throws java.io.IOException in case of an I/O error
-     * @see IOUtils#contentEqualsIgnoreEOL(java.io.Reader, java.io.Reader)
+     * @throws IOException in case of an I/O error
+     * @see IOUtils#contentEqualsIgnoreEOL(Reader, Reader)
      * @since 2.2
      */
     public static boolean contentEqualsIgnoreEOL(File file1, File file2, String charsetName) throws IOException {
@@ -598,7 +598,7 @@ public class FileUtils {
      * Decodes the specified URL as per RFC 3986, i.e. transforms
      * percent-encoded octets to characters by decoding with the UTF-8 character
      * set. This function is primarily intended for usage with
-     * {@link java.net.URL} which unfortunately does not enforce proper URLs. As
+     * {@link URL} which unfortunately does not enforce proper URLs. As
      * such, this method will leniently accept invalid characters or malformed
      * percent-encoded octets and simply pass them literally through to the
      * result string. Except for rare edge cases, this will make unencoded URLs
@@ -685,7 +685,7 @@ public class FileUtils {
      *
      * @param files the files to convert, must not be {@code null}
      * @return an array of URLs matching the input
-     * @throws java.io.IOException  if a file cannot be converted
+     * @throws IOException  if a file cannot be converted
      * @throws NullPointerException if the parameter is null
      */
     public static URL[] toURLs(File[] files) throws IOException {
@@ -709,16 +709,16 @@ public class FileUtils {
      * If the destination file exists, then this method will overwrite it.
      * <p/>
      * <strong>Note:</strong> This method tries to preserve the file's last
-     * modified date/times using {@link java.io.File#setLastModified(long)}, however
+     * modified date/times using {@link File#setLastModified(long)}, however
      * it is not guaranteed that the operation will succeed.
      * If the modification operation fails, no indication is provided.
      *
      * @param srcFile an existing file to copy, must not be {@code null}
      * @param destDir the directory to place the copy in, must not be {@code null}
      * @throws NullPointerException if source or destination is null
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs during copying
-     * @see #copyFile(java.io.File, java.io.File, boolean)
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs during copying
+     * @see #copyFile(File, File, boolean)
      */
     public static void copyFileToDirectory(File srcFile, File destDir) throws IOException {
         copyFileToDirectory(srcFile, destDir, true);
@@ -734,7 +734,7 @@ public class FileUtils {
      * <p/>
      * <strong>Note:</strong> Setting <code>preserveFileDate</code> to
      * {@code true} tries to preserve the file's last modified
-     * date/times using {@link java.io.File#setLastModified(long)}, however it is
+     * date/times using {@link File#setLastModified(long)}, however it is
      * not guaranteed that the operation will succeed.
      * If the modification operation fails, no indication is provided.
      *
@@ -743,9 +743,9 @@ public class FileUtils {
      * @param preserveFileDate true if the file date of the copy
      *                         should be the same as the original
      * @throws NullPointerException if source or destination is {@code null}
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs during copying
-     * @see #copyFile(java.io.File, java.io.File, boolean)
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs during copying
+     * @see #copyFile(File, File, boolean)
      * @since 1.3
      */
     public static void copyFileToDirectory(File srcFile, File destDir, boolean preserveFileDate) throws IOException {
@@ -768,16 +768,16 @@ public class FileUtils {
      * method will overwrite it.
      * <p/>
      * <strong>Note:</strong> This method tries to preserve the file's last
-     * modified date/times using {@link java.io.File#setLastModified(long)}, however
+     * modified date/times using {@link File#setLastModified(long)}, however
      * it is not guaranteed that the operation will succeed.
      * If the modification operation fails, no indication is provided.
      *
      * @param srcFile  an existing file to copy, must not be {@code null}
      * @param destFile the new file, must not be {@code null}
      * @throws NullPointerException if source or destination is {@code null}
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs during copying
-     * @see #copyFileToDirectory(java.io.File, java.io.File)
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs during copying
+     * @see #copyFileToDirectory(File, File)
      */
     public static void copyFile(File srcFile, File destFile) throws IOException {
         copyFile(srcFile, destFile, true);
@@ -793,7 +793,7 @@ public class FileUtils {
      * <p/>
      * <strong>Note:</strong> Setting <code>preserveFileDate</code> to
      * {@code true} tries to preserve the file's last modified
-     * date/times using {@link java.io.File#setLastModified(long)}, however it is
+     * date/times using {@link File#setLastModified(long)}, however it is
      * not guaranteed that the operation will succeed.
      * If the modification operation fails, no indication is provided.
      *
@@ -802,9 +802,9 @@ public class FileUtils {
      * @param preserveFileDate true if the file date of the copy
      *                         should be the same as the original
      * @throws NullPointerException if source or destination is {@code null}
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs during copying
-     * @see #copyFileToDirectory(java.io.File, java.io.File, boolean)
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs during copying
+     * @see #copyFileToDirectory(File, File, boolean)
      */
     public static void copyFile(File srcFile, File destFile,
                                 boolean preserveFileDate) throws IOException {
@@ -845,7 +845,7 @@ public class FileUtils {
      * @param output the <code>OutputStream</code> to write to
      * @return the number of bytes copied
      * @throws NullPointerException if the input or output is null
-     * @throws java.io.IOException  if an I/O error occurs
+     * @throws IOException  if an I/O error occurs
      * @since 2.1
      */
     public static long copyFile(File input, OutputStream output) throws IOException {
@@ -863,7 +863,7 @@ public class FileUtils {
      * @param srcFile          the validated source file, must not be {@code null}
      * @param destFile         the validated destination file, must not be {@code null}
      * @param preserveFileDate whether to preserve the file date
-     * @throws java.io.IOException if an error occurs
+     * @throws IOException if an error occurs
      */
     private static void doCopyFile(File srcFile, File destFile, boolean preserveFileDate) throws IOException {
         if (destFile.exists() && destFile.isDirectory()) {
@@ -915,15 +915,15 @@ public class FileUtils {
      * the source with the destination, with the source taking precedence.
      * <p/>
      * <strong>Note:</strong> This method tries to preserve the files' last
-     * modified date/times using {@link java.io.File#setLastModified(long)}, however
+     * modified date/times using {@link File#setLastModified(long)}, however
      * it is not guaranteed that those operations will succeed.
      * If the modification operation fails, no indication is provided.
      *
      * @param srcDir  an existing directory to copy, must not be {@code null}
      * @param destDir the directory to place the copy in, must not be {@code null}
      * @throws NullPointerException if source or destination is {@code null}
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs during copying
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs during copying
      * @since 1.2
      */
     public static void copyDirectoryToDirectory(File srcDir, File destDir) throws IOException {
@@ -954,15 +954,15 @@ public class FileUtils {
      * the source with the destination, with the source taking precedence.
      * <p/>
      * <strong>Note:</strong> This method tries to preserve the files' last
-     * modified date/times using {@link java.io.File#setLastModified(long)}, however
+     * modified date/times using {@link File#setLastModified(long)}, however
      * it is not guaranteed that those operations will succeed.
      * If the modification operation fails, no indication is provided.
      *
      * @param srcDir  an existing directory to copy, must not be {@code null}
      * @param destDir the new directory, must not be {@code null}
      * @throws NullPointerException if source or destination is {@code null}
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs during copying
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs during copying
      * @since 1.1
      */
     public static void copyDirectory(File srcDir, File destDir) throws IOException {
@@ -981,7 +981,7 @@ public class FileUtils {
      * <p/>
      * <strong>Note:</strong> Setting <code>preserveFileDate</code> to
      * {@code true} tries to preserve the files' last modified
-     * date/times using {@link java.io.File#setLastModified(long)}, however it is
+     * date/times using {@link File#setLastModified(long)}, however it is
      * not guaranteed that those operations will succeed.
      * If the modification operation fails, no indication is provided.
      *
@@ -990,8 +990,8 @@ public class FileUtils {
      * @param preserveFileDate true if the file date of the copy
      *                         should be the same as the original
      * @throws NullPointerException if source or destination is {@code null}
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs during copying
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs during copying
      * @since 1.1
      */
     public static void copyDirectory(File srcDir, File destDir,
@@ -1010,7 +1010,7 @@ public class FileUtils {
      * the source with the destination, with the source taking precedence.
      * <p/>
      * <strong>Note:</strong> This method tries to preserve the files' last
-     * modified date/times using {@link java.io.File#setLastModified(long)}, however
+     * modified date/times using {@link File#setLastModified(long)}, however
      * it is not guaranteed that those operations will succeed.
      * If the modification operation fails, no indication is provided.
      * <p/>
@@ -1038,8 +1038,8 @@ public class FileUtils {
      * @param filter  the filter to apply, null means copy all directories and files
      *                should be the same as the original
      * @throws NullPointerException if source or destination is {@code null}
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs during copying
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs during copying
      * @since 1.4
      */
     public static void copyDirectory(File srcDir, File destDir,
@@ -1059,7 +1059,7 @@ public class FileUtils {
      * <p/>
      * <strong>Note:</strong> Setting <code>preserveFileDate</code> to
      * {@code true} tries to preserve the files' last modified
-     * date/times using {@link java.io.File#setLastModified(long)}, however it is
+     * date/times using {@link File#setLastModified(long)}, however it is
      * not guaranteed that those operations will succeed.
      * If the modification operation fails, no indication is provided.
      * <p/>
@@ -1088,8 +1088,8 @@ public class FileUtils {
      * @param preserveFileDate true if the file date of the copy
      *                         should be the same as the original
      * @throws NullPointerException if source or destination is {@code null}
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs during copying
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs during copying
      * @since 1.4
      */
     public static void copyDirectory(File srcDir, File destDir,
@@ -1133,7 +1133,7 @@ public class FileUtils {
      * @param filter           the filter to apply, null means copy all directories and files
      * @param preserveFileDate whether to preserve the file date
      * @param exclusionList    List of files and directories to exclude from the copy, may be null
-     * @throws java.io.IOException if an error occurs
+     * @throws IOException if an error occurs
      * @since 1.1
      */
     private static void doCopyDirectory(File srcDir, File destDir, FileFilter filter,
@@ -1181,17 +1181,17 @@ public class FileUtils {
      * will be overwritten if it already exists.
      * <p/>
      * Warning: this method does not set a connection or read timeout and thus
-     * might block forever. Use {@link #copyURLToFile(java.net.URL, java.io.File, int, int)}
+     * might block forever. Use {@link #copyURLToFile(URL, File, int, int)}
      * with reasonable timeouts to prevent this.
      *
      * @param source      the <code>URL</code> to copy bytes from, must not be {@code null}
      * @param destination the non-directory <code>File</code> to write bytes to
      *                    (possibly overwriting), must not be {@code null}
-     * @throws java.io.IOException if <code>source</code> URL cannot be opened
-     * @throws java.io.IOException if <code>destination</code> is a directory
-     * @throws java.io.IOException if <code>destination</code> cannot be written
-     * @throws java.io.IOException if <code>destination</code> needs creating but can't be
-     * @throws java.io.IOException if an IO error occurs during copying
+     * @throws IOException if <code>source</code> URL cannot be opened
+     * @throws IOException if <code>destination</code> is a directory
+     * @throws IOException if <code>destination</code> cannot be written
+     * @throws IOException if <code>destination</code> needs creating but can't be
+     * @throws IOException if an IO error occurs during copying
      */
     public static void copyURLToFile(URL source, File destination) throws IOException {
         InputStream input = source.openStream();
@@ -1211,11 +1211,11 @@ public class FileUtils {
      *                          will timeout if no connection could be established to the <code>source</code>
      * @param readTimeout       the number of milliseconds until this method will
      *                          timeout if no data could be read from the <code>source</code>
-     * @throws java.io.IOException if <code>source</code> URL cannot be opened
-     * @throws java.io.IOException if <code>destination</code> is a directory
-     * @throws java.io.IOException if <code>destination</code> cannot be written
-     * @throws java.io.IOException if <code>destination</code> needs creating but can't be
-     * @throws java.io.IOException if an IO error occurs during copying
+     * @throws IOException if <code>source</code> URL cannot be opened
+     * @throws IOException if <code>destination</code> is a directory
+     * @throws IOException if <code>destination</code> cannot be written
+     * @throws IOException if <code>destination</code> needs creating but can't be
+     * @throws IOException if an IO error occurs during copying
      * @since 2.0
      */
     public static void copyURLToFile(URL source, File destination,
@@ -1228,7 +1228,7 @@ public class FileUtils {
     }
 
     /**
-     * Copies bytes from an {@link java.io.InputStream} <code>source</code> to a file
+     * Copies bytes from an {@link InputStream} <code>source</code> to a file
      * <code>destination</code>. The directories up to <code>destination</code>
      * will be created if they don't already exist. <code>destination</code>
      * will be overwritten if it already exists.
@@ -1236,10 +1236,10 @@ public class FileUtils {
      * @param source      the <code>InputStream</code> to copy bytes from, must not be {@code null}
      * @param destination the non-directory <code>File</code> to write bytes to
      *                    (possibly overwriting), must not be {@code null}
-     * @throws java.io.IOException if <code>destination</code> is a directory
-     * @throws java.io.IOException if <code>destination</code> cannot be written
-     * @throws java.io.IOException if <code>destination</code> needs creating but can't be
-     * @throws java.io.IOException if an IO error occurs during copying
+     * @throws IOException if <code>destination</code> is a directory
+     * @throws IOException if <code>destination</code> cannot be written
+     * @throws IOException if <code>destination</code> needs creating but can't be
+     * @throws IOException if an IO error occurs during copying
      * @since 2.0
      */
     public static void copyInputStreamToFile(InputStream source, File destination) throws IOException {
@@ -1262,7 +1262,7 @@ public class FileUtils {
      * Deletes a directory recursively.
      *
      * @param directory directory to delete
-     * @throws java.io.IOException in case deletion is unsuccessful
+     * @throws IOException in case deletion is unsuccessful
      */
     public static void deleteDirectory(File directory) throws IOException {
         if (!directory.exists()) {
@@ -1316,7 +1316,7 @@ public class FileUtils {
      * Cleans a directory without deleting it.
      *
      * @param directory directory to clean
-     * @throws java.io.IOException in case cleaning is unsuccessful
+     * @throws IOException in case cleaning is unsuccessful
      */
     public static void cleanDirectory(File directory) throws IOException {
         if (!directory.exists()) {
@@ -1353,7 +1353,7 @@ public class FileUtils {
     /**
      * Waits for NFS to propagate a file creation, imposing a timeout.
      * <p/>
-     * This method repeatedly tests {@link java.io.File#exists()} until it returns
+     * This method repeatedly tests {@link File#exists()} until it returns
      * true up to the maximum time specified in seconds.
      *
      * @param file    the file to check, must not be {@code null}
@@ -1391,7 +1391,7 @@ public class FileUtils {
      * @param file     the file to read, must not be {@code null}
      * @param encoding the encoding to use, {@code null} means platform default
      * @return the file contents, never {@code null}
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 2.3
      */
     public static String readFileToString(File file, Charset encoding) throws IOException {
@@ -1410,8 +1410,8 @@ public class FileUtils {
      * @param file     the file to read, must not be {@code null}
      * @param encoding the encoding to use, {@code null} means platform default
      * @return the file contents, never {@code null}
-     * @throws java.io.IOException                          in case of an I/O error
-     * @throws java.nio.charset.UnsupportedCharsetException thrown instead of {@link java.io.UnsupportedEncodingException} in version 2.2 if the encoding is not
+     * @throws IOException                          in case of an I/O error
+     * @throws java.nio.charset.UnsupportedCharsetException thrown instead of {@link UnsupportedEncodingException} in version 2.2 if the encoding is not
      *                                                      supported.
      * @since 2.3
      */
@@ -1426,7 +1426,7 @@ public class FileUtils {
      *
      * @param file the file to read, must not be {@code null}
      * @return the file contents, never {@code null}
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 1.3.1
      */
     public static String readFileToString(File file) throws IOException {
@@ -1439,7 +1439,7 @@ public class FileUtils {
      *
      * @param file the file to read, must not be {@code null}
      * @return the file contents, never {@code null}
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 1.1
      */
     public static byte[] readFileToByteArray(File file) throws IOException {
@@ -1459,7 +1459,7 @@ public class FileUtils {
      * @param file     the file to read, must not be {@code null}
      * @param encoding the encoding to use, {@code null} means platform default
      * @return the list of Strings representing each line in the file, never {@code null}
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 2.3
      */
     public static List<String> readLines(File file, Charset encoding) throws IOException {
@@ -1478,8 +1478,8 @@ public class FileUtils {
      * @param file     the file to read, must not be {@code null}
      * @param encoding the encoding to use, {@code null} means platform default
      * @return the list of Strings representing each line in the file, never {@code null}
-     * @throws java.io.IOException                          in case of an I/O error
-     * @throws java.nio.charset.UnsupportedCharsetException thrown instead of {@link java.io.UnsupportedEncodingException} in version 2.2 if the encoding is not
+     * @throws IOException                          in case of an I/O error
+     * @throws java.nio.charset.UnsupportedCharsetException thrown instead of {@link UnsupportedEncodingException} in version 2.2 if the encoding is not
      *                                                      supported.
      * @since 1.1
      */
@@ -1493,7 +1493,7 @@ public class FileUtils {
      *
      * @param file the file to read, must not be {@code null}
      * @return the list of Strings representing each line in the file, never {@code null}
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 1.3
      */
     public static List<String> readLines(File file) throws IOException {
@@ -1511,8 +1511,8 @@ public class FileUtils {
      * @param file     the file to write
      * @param data     the content to write to the file
      * @param encoding the encoding to use, {@code null} means platform default
-     * @throws java.io.IOException                  in case of an I/O error
-     * @throws java.io.UnsupportedEncodingException if the encoding is not supported by the VM
+     * @throws IOException                  in case of an I/O error
+     * @throws UnsupportedEncodingException if the encoding is not supported by the VM
      * @since 2.4
      */
     public static void writeStringToFile(File file, String data, Charset encoding) throws IOException {
@@ -1528,8 +1528,8 @@ public class FileUtils {
      * @param file     the file to write
      * @param data     the content to write to the file
      * @param encoding the encoding to use, {@code null} means platform default
-     * @throws java.io.IOException                  in case of an I/O error
-     * @throws java.io.UnsupportedEncodingException if the encoding is not supported by the VM
+     * @throws IOException                  in case of an I/O error
+     * @throws UnsupportedEncodingException if the encoding is not supported by the VM
      */
     public static void writeStringToFile(File file, String data, String encoding) throws IOException {
         writeStringToFile(file, data, encoding, false);
@@ -1543,7 +1543,7 @@ public class FileUtils {
      * @param encoding the encoding to use, {@code null} means platform default
      * @param append   if {@code true}, then the String will be added to the
      *                 end of the file rather than overwriting
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 2.3
      */
     public static void writeStringToFile(File file, String data, Charset encoding, boolean append) throws IOException {
@@ -1565,8 +1565,8 @@ public class FileUtils {
      * @param encoding the encoding to use, {@code null} means platform default
      * @param append   if {@code true}, then the String will be added to the
      *                 end of the file rather than overwriting
-     * @throws java.io.IOException                          in case of an I/O error
-     * @throws java.nio.charset.UnsupportedCharsetException thrown instead of {@link java.io.UnsupportedEncodingException} in version 2.2 if the encoding is not
+     * @throws IOException                          in case of an I/O error
+     * @throws java.nio.charset.UnsupportedCharsetException thrown instead of {@link UnsupportedEncodingException} in version 2.2 if the encoding is not
      *                                                      supported by the VM
      * @since 2.1
      */
@@ -1579,7 +1579,7 @@ public class FileUtils {
      *
      * @param file the file to write
      * @param data the content to write to the file
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      */
     public static void writeStringToFile(File file, String data) throws IOException {
         writeStringToFile(file, data, Charset.defaultCharset(), false);
@@ -1592,7 +1592,7 @@ public class FileUtils {
      * @param data   the content to write to the file
      * @param append if {@code true}, then the String will be added to the
      *               end of the file rather than overwriting
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 2.1
      */
     public static void writeStringToFile(File file, String data, boolean append) throws IOException {
@@ -1604,7 +1604,7 @@ public class FileUtils {
      *
      * @param file the file to write
      * @param data the content to write to the file
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 2.0
      */
     public static void write(File file, CharSequence data) throws IOException {
@@ -1618,7 +1618,7 @@ public class FileUtils {
      * @param data   the content to write to the file
      * @param append if {@code true}, then the data will be added to the
      *               end of the file rather than overwriting
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 2.1
      */
     public static void write(File file, CharSequence data, boolean append) throws IOException {
@@ -1631,7 +1631,7 @@ public class FileUtils {
      * @param file     the file to write
      * @param data     the content to write to the file
      * @param encoding the encoding to use, {@code null} means platform default
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 2.3
      */
     public static void write(File file, CharSequence data, Charset encoding) throws IOException {
@@ -1644,8 +1644,8 @@ public class FileUtils {
      * @param file     the file to write
      * @param data     the content to write to the file
      * @param encoding the encoding to use, {@code null} means platform default
-     * @throws java.io.IOException                  in case of an I/O error
-     * @throws java.io.UnsupportedEncodingException if the encoding is not supported by the VM
+     * @throws IOException                  in case of an I/O error
+     * @throws UnsupportedEncodingException if the encoding is not supported by the VM
      * @since 2.0
      */
     public static void write(File file, CharSequence data, String encoding) throws IOException {
@@ -1660,7 +1660,7 @@ public class FileUtils {
      * @param encoding the encoding to use, {@code null} means platform default
      * @param append   if {@code true}, then the data will be added to the
      *                 end of the file rather than overwriting
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 2.3
      */
     public static void write(File file, CharSequence data, Charset encoding, boolean append) throws IOException {
@@ -1676,8 +1676,8 @@ public class FileUtils {
      * @param encoding the encoding to use, {@code null} means platform default
      * @param append   if {@code true}, then the data will be added to the
      *                 end of the file rather than overwriting
-     * @throws java.io.IOException                          in case of an I/O error
-     * @throws java.nio.charset.UnsupportedCharsetException thrown instead of {@link java.io.UnsupportedEncodingException} in version 2.2 if the encoding is not
+     * @throws IOException                          in case of an I/O error
+     * @throws java.nio.charset.UnsupportedCharsetException thrown instead of {@link UnsupportedEncodingException} in version 2.2 if the encoding is not
      *                                                      supported by the VM
      * @since IO 2.1
      */
@@ -1693,7 +1693,7 @@ public class FileUtils {
      *
      * @param file the file to write to
      * @param data the content to write to the file
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 1.1
      */
     public static void writeByteArrayToFile(File file, byte[] data) throws IOException {
@@ -1707,7 +1707,7 @@ public class FileUtils {
      * @param data   the content to write to the file
      * @param append if {@code true}, then bytes will be added to the
      *               end of the file rather than overwriting
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since IO 2.1
      */
     public static void writeByteArrayToFile(File file, byte[] data, boolean append) throws IOException {
@@ -1732,8 +1732,8 @@ public class FileUtils {
      * @param file     the file to write to
      * @param encoding the encoding to use, {@code null} means platform default
      * @param lines    the lines to write, {@code null} entries produce blank lines
-     * @throws java.io.IOException                  in case of an I/O error
-     * @throws java.io.UnsupportedEncodingException if the encoding is not supported by the VM
+     * @throws IOException                  in case of an I/O error
+     * @throws UnsupportedEncodingException if the encoding is not supported by the VM
      * @since 1.1
      */
     public static void writeLines(File file, String encoding, Collection<?> lines) throws IOException {
@@ -1750,8 +1750,8 @@ public class FileUtils {
      * @param lines    the lines to write, {@code null} entries produce blank lines
      * @param append   if {@code true}, then the lines will be added to the
      *                 end of the file rather than overwriting
-     * @throws java.io.IOException                  in case of an I/O error
-     * @throws java.io.UnsupportedEncodingException if the encoding is not supported by the VM
+     * @throws IOException                  in case of an I/O error
+     * @throws UnsupportedEncodingException if the encoding is not supported by the VM
      * @since 2.1
      */
     public static void writeLines(File file, String encoding, Collection<?> lines, boolean append) throws IOException {
@@ -1765,7 +1765,7 @@ public class FileUtils {
      *
      * @param file  the file to write to
      * @param lines the lines to write, {@code null} entries produce blank lines
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 1.3
      */
     public static void writeLines(File file, Collection<?> lines) throws IOException {
@@ -1781,7 +1781,7 @@ public class FileUtils {
      * @param lines  the lines to write, {@code null} entries produce blank lines
      * @param append if {@code true}, then the lines will be added to the
      *               end of the file rather than overwriting
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 2.1
      */
     public static void writeLines(File file, Collection<?> lines, boolean append) throws IOException {
@@ -1800,8 +1800,8 @@ public class FileUtils {
      * @param encoding   the encoding to use, {@code null} means platform default
      * @param lines      the lines to write, {@code null} entries produce blank lines
      * @param lineEnding the line separator to use, {@code null} is system default
-     * @throws java.io.IOException                  in case of an I/O error
-     * @throws java.io.UnsupportedEncodingException if the encoding is not supported by the VM
+     * @throws IOException                  in case of an I/O error
+     * @throws UnsupportedEncodingException if the encoding is not supported by the VM
      * @since 1.1
      */
     public static void writeLines(File file, String encoding, Collection<?> lines, String lineEnding)
@@ -1820,8 +1820,8 @@ public class FileUtils {
      * @param lineEnding the line separator to use, {@code null} is system default
      * @param append     if {@code true}, then the lines will be added to the
      *                   end of the file rather than overwriting
-     * @throws java.io.IOException                  in case of an I/O error
-     * @throws java.io.UnsupportedEncodingException if the encoding is not supported by the VM
+     * @throws IOException                  in case of an I/O error
+     * @throws UnsupportedEncodingException if the encoding is not supported by the VM
      * @since 2.1
      */
     public static void writeLines(File file, String encoding, Collection<?> lines, String lineEnding, boolean append)
@@ -1846,7 +1846,7 @@ public class FileUtils {
      * @param file       the file to write to
      * @param lines      the lines to write, {@code null} entries produce blank lines
      * @param lineEnding the line separator to use, {@code null} is system default
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 1.3
      */
     public static void writeLines(File file, Collection<?> lines, String lineEnding) throws IOException {
@@ -1863,7 +1863,7 @@ public class FileUtils {
      * @param lineEnding the line separator to use, {@code null} is system default
      * @param append     if {@code true}, then the lines will be added to the
      *                   end of the file rather than overwriting
-     * @throws java.io.IOException in case of an I/O error
+     * @throws IOException in case of an I/O error
      * @since 2.1
      */
     public static void writeLines(File file, Collection<?> lines, String lineEnding, boolean append)
@@ -1885,8 +1885,8 @@ public class FileUtils {
      *
      * @param file file or directory to delete, must not be {@code null}
      * @throws NullPointerException          if the directory is {@code null}
-     * @throws java.io.FileNotFoundException if the file was not found
-     * @throws java.io.IOException           in case deletion is unsuccessful
+     * @throws FileNotFoundException if the file was not found
+     * @throws IOException           in case deletion is unsuccessful
      */
     public static void forceDelete(File file) throws IOException {
         if (file.isDirectory()) {
@@ -1910,7 +1910,7 @@ public class FileUtils {
      *
      * @param file file or directory to delete, must not be {@code null}
      * @throws NullPointerException if the file is {@code null}
-     * @throws java.io.IOException  in case deletion is unsuccessful
+     * @throws IOException  in case deletion is unsuccessful
      */
     public static void forceDeleteOnExit(File file) throws IOException {
         if (file.isDirectory()) {
@@ -1925,7 +1925,7 @@ public class FileUtils {
      *
      * @param directory directory to delete, must not be {@code null}
      * @throws NullPointerException if the directory is {@code null}
-     * @throws java.io.IOException  in case deletion is unsuccessful
+     * @throws IOException  in case deletion is unsuccessful
      */
     private static void deleteDirectoryOnExit(File directory) throws IOException {
         if (!directory.exists()) {
@@ -1943,7 +1943,7 @@ public class FileUtils {
      *
      * @param directory directory to clean, must not be {@code null}
      * @throws NullPointerException if the directory is {@code null}
-     * @throws java.io.IOException  in case cleaning is unsuccessful
+     * @throws IOException  in case cleaning is unsuccessful
      */
     private static void cleanDirectoryOnExit(File directory) throws IOException {
         if (!directory.exists()) {
@@ -1984,7 +1984,7 @@ public class FileUtils {
      *
      * @param directory directory to create, must not be {@code null}
      * @throws NullPointerException if the directory is {@code null}
-     * @throws java.io.IOException  if the directory cannot be created or the file already exists but is not a directory
+     * @throws IOException  if the directory cannot be created or the file already exists but is not a directory
      */
     public static void forceMkdir(File directory) throws IOException {
         if (directory.exists()) {
@@ -2013,7 +2013,7 @@ public class FileUtils {
 
     /**
      * Returns the size of the specified file or directory. If the provided
-     * {@link java.io.File} is a regular file, then the file's length is returned.
+     * {@link File} is a regular file, then the file's length is returned.
      * If the argument is a directory, then the size of the directory is
      * calculated recursively. If a directory or subdirectory is security
      * restricted, its size will not be included.
@@ -2043,7 +2043,7 @@ public class FileUtils {
 
     /**
      * Returns the size of the specified file or directory. If the provided
-     * {@link java.io.File} is a regular file, then the file's length is returned.
+     * {@link File} is a regular file, then the file's length is returned.
      * If the argument is a directory, then the size of the directory is
      * calculated recursively. If a directory or subdirectory is security
      * restricted, its size will not be included.
@@ -2295,8 +2295,8 @@ public class FileUtils {
      * @param destDir the destination directory
      * @throws NullPointerException if source or destination is {@code null}
      * @throws FileExistsException  if the destination directory exists
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs moving the file
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs moving the file
      * @since 1.4
      */
     public static void moveDirectory(File srcDir, File destDir) throws IOException {
@@ -2338,8 +2338,8 @@ public class FileUtils {
      *                      otherwise if {@code false} throw an IOException
      * @throws NullPointerException if source or destination is {@code null}
      * @throws FileExistsException  if the directory exists in the destination directory
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs moving the file
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs moving the file
      * @since 1.4
      */
     public static void moveDirectoryToDirectory(File src, File destDir, boolean createDestDir) throws IOException {
@@ -2372,8 +2372,8 @@ public class FileUtils {
      * @param destFile the destination file
      * @throws NullPointerException if source or destination is {@code null}
      * @throws FileExistsException  if the destination file exists
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs moving the file
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs moving the file
      * @since 1.4
      */
     public static void moveFile(File srcFile, File destFile) throws IOException {
@@ -2414,8 +2414,8 @@ public class FileUtils {
      * @param createDestDir If {@code true} create the destination directory,
      *                      otherwise if {@code false} throw an IOException
      * @throws NullPointerException if source or destination is {@code null}
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs moving the file
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs moving the file
      * @since 1.4
      */
     public static void moveFileToDirectory(File srcFile, File destDir, boolean createDestDir) throws IOException {
@@ -2448,8 +2448,8 @@ public class FileUtils {
      * @param createDestDir If {@code true} create the destination directory,
      *                      otherwise if {@code false} throw an IOException
      * @throws NullPointerException if source or destination is {@code null}
-     * @throws java.io.IOException  if source or destination is invalid
-     * @throws java.io.IOException  if an IO error occurs moving the file
+     * @throws IOException  if source or destination is invalid
+     * @throws IOException  if an IO error occurs moving the file
      * @since 1.4
      */
     public static void moveToDirectory(File src, File destDir, boolean createDestDir) throws IOException {
@@ -2480,7 +2480,7 @@ public class FileUtils {
      *
      * @param file the file to check
      * @return true if the file is a Symbolic Link
-     * @throws java.io.IOException if an IO error occurs while checking the file
+     * @throws IOException if an IO error occurs while checking the file
      * @since 2.0
      */
     public static boolean isSymlink(File file) throws IOException {

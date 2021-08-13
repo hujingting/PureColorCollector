@@ -1,17 +1,26 @@
 package com.tbs.purecolorcollector
 
-import android.content.Intent
+import android.app.WallpaperManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.tbs.purecolorcollector.databinding.MainActivityBinding
 import com.tbs.purecolorcollector.ui.main.MainFragment
+import com.tbs.purecolorcollector.utils.ScreenUtils
+import com.tbs.purecolorcollector.utils.common.utils.BitmapUtil
+import com.tbs.purecolorcollector.utils.common.utils.FileUtils
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: MainActivityBinding
+    private var currentColor : String = "#00F9FF"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,12 +51,28 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
 
         R.id.action_settings -> {
-            Toast.makeText(this, "设置壁纸", Toast.LENGTH_SHORT).show()
+            val bitmap = Bitmap.createBitmap(ScreenUtils.screenWidth, ScreenUtils.screenHeight, Bitmap.Config.RGB_565)
+            val canvas = Canvas(bitmap)
+            canvas.drawColor(Color.parseColor(currentColor))
+
+            val wallpaperManager = WallpaperManager.getInstance(baseContext)
+            wallpaperManager.setBitmap(bitmap)
+            Toast.makeText(this, "已设置", Toast.LENGTH_SHORT).show()
             true
         }
 
         R.id.action_download -> {
-            Toast.makeText(this, "下载壁纸", Toast.LENGTH_SHORT).show()
+
+            val bitmap = Bitmap.createBitmap(ScreenUtils.screenWidth, ScreenUtils.screenHeight, Bitmap.Config.RGB_565)
+            val canvas = Canvas(bitmap)
+            canvas.drawColor(Color.parseColor(currentColor))
+
+            val imagePathString = FileUtils.getFilePath(this, UUID.randomUUID().toString() + "_" + currentColor + ".png")
+            val file = BitmapUtil.saveBitmapToFile(bitmap, imagePathString)
+            FileUtils.saveImageToMediaStore(this, file)
+
+
+            Toast.makeText(this, "已保存", Toast.LENGTH_SHORT).show()
             true
         }
 
@@ -59,9 +84,13 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+    fun setCurrentColor(color: String) {
 
+        if (TextUtils.isEmpty(color)) {
+            return
+        }
+
+        currentColor = color
     }
 
 }

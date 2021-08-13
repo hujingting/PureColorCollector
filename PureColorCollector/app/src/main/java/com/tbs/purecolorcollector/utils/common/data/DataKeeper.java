@@ -13,14 +13,15 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.litesuits.common.data;
+package com.tbs.purecolorcollector.utils.common.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.litesuits.android.log.Log;
-import com.litesuits.common.data.cipher.Cipher;
-import com.litesuits.common.utils.ByteUtil;
-import com.litesuits.common.utils.HexUtil;
+
+import com.tbs.purecolorcollector.utils.common.data.cipher.Cipher;
+import com.tbs.purecolorcollector.utils.common.log.Log;
+import com.tbs.purecolorcollector.utils.common.utils.ByteUtil;
+import com.tbs.purecolorcollector.utils.common.utils.HexUtil;
 
 /**
  * @author MaTianyu

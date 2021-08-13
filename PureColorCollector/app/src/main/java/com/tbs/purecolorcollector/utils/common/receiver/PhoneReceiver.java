@@ -1,12 +1,13 @@
-package com.litesuits.common.receiver;
+package com.tbs.purecolorcollector.utils.common.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import com.litesuits.android.log.Log;
-import com.litesuits.common.assist.Check;
+
+import com.tbs.purecolorcollector.utils.common.assist.Check;
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 /**
  * <uses-permission android:name="android.permission.READ_PHONE_STATE"/>

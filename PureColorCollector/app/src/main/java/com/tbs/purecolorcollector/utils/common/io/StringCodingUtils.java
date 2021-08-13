@@ -1,4 +1,4 @@
-package com.litesuits.common.io;
+package com.tbs.purecolorcollector.utils.common.io;
 
 import android.os.Build;
 

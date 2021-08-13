@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.litesuits.android.log;
+package com.tbs.purecolorcollector.utils.common.log;
 
 import java.io.*;
 import java.text.DecimalFormat;

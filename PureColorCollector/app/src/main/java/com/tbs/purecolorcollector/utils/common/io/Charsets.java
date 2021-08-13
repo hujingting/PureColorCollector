@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.litesuits.common.io;
+package com.tbs.purecolorcollector.utils.common.io;
 
 import java.nio.charset.Charset;
 

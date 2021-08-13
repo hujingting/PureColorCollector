@@ -1,10 +1,11 @@
-package com.litesuits.common.receiver;
+package com.tbs.purecolorcollector.utils.common.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import com.litesuits.android.log.Log;
+
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 public class ScreenReceiver extends BroadcastReceiver {
     private String TAG = "ScreenActionReceiver";

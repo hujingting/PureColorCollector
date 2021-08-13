@@ -11,7 +11,7 @@
     <item
         android:id="@+id/action_download"
         android:orderInCategory="100"
-        android:title="下载壁纸"
+        android:title="保存壁纸"
         app:showAsAction="never" />
 
 </menu>

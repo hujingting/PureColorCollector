@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.litesuits.common.io.stream;
+package com.tbs.purecolorcollector.utils.common.io.stream;
 
 import java.io.Serializable;
 import java.io.Writer;
 
 /**
- * {@link java.io.Writer} implementation that outputs to a {@link StringBuilder}.
+ * {@link Writer} implementation that outputs to a {@link StringBuilder}.
  * <p>
  * <strong>NOTE:</strong> This implementation, as an alternative to
  * <code>java.io.StringWriter</code>, provides an <i>un-synchronized</i>

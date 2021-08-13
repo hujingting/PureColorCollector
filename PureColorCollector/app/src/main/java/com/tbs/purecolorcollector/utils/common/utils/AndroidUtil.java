@@ -1,4 +1,4 @@
-package com.litesuits.common.utils;
+package com.tbs.purecolorcollector.utils.common.utils;
 
 import android.content.Context;
 import android.net.wifi.WifiInfo;
@@ -7,8 +7,9 @@ import android.os.Build;
 import android.os.SystemClock;
 import android.provider.Settings;
 
-import com.litesuits.android.log.Log;
-import com.litesuits.common.io.FileUtils;
+
+import com.tbs.purecolorcollector.utils.common.io.FileUtils;
+import com.tbs.purecolorcollector.utils.common.log.Log;
 
 import java.io.File;
 import java.io.IOException;

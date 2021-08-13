@@ -1,4 +1,4 @@
-package com.litesuits.common.utils;
+package com.tbs.purecolorcollector.utils.common.utils;
 
 import android.content.Intent;
 import android.graphics.*;
@@ -7,9 +7,11 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
-import com.litesuits.android.log.Log;
-import com.litesuits.common.assist.Base64;
 
+import com.tbs.purecolorcollector.utils.common.assist.Base64;
+import com.tbs.purecolorcollector.utils.common.log.Log;
+
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -132,6 +134,26 @@ public class BitmapUtil {
             }
         }
         return false;
+    }
+
+    /**
+     * 把batmap 转file
+     *
+     * @param bitmap
+     */
+    public static File saveBitmapToFile(Bitmap bitmap, String filepath) {
+
+        File file = new File(filepath);//将要保存图片的路径
+
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            bos.flush();
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 
     public static boolean saveBitmap(Bitmap bitmap, String absPath) {
