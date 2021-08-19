@@ -77,7 +77,7 @@ public class NotificationUtil {
                 baseNF = builder.build();
             }
             //发出状态栏通知
-            NotificationManager nm = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+            NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             nm.notify(id, baseNF);
         } else {
             // 创建一个NotificationManager的引用

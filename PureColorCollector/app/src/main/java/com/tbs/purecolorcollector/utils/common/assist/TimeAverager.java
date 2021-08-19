@@ -11,11 +11,11 @@ public class TimeAverager {
     /**
      * 计时器
      */
-    private TimeCounter tc = new TimeCounter();
+    private final TimeCounter tc = new TimeCounter();
     /**
      * 均值器
      */
-    private Averager av = new Averager();
+    private final Averager av = new Averager();
 
     /**
      * 一个计时开始

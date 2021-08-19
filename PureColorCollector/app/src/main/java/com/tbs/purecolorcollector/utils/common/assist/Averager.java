@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Averager {
     private static final String            TAG     = "Averager";
-    private              ArrayList<Number> numList = new ArrayList<Number>();
+    private final ArrayList<Number> numList = new ArrayList<Number>();
 
     /**
      * 添加一个数字

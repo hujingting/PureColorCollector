@@ -8,7 +8,7 @@ import android.content.IntentFilter;
 import com.tbs.purecolorcollector.utils.common.log.Log;
 
 public class ScreenReceiver extends BroadcastReceiver {
-    private String TAG = "ScreenActionReceiver";
+    private final String TAG = "ScreenActionReceiver";
     private ScreenListener screenListener;
 
     public ScreenReceiver() {
@@ -53,10 +53,10 @@ public class ScreenReceiver extends BroadcastReceiver {
         }
     }
 
-    public static interface ScreenListener {
-        public void screenOn();
+    public interface ScreenListener {
+        void screenOn();
 
-        public void screenOff();
+        void screenOff();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.tbs.purecolorcollector
+package com.tbs.purecolorcollector.utils
 
 import java.util.regex.Matcher
 import java.util.regex.Pattern

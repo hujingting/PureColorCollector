@@ -16,7 +16,7 @@ import android.os.Handler;
 public class FlashLight {
 
     private Camera camera;
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
 
     /**
      * 超过3分钟自动关闭，防止损伤硬件

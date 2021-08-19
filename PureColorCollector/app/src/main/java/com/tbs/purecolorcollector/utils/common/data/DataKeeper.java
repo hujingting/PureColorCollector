@@ -28,7 +28,7 @@ import com.tbs.purecolorcollector.utils.common.utils.HexUtil;
  * @date 14-7-10
  */
 public class DataKeeper {
-    private SharedPreferences sp;
+    private final SharedPreferences sp;
     public static final  String KEY_PK_HOME = "msg_pk_home";
     public static final  String KEY_PK_NEW  = "msg_pk_new";
     private static final String TAG         = DataKeeper.class.getSimpleName();

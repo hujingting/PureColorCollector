@@ -115,12 +115,12 @@ public class SdCardUtil {
                 }
 
                 if (line.contains("fat")) {
-                    String columns[] = line.split(" ");
+                    String[] columns = line.split(" ");
                     if (columns.length > 1) {
                         list.add("*" + columns[1]);
                     }
                 } else if (line.contains("fuse")) {
-                    String columns[] = line.split(" ");
+                    String[] columns = line.split(" ");
                     if (columns.length > 1) {
                         list.add(columns[1]);
                     }

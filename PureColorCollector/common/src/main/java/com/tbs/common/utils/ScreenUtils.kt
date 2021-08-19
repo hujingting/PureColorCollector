@@ -1,4 +1,4 @@
-package com.tbs.purecolorcollector.utils
+package com.tbs.common.utils
 
 import android.annotation.SuppressLint
 import android.content.Context

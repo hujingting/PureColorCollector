@@ -12,11 +12,11 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.tbs.purecolorcollector.databinding.MainActivityBinding
 import com.tbs.purecolorcollector.ui.main.MainFragment
-import com.tbs.purecolorcollector.utils.ScreenUtils
+import com.tbs.common.utils.ScreenUtils
+import com.tbs.purecolorcollector.utils.HexColorUtil
 import com.tbs.purecolorcollector.utils.common.utils.BitmapUtil
 import com.tbs.purecolorcollector.utils.common.utils.FileUtils
 import java.util.*
-import kotlin.contracts.Returns
 
 class MainActivity : AppCompatActivity() {
 

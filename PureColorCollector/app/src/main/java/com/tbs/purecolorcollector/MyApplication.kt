@@ -2,7 +2,7 @@ package com.tbs.purecolorcollector
 
 import android.app.Application
 import com.tbs.purecolorcollector.utils.PureColorUtils
-import com.tbs.purecolorcollector.utils.ScreenUtils
+import com.tbs.common.utils.ScreenUtils
 
 /**
  * author jingting

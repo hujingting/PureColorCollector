@@ -10,7 +10,7 @@ import android.widget.Toast;
 public class Toastor {
 
     private Toast   mToast;
-    private Context context;
+    private final Context context;
 
     public Toastor(Context context) {
         this.context = context.getApplicationContext();

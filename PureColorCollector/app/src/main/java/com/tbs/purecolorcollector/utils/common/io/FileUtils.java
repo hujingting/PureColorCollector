@@ -23,6 +23,7 @@ import java.net.URLConnection;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 
@@ -151,7 +152,7 @@ public class FileUtils {
     /**
      * The UTF-8 character set, used to decode octets in URLs.
      */
-    private static final Charset UTF8 = Charset.forName("UTF-8");
+    private static final Charset UTF8 = StandardCharsets.UTF_8;
 
     //-----------------------------------------------------------------------
 
@@ -362,19 +363,19 @@ public class FileUtils {
         String displaySize;
 
         if (size.divide(ONE_EB_BI).compareTo(BigInteger.ZERO) > 0) {
-            displaySize = String.valueOf(size.divide(ONE_EB_BI)) + " EB";
+            displaySize = size.divide(ONE_EB_BI) + " EB";
         } else if (size.divide(ONE_PB_BI).compareTo(BigInteger.ZERO) > 0) {
-            displaySize = String.valueOf(size.divide(ONE_PB_BI)) + " PB";
+            displaySize = size.divide(ONE_PB_BI) + " PB";
         } else if (size.divide(ONE_TB_BI).compareTo(BigInteger.ZERO) > 0) {
-            displaySize = String.valueOf(size.divide(ONE_TB_BI)) + " TB";
+            displaySize = size.divide(ONE_TB_BI) + " TB";
         } else if (size.divide(ONE_GB_BI).compareTo(BigInteger.ZERO) > 0) {
-            displaySize = String.valueOf(size.divide(ONE_GB_BI)) + " GB";
+            displaySize = size.divide(ONE_GB_BI) + " GB";
         } else if (size.divide(ONE_MB_BI).compareTo(BigInteger.ZERO) > 0) {
-            displaySize = String.valueOf(size.divide(ONE_MB_BI)) + " MB";
+            displaySize = size.divide(ONE_MB_BI) + " MB";
         } else if (size.divide(ONE_KB_BI).compareTo(BigInteger.ZERO) > 0) {
-            displaySize = String.valueOf(size.divide(ONE_KB_BI)) + " KB";
+            displaySize = size.divide(ONE_KB_BI) + " KB";
         } else {
-            displaySize = String.valueOf(size) + " bytes";
+            displaySize = size + " bytes";
         }
         return displaySize;
     }
@@ -2498,11 +2499,7 @@ public class FileUtils {
             fileInCanonicalDir = new File(canonicalDir, file.getName());
         }
 
-        if (fileInCanonicalDir.getCanonicalFile().equals(fileInCanonicalDir.getAbsoluteFile())) {
-            return false;
-        } else {
-            return true;
-        }
+        return !fileInCanonicalDir.getCanonicalFile().equals(fileInCanonicalDir.getAbsoluteFile());
     }
 
     /**
