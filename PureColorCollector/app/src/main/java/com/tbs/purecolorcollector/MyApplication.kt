@@ -1,6 +1,8 @@
 package com.tbs.purecolorcollector
 
 import android.app.Application
+import android.content.Context
+import com.tbs.common.BaseApplication
 import com.tbs.purecolorcollector.utils.PureColorUtils
 import com.tbs.common.utils.ScreenUtils
 
@@ -8,11 +10,20 @@ import com.tbs.common.utils.ScreenUtils
  * author jingting
  * date : 2021/8/13上午10:05
  */
-class MyApplication : Application(){
+class MyApplication : BaseApplication(){
 
     override fun onCreate() {
         super.onCreate()
+        baseApplication = this
         PureColorUtils.initialize(this)
         ScreenUtils.initScreen(this)
+    }
+
+    companion object{
+        private lateinit var baseApplication:MyApplication
+
+        fun getContext(): Context {
+            return baseApplication
+        }
     }
 }
