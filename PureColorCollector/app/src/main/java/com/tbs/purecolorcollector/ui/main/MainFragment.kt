@@ -152,8 +152,8 @@ class MainFragment : BaseFragment() {
         /**
          * 解析默认图片主题色
          */
-        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.big_mouth_bird)
-        createPaletteAsync(bitmap)
+//        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.big_mouth_bird)
+//        createPaletteAsync(bitmap)
 
     }
 
