@@ -1,21 +1,28 @@
 package com.tbs.purecolorcollector
 
 import android.app.WallpaperManager
+import android.content.ContentValues
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.tbs.common.utils.AndroidVersion
 import com.tbs.purecolorcollector.databinding.MainActivityBinding
 import com.tbs.purecolorcollector.ui.main.MainFragment
 import com.tbs.common.utils.ScreenUtils
 import com.tbs.purecolorcollector.utils.HexColorUtil
 import com.tbs.purecolorcollector.utils.common.utils.BitmapUtil
 import com.tbs.purecolorcollector.utils.common.utils.FileUtils
+import java.io.BufferedInputStream
+import java.io.BufferedOutputStream
+import java.io.FileInputStream
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -77,10 +84,10 @@ class MainActivity : AppCompatActivity() {
                 val canvas = Canvas(bitmap)
                 canvas.drawColor(Color.parseColor(currentColor))
 
-
-                val imagePathString = FileUtils.getFilePath(this, UUID.randomUUID().toString() + "_" + currentColor + ".png")
-                val file = BitmapUtil.saveBitmapToFile(bitmap, imagePathString)
-                FileUtils.saveImageToMediaStore(this, file)
+//                val imagePathString = FileUtils.getFilePath(this, UUID.randomUUID().toString() + "_" + currentColor + ".png")
+//                val file = BitmapUtil.saveBitmapToFile(bitmap, imagePathString)
+                FileUtils.saveImage(bitmap, UUID.randomUUID().toString() + "_" + currentColor);
+//                FileUtils.saveImageToMediaStore(this, file)
 
                 Toast.makeText(this, "已保存", Toast.LENGTH_SHORT).show()
             }

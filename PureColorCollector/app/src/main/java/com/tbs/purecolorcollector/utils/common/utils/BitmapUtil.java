@@ -143,6 +143,7 @@ public class BitmapUtil {
      */
     public static File saveBitmapToFile(Bitmap bitmap, String filepath) {
 
+
         File file = new File(filepath);//将要保存图片的路径
 
         try {

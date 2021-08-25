@@ -3,16 +3,24 @@ package com.tbs.purecolorcollector.utils.common.utils;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 
 import com.bumptech.glide.util.Util;
+import com.tbs.common.utils.AndroidVersion;
 import com.tbs.purecolorcollector.MyApplication;
 import com.tbs.purecolorcollector.utils.PureColorUtils;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Arrays;
+
+import androidx.annotation.NonNull;
 
 public class FileUtils {
 
@@ -39,7 +47,7 @@ public class FileUtils {
     }
 
     public static String getImageDirPath(Context context) {
-        return getDirPath(context, DIR_NAME, true);
+        return getDirPath(context, DIR_NAME, false);
     }
 
     private static String getDirPath(Context context, String dirName, boolean saveToSdcard) {
@@ -55,6 +63,36 @@ public class FileUtils {
         } else
             return f.getAbsolutePath();
         return f.getAbsolutePath();
+    }
+
+    public static void saveImage(Bitmap bitmap, @NonNull String name) throws IOException {
+        boolean saved;
+        OutputStream fos;
+
+        if (AndroidVersion.INSTANCE.hasQ()) {
+            ContentResolver resolver = MyApplication.Companion.getContext().getContentResolver();
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name);
+            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png");
+            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, "DCIM/" + DIR_NAME);
+            Uri imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+            fos = resolver.openOutputStream(imageUri);
+        } else {
+            String imagesDir = getImageDirPath(MyApplication.Companion.getContext());
+
+            File file = new File(imagesDir);
+
+            if (!file.exists()) {
+                file.mkdir();
+            }
+
+            File image = new File(imagesDir, name + ".png");
+            fos = new FileOutputStream(image);
+        }
+
+        saved = bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        fos.flush();
+        fos.close();
     }
 
     public static void saveImageToMediaStore(Context context, File file) {

@@ -27,6 +27,7 @@ import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
 import com.zhihu.matisse.filter.Filter
+import com.zhihu.matisse.internal.entity.CaptureStrategy
 
 
 class MainFragment : BaseFragment() {
@@ -116,18 +117,21 @@ class MainFragment : BaseFragment() {
 //            intent.type = "image/*"
 //            startActivityForResult(intent, 1000)
 
-            handlePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), object : PermissionListener {
+            handlePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA), object : PermissionListener {
                 override fun onGranted() {
                     Matisse.from(fragment)
                         .choose(MimeType.ofAll())
                         .countable(true)
                         .maxSelectable(1)
-                        .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+//                        .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
                         .gridExpectedSize(resources.getDimensionPixelSize(R.dimen.grid_expected_size))
                         .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                        //这两行要连用 是否在选择图片中展示照相 和适配安卓7.0 FileProvider
+                        .capture(true)
+                        .captureStrategy(CaptureStrategy(true,"PhotoPicker"))
                         .thumbnailScale(0.85f)
                         .imageEngine(GlideEngine())
-                        .showPreview(false) // Default is `true`
+                        .showPreview(true) // Default is `true`
                         .forResult(REQUEST_CODE_CHOOSE)
                 }
 
