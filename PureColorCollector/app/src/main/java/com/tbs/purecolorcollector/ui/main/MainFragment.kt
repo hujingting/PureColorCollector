@@ -23,6 +23,8 @@ import com.tbs.purecolorcollector.MainActivity
 import com.tbs.purecolorcollector.R
 import com.tbs.purecolorcollector.databinding.MainFragmentBinding
 import com.tbs.common.utils.StatusBarUtils
+import com.tbs.purecolorcollector.utils.common.utils.BitmapUtil
+import com.tbs.purecolorcollector.utils.common.utils.FileUtils
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import com.zhihu.matisse.engine.impl.GlideEngine
@@ -128,7 +130,7 @@ class MainFragment : BaseFragment() {
                         .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                         //这两行要连用 是否在选择图片中展示照相 和适配安卓7.0 FileProvider
                         .capture(true)
-                        .captureStrategy(CaptureStrategy(true,"PhotoPicker"))
+                        .captureStrategy(CaptureStrategy(true,"com.tbs.purecolorcollector.ui.main.FileProvider"))
                         .thumbnailScale(0.85f)
                         .imageEngine(GlideEngine())
                         .showPreview(true) // Default is `true`
