@@ -59,7 +59,7 @@ public class RoundedRectangleImageView extends AppCompatImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.clipPath(mRoundedRectPath);
+//        canvas.clipPath(mRoundedRectPath);
         super.onDraw(canvas);
     }
 }

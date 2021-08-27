@@ -122,7 +122,7 @@ class MainFragment : BaseFragment() {
             handlePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA), object : PermissionListener {
                 override fun onGranted() {
                     Matisse.from(fragment)
-                        .choose(MimeType.ofAll())
+                        .choose(MimeType.ofImage())
                         .countable(true)
                         .maxSelectable(1)
 //                        .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))

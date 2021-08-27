@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Arrays;
+import java.util.PrimitiveIterator;
 
 import androidx.annotation.NonNull;
 
@@ -68,6 +69,7 @@ public class FileUtils {
     public static void saveImage(Bitmap bitmap, @NonNull String name) throws IOException {
         boolean saved;
         OutputStream fos;
+        File image = null;
 
         if (AndroidVersion.INSTANCE.hasQ()) {
             ContentResolver resolver = MyApplication.Companion.getContext().getContentResolver();
@@ -86,13 +88,17 @@ public class FileUtils {
                 file.mkdir();
             }
 
-            File image = new File(imagesDir, name + ".png");
+            image = new File(imagesDir, name + ".png");
             fos = new FileOutputStream(image);
         }
 
         saved = bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
         fos.flush();
         fos.close();
+
+        if (image != null) {
+            saveImageToMediaStore(MyApplication.Companion.getContext(), image);
+        }
     }
 
     public static void saveImageToMediaStore(Context context, File file) {

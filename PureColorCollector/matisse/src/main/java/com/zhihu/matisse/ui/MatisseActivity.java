@@ -26,6 +26,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,6 +60,7 @@ import com.zhihu.matisse.internal.utils.PathUtils;
 import com.zhihu.matisse.internal.utils.PhotoMetadataUtils;
 
 import com.zhihu.matisse.internal.utils.SingleMediaScanner;
+
 import java.util.ArrayList;
 
 /**
@@ -239,7 +241,8 @@ public class MatisseActivity extends AppCompatActivity implements
                         Intent.FLAG_GRANT_WRITE_URI_PERMISSION | Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
             new SingleMediaScanner(this.getApplicationContext(), path, new SingleMediaScanner.ScanListener() {
-                @Override public void onScanFinish() {
+                @Override
+                public void onScanFinish() {
                     Log.i("SingleMediaScanner", "scan finish!");
                 }
             });
@@ -381,6 +384,8 @@ public class MatisseActivity extends AppCompatActivity implements
         });
     }
 
+    private Fragment fragment;
+
     @Override
     public void onAlbumReset() {
         mAlbumsAdapter.swapCursor(null);
@@ -393,10 +398,19 @@ public class MatisseActivity extends AppCompatActivity implements
         } else {
             mContainer.setVisibility(View.VISIBLE);
             mEmptyView.setVisibility(View.GONE);
-            Fragment fragment = MediaSelectionFragment.newInstance(album);
+
+            if (fragment != null) {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .remove(fragment)
+                        .commitAllowingStateLoss();
+            }
+
+            fragment = MediaSelectionFragment.newInstance(album);
+
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.container, fragment, MediaSelectionFragment.class.getSimpleName())
+                    .add(R.id.container, fragment, MediaSelectionFragment.class.getSimpleName())
                     .commitAllowingStateLoss();
         }
     }

@@ -87,7 +87,6 @@ class MainActivity : AppCompatActivity() {
 //                val imagePathString = FileUtils.getFilePath(this, UUID.randomUUID().toString() + "_" + currentColor + ".png")
 //                val file = BitmapUtil.saveBitmapToFile(bitmap, imagePathString)
                 FileUtils.saveImage(bitmap, UUID.randomUUID().toString() + "_" + currentColor);
-//                FileUtils.saveImageToMediaStore(this, file)
 
                 Toast.makeText(this, "已保存", Toast.LENGTH_SHORT).show()
             }
