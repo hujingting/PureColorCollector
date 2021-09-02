@@ -46,18 +46,31 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#"
+        app:layout_constraintEnd_toStartOf="@+id/tv_show_color"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/tv_show_color"
+        android:textSize="20sp"/>
+
     <EditText
         android:id="@+id/tv_show_color"
-        android:layout_width="100dp"
-        android:layout_height="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="50dp"
-        android:background="@color/black"
-        android:gravity="center"
-        android:text="color_text"
-        android:textColor="@color/white"
-        android:textSize="16sp"
+        android:gravity="start|center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         android:hint="色值"
+        tools:text="FFFFFF"
+        android:maxLength="8"
+        android:maxLines="1"
         android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:textColorHint="#999999"
         app:layout_constraintEnd_toEndOf="parent"

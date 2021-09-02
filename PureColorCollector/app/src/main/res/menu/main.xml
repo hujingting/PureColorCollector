@@ -3,15 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_download"
+        android:orderInCategory="100"
+        android:title="保存壁纸"
+        app:showAsAction="never" />
+
+
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="设置壁纸"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_download"
+        android:id="@+id/action_settings_desktop"
         android:orderInCategory="100"
-        android:title="保存壁纸"
+        android:title="设置桌面壁纸"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_settings_lock_screen"
+        android:orderInCategory="100"
+        android:title="设置锁屏壁纸"
         app:showAsAction="never" />
 
 </menu>

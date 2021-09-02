@@ -17,6 +17,7 @@ import com.tbs.common.utils.AndroidVersion
 import com.tbs.purecolorcollector.databinding.MainActivityBinding
 import com.tbs.purecolorcollector.ui.main.MainFragment
 import com.tbs.common.utils.ScreenUtils
+import com.tbs.common.utils.toast
 import com.tbs.purecolorcollector.utils.HexColorUtil
 import com.tbs.purecolorcollector.utils.common.utils.BitmapUtil
 import com.tbs.purecolorcollector.utils.common.utils.FileUtils
@@ -69,7 +70,7 @@ class MainActivity : AppCompatActivity() {
 
                 val wallpaperManager = WallpaperManager.getInstance(baseContext)
                 wallpaperManager.setBitmap(bitmap)
-                Toast.makeText(this, "已设置", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "已设置桌面和锁屏壁纸", Toast.LENGTH_SHORT).show()
             }
 
             true
@@ -91,6 +92,52 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "已保存", Toast.LENGTH_SHORT).show()
             }
 
+            true
+        }
+
+        R.id.action_settings_desktop -> {
+            if (!HexColorUtil.validate(currentColor)) {
+                toast("请输入正确的色值", Toast.LENGTH_SHORT)
+            } else {
+                val bitmap = Bitmap.createBitmap(ScreenUtils.screenWidth, ScreenUtils.screenHeight, Bitmap.Config.RGB_565)
+                val canvas = Canvas(bitmap)
+                canvas.drawColor(Color.parseColor(currentColor))
+
+                val wallpaperManager = WallpaperManager.getInstance(baseContext)
+                /**
+                 * Android N之后可以分开设定锁屏和桌面壁纸
+                 */
+                if (AndroidVersion.hasNougat()) {
+                    wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_SYSTEM)
+                    toast("已设置桌面壁纸", Toast.LENGTH_SHORT)
+                } else {
+                    wallpaperManager.setBitmap(bitmap)
+                    toast("已设置桌面和锁屏壁纸", Toast.LENGTH_SHORT)
+                }
+            }
+            true
+        }
+
+        R.id.action_settings_lock_screen -> {
+            if (!HexColorUtil.validate(currentColor)) {
+                toast("请输入正确的色值", Toast.LENGTH_SHORT)
+            } else {
+                val bitmap = Bitmap.createBitmap(ScreenUtils.screenWidth, ScreenUtils.screenHeight, Bitmap.Config.RGB_565)
+                val canvas = Canvas(bitmap)
+                canvas.drawColor(Color.parseColor(currentColor))
+
+                val wallpaperManager = WallpaperManager.getInstance(baseContext)
+                /**
+                 * Android N之后可以分开设定锁屏和桌面壁纸
+                 */
+                if (AndroidVersion.hasNougat()) {
+                    wallpaperManager.setBitmap(bitmap, null, true, WallpaperManager.FLAG_LOCK)
+                    toast("已设置锁屏壁纸", Toast.LENGTH_SHORT)
+                } else {
+                    wallpaperManager.setBitmap(bitmap)
+                    toast("已设置桌面和锁屏壁纸", Toast.LENGTH_SHORT)
+                }
+            }
             true
         }
 

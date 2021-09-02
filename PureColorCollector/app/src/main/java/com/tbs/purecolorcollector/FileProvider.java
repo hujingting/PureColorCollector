@@ -1,4 +1,4 @@
-package com.tbs.purecolorcollector.ui.main;
+package com.tbs.purecolorcollector;
 
 import java.security.Provider;
 

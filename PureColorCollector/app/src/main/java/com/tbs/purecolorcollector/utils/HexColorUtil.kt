@@ -12,7 +12,7 @@ object HexColorUtil {
     private var pattern: Pattern? = null
     private var matcher: Matcher? = null
 
-    private const val HEX_PATTERN = "^#([A-Fa-f0-9]{8}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+    private const val HEX_PATTERN = "^#([A-Fa-f0-9]{8}|[A-Fa-f0-9]{6})$"
 
     /**
      * Validate hex with regular expression

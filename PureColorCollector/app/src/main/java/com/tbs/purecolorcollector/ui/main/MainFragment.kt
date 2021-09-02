@@ -7,8 +7,11 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +26,8 @@ import com.tbs.purecolorcollector.MainActivity
 import com.tbs.purecolorcollector.R
 import com.tbs.purecolorcollector.databinding.MainFragmentBinding
 import com.tbs.common.utils.StatusBarUtils
+import com.tbs.common.utils.toast
+import com.tbs.purecolorcollector.utils.HexColorUtil
 import com.tbs.purecolorcollector.utils.common.utils.BitmapUtil
 import com.tbs.purecolorcollector.utils.common.utils.FileUtils
 import com.zhihu.matisse.Matisse
@@ -70,9 +75,9 @@ class MainFragment : BaseFragment() {
          */
         viewModel.currentColor.observe(viewLifecycleOwner, Observer {
 
-            binding.tvShowColor.setText("#" + it.hexCode)
+            binding.tvShowColor.setText(it.hexCode)
 
-            binding.main.setBackgroundColor(it.color)
+//            binding.main.setBackgroundColor(it.color)
 
             it?.let { StatusBarUtils.setColor(requireActivity(), it.color) }
 
@@ -82,12 +87,35 @@ class MainFragment : BaseFragment() {
             }
         })
 
-        binding.tvShowColor.addTextChangedListener {
+        binding.tvShowColor.addTextChangedListener(object : TextWatcher {
 
-            if (activity != null) {
-                (activity as MainActivity).setCurrentColor(it.toString())
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
             }
-        }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+                val color = "#" + s.toString()
+
+                if (!HexColorUtil.validate(color)) {
+//                    toast("请输入正确的色值", Toast.LENGTH_SHORT)
+                    return
+                }
+
+//                binding.main.setBackgroundColor(Color.parseColor(color))
+                StatusBarUtils.setColor(requireActivity(), Color.parseColor(color))
+                (activity as MainActivity).setToolBarBg(Color.parseColor(color))
+                if (activity != null) {
+                    (activity as MainActivity).setCurrentColor(color)
+                }
+
+            }
+
+        })
 
 
         /**
@@ -130,7 +158,7 @@ class MainFragment : BaseFragment() {
                         .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                         //这两行要连用 是否在选择图片中展示照相 和适配安卓7.0 FileProvider
                         .capture(true)
-                        .captureStrategy(CaptureStrategy(true,"com.tbs.purecolorcollector.ui.main.FileProvider"))
+                        .captureStrategy(CaptureStrategy(true,"com.tbs.purecolorcollector.FileProvider"))
                         .thumbnailScale(0.85f)
                         .imageEngine(GlideEngine())
                         .showPreview(true) // Default is `true`
