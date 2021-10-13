@@ -1,40 +1,36 @@
 package com.tbs.purecolorcollector.ui.main
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.luck.picture.lib.PictureSelector
+import com.luck.picture.lib.config.PictureConfig
+import com.luck.picture.lib.config.PictureMimeType
+import com.luck.picture.lib.entity.LocalMedia
+import com.luck.picture.lib.listener.OnResultCallbackListener
 import com.skydoves.colorpickerview.ColorEnvelope
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
-import com.tbs.purecolorcollector.GifSizeFilter
 import com.tbs.purecolorcollector.MainActivity
 import com.tbs.purecolorcollector.R
 import com.tbs.purecolorcollector.databinding.MainFragmentBinding
 import com.tbs.common.utils.StatusBarUtils
-import com.tbs.common.utils.toast
+import com.tbs.purecolorcollector.utils.GlideEngine
 import com.tbs.purecolorcollector.utils.HexColorUtil
-import com.tbs.purecolorcollector.utils.common.utils.BitmapUtil
-import com.tbs.purecolorcollector.utils.common.utils.FileUtils
-import com.zhihu.matisse.Matisse
-import com.zhihu.matisse.MimeType
-import com.zhihu.matisse.engine.impl.GlideEngine
-import com.zhihu.matisse.filter.Filter
-import com.zhihu.matisse.internal.entity.CaptureStrategy
+import java.io.File
+import java.net.URI
 
 
 class MainFragment : BaseFragment() {
@@ -147,28 +143,69 @@ class MainFragment : BaseFragment() {
 //            intent.type = "image/*"
 //            startActivityForResult(intent, 1000)
 
-            handlePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA), object : PermissionListener {
-                override fun onGranted() {
-                    Matisse.from(fragment)
-                        .choose(MimeType.ofImage())
-                        .countable(true)
-                        .maxSelectable(1)
-//                        .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-                        .gridExpectedSize(resources.getDimensionPixelSize(R.dimen.grid_expected_size))
-                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                        //这两行要连用 是否在选择图片中展示照相 和适配安卓7.0 FileProvider
-                        .capture(true)
-                        .captureStrategy(CaptureStrategy(true,"com.tbs.purecolorcollector.FileProvider"))
-                        .thumbnailScale(0.85f)
-                        .imageEngine(GlideEngine())
-                        .showPreview(true) // Default is `true`
-                        .forResult(REQUEST_CODE_CHOOSE)
-                }
+//            handlePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA), object : PermissionListener {
+//                override fun onGranted() {
+//                    Matisse.from(fragment)
+//                        .choose(MimeType.ofImage())
+//                        .countable(true)
+//                        .maxSelectable(1)
+////                        .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
+//                        .gridExpectedSize(resources.getDimensionPixelSize(R.dimen.grid_expected_size))
+//                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+//                        //这两行要连用 是否在选择图片中展示照相 和适配安卓7.0 FileProvider
+//                        .capture(true)
+//                        .captureStrategy(CaptureStrategy(true,"com.tbs.purecolorcollector.FileProvider"))
+//                        .thumbnailScale(0.85f)
+//                        .imageEngine(GlideEngine())
+//                        .showPreview(true) // Default is `true`
+//                        .forResult(REQUEST_CODE_CHOOSE)
+//                }
+//
+//                override fun onDenied(deniedPermissions: List<String>) {
+//                    Toast.makeText(activity, R.string.permission_request_denied, Toast.LENGTH_SHORT).show()
+//                }
+//            })
 
-                override fun onDenied(deniedPermissions: List<String>) {
-                    Toast.makeText(activity, R.string.permission_request_denied, Toast.LENGTH_SHORT).show()
-                }
-            })
+            PictureSelector.create(this)
+                .openGallery(PictureMimeType.ofImage())//显示的媒体类型
+                .imageEngine(GlideEngine.createGlideEngine())//图片加载引擎
+                .selectionMode(PictureConfig.SINGLE)//单选
+                .isCamera(true)//是否显示拍照按钮
+                .isEnableCrop(true)//是否开启裁剪
+                .hideBottomControls(false)
+                .forResult(object : OnResultCallbackListener<LocalMedia> {
+                    override fun onResult(result: MutableList<LocalMedia>?) {
+
+                        if (result?.size == 0) {
+                            return
+                        }
+
+                        val localMedia = result?.get(0);
+                        var imagePath = ""
+                        if (localMedia?.isCompressed == true) {
+                            imagePath = localMedia.compressPath
+                        } else if (localMedia?.isCut == true) {
+                            imagePath = localMedia.cutPath
+                        } else {
+                            imagePath = localMedia?.path.toString()
+                        }
+
+                        if (TextUtils.isEmpty(imagePath)) {
+                            return
+                        }
+
+                        val file = File(imagePath)
+                        val selectedUri = Uri.fromFile(file)
+                        val selectImage = selectedUri?.let { activity?.contentResolver?.openInputStream(it) }
+                        val drawable = BitmapDrawable(resources, selectImage)
+                        binding.colorPickerView.setPaletteDrawable(drawable)
+
+                    }
+
+                    override fun onCancel() {
+                    }
+
+                })
         }
 
         /**
@@ -206,15 +243,12 @@ class MainFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_CHOOSE) {
             if (resultCode == RESULT_OK) {
-//                val imageUri = data?.data
-//                val selectImage = imageUri?.let { activity?.contentResolver?.openInputStream(it) }
-//                val drawable = BitmapDrawable(resources, selectImage)
 
-                val selectedUri = Matisse.obtainResult(data)[0]
-                val selectImage = selectedUri?.let { activity?.contentResolver?.openInputStream(it) }
-                val drawable = BitmapDrawable(resources, selectImage)
-                binding.colorPickerView.setPaletteDrawable(drawable)
-                createPaletteAsync(drawable.bitmap)
+//                val selectedUri = Matisse.obtainResult(data)[0]
+//                val selectImage = selectedUri?.let { activity?.contentResolver?.openInputStream(it) }
+//                val drawable = BitmapDrawable(resources, selectImage)
+//                binding.colorPickerView.setPaletteDrawable(drawable)
+//                createPaletteAsync(drawable.bitmap)
             }
         }
     }
