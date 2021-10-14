@@ -97,14 +97,14 @@ class MainFragment : BaseFragment() {
 
                 val color = "#" + s.toString()
 
-                if (!HexColorUtil.validate(color)) {
+                if (HexColorUtil.validate(color)) {
 //                    toast("请输入正确的色值", Toast.LENGTH_SHORT)
-                    return
+                    StatusBarUtils.setColor(requireActivity(), Color.parseColor(color))
+                    (activity as MainActivity).setToolBarBg(Color.parseColor(color))
                 }
 
 //                binding.main.setBackgroundColor(Color.parseColor(color))
-                StatusBarUtils.setColor(requireActivity(), Color.parseColor(color))
-                (activity as MainActivity).setToolBarBg(Color.parseColor(color))
+
                 if (activity != null) {
                     (activity as MainActivity).setCurrentColor(color)
                 }
