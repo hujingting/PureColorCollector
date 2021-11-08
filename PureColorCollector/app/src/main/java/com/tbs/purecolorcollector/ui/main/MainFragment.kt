@@ -113,7 +113,6 @@ class MainFragment : BaseFragment() {
 
         })
 
-
         /**
          * 选中颜色回调
          */

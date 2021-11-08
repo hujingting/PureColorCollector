@@ -1,35 +1,49 @@
 package com.tbs.purecolorcollector
 
 import android.app.WallpaperManager
-import android.content.ContentValues
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
 import android.text.TextUtils
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.tbs.common.utils.AndroidVersion
 import com.tbs.purecolorcollector.databinding.MainActivityBinding
 import com.tbs.purecolorcollector.ui.main.MainFragment
 import com.tbs.common.utils.ScreenUtils
 import com.tbs.common.utils.toast
+import com.tbs.doSelected
+import com.tbs.initFragment
+import com.tbs.purecolorcollector.ui.main.ColorFragment
 import com.tbs.purecolorcollector.utils.HexColorUtil
-import com.tbs.purecolorcollector.utils.common.utils.BitmapUtil
 import com.tbs.purecolorcollector.utils.common.utils.FileUtils
-import java.io.BufferedInputStream
-import java.io.BufferedOutputStream
-import java.io.FileInputStream
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: MainActivityBinding
     private var currentColor : String = "#00F9FF"
+
+    private val fragmentList = arrayListOf<Fragment>()
+
+    private val mainFragment by lazy {
+        MainFragment()
+    }
+
+    private val colorFragment by lazy {
+        ColorFragment()
+    }
+
+    init {
+        fragmentList.apply {
+            add(mainFragment)
+            add(colorFragment)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +54,29 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, MainFragment.newInstance())
-                .commitNow()
+        binding.vpHome.initFragment(supportFragmentManager, fragmentList).run {
+            //全部缓存,避免切换回重新加载
+            offscreenPageLimit = fragmentList.size
+        }
+
+
+        binding.vpHome.doSelected {
+            binding.bottomNV.menu.getItem(it).isChecked = true
+        }
+
+//        binding.vpHome.initFragment(supportFragmentManager)
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.beginTransaction()
+//                .replace(R.id.container, MainFragment.newInstance())
+//                .commitNow()
+//        }
+
+        binding.bottomNV.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.menu_home -> binding.vpHome.setCurrentItem(0,false)
+                R.id.menu_project -> binding.vpHome.setCurrentItem(1, false)
+            }
+            true
         }
     }
 

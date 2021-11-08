@@ -1,11 +1,9 @@
-package com.tbs.common.ext
+package com.tbs
 
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.res.TypedArray
-import android.os.Build
 import android.os.Parcelable
-import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
