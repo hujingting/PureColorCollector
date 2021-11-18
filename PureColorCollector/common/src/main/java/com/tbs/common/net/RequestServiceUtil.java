@@ -1,8 +1,7 @@
-package com.app.net;
+package com.tbs.common.net;
 
 import android.text.TextUtils;
 
-import com.app.model.RuntimeData;
 
 import java.security.cert.CertificateException;
 import java.util.HashMap;
@@ -20,8 +19,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author liujinxian
  */
 public class RequestServiceUtil {
+
     private static final int DEFAULT_TIMEOUT = 10;
     private static final Map<String, Retrofit> baseUrl2retrofit = new HashMap<>();
+    private static final String base_url = "https://www.wanandroid.com";
 
     public static synchronized <S> S createService(Class<S> serviceClass) {
         return createService(serviceClass, null);
@@ -32,7 +33,7 @@ public class RequestServiceUtil {
         synchronized (baseUrl2retrofit) {
             retrofit = baseUrl2retrofit.get(baseUrl);
             if (retrofit == null) {
-                CommonInterceptor interceptor = new CommonInterceptor();
+//                CommonInterceptor interceptor = new CommonInterceptor();
                 HashMap<String, String> map = new HashMap<>();
                 OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
                         .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -41,13 +42,14 @@ public class RequestServiceUtil {
                 Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
+
                 if (!TextUtils.isEmpty(baseUrl)) {
                     retrofitBuilder.baseUrl(baseUrl);
                 } else {
-                    retrofitBuilder.baseUrl(RuntimeData.getInstance().getAppConfig().ip);
+                    retrofitBuilder.baseUrl(base_url);
                 }
                 clientBuilder.interceptors().clear();
-                clientBuilder.interceptors().add(interceptor);
+//                clientBuilder.interceptors().add(interceptor);
 
                 //定义一个信任所有证书的TrustManager
                 final X509TrustManager trustAllCert = new X509TrustManager() {

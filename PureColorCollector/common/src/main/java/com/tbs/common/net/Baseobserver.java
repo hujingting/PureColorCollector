@@ -1,9 +1,8 @@
-package com.app.net;
+package com.tbs.common.net;
 
-import com.app.model.protocol.BaseProtocol;
-import com.app.util.MLog;
 
-import io.reactivex.Observable;
+import com.tbs.common.model.BaseProtocol;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 

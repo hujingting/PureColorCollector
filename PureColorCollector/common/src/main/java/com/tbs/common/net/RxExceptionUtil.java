@@ -1,10 +1,12 @@
-package com.app.net;
+package com.tbs.common.net;
 
 
 import org.json.JSONException;
+
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.text.ParseException;
+
 import retrofit2.HttpException;
 
 /**

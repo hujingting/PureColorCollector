@@ -1,13 +1,9 @@
-package com.app.net;
+package com.tbs.common.net;
 
 import android.text.TextUtils;
 
-import androidx.annotation.NonNull;
-
-import com.app.controller.ControllerFactory;
-import com.app.model.AppConfig;
-import com.app.model.net.NameValuePair;
-import com.app.util.DecryptUtil;
+import com.tbs.common.config.AppConfig;
+import com.tbs.common.utils.DecryptUtil;
 
 import org.json.JSONObject;
 
@@ -18,12 +14,10 @@ import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnsupportedCharsetException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
+import androidx.annotation.NonNull;
 import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.Interceptor;
@@ -36,8 +30,7 @@ import okhttp3.ResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
 
-public class
-CommonInterceptor implements Interceptor {
+public class CommonInterceptor implements Interceptor {
 
     public static Map<String, String> commonParams;
 
@@ -87,13 +80,13 @@ CommonInterceptor implements Interceptor {
         }
 
         String restxt =new String(respBody.getBytes()) ;
-        if (AppConfig.isEncryption) {
-            byte[] data = DecryptUtil.desDecrypt(respBody.getBytes(), ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords());
-            String info = new String(data, StandardCharsets.UTF_8);
-            //对info 解密
-            ResponseBody responseBody1 = ResponseBody.create(responseBody.contentType(), info);
-            return response.newBuilder().body(responseBody1).build();
-        }
+//        if (AppConfig.isEncryption) {
+//            byte[] data = DecryptUtil.desDecrypt(respBody.getBytes(), ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords());
+//            String info = new String(data, StandardCharsets.UTF_8);
+//            //对info 解密
+//            ResponseBody responseBody1 = ResponseBody.create(responseBody.contentType(), info);
+//            return response.newBuilder().body(responseBody1).build();
+//        }
 
 //
 //        // 输出返回结果
@@ -192,17 +185,17 @@ CommonInterceptor implements Interceptor {
             for (String string : signParams.keySet()) {
                 sb.append(string).append("=").append(signParams.get(string)).append("&");
             }
-            if (AppConfig.isEncryption && !TextUtils.isEmpty(ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords())) {
-
-                builder.add("_p", DecryptUtil.desEncryptNotToURLEncoded(sb.toString(), ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords()));
-            } else {
-                List<NameValuePair> pairs = new ArrayList<>();
-                for (String key : signParams.keySet()) {
-                    if (signParams.get(key) != null) {
-                        builder.add(key, Objects.requireNonNull(signParams.get(key)));
-                    }
-                }
-            }
+//            if (AppConfig.isEncryption && !TextUtils.isEmpty(ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords())) {
+//
+//                builder.add("_p", DecryptUtil.desEncryptNotToURLEncoded(sb.toString(), ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords()));
+//            } else {
+//                List<NameValuePair> pairs = new ArrayList<>();
+//                for (String key : signParams.keySet()) {
+//                    if (signParams.get(key) != null) {
+//                        builder.add(key, Objects.requireNonNull(signParams.get(key)));
+//                    }
+//                }
+//            }
             newRequestBody = builder.build();
         } else if (originalRequestBody instanceof MultipartBody) { // 文件
             MultipartBody requestBody = (MultipartBody) request.body();
@@ -304,18 +297,18 @@ CommonInterceptor implements Interceptor {
                     sb.append(string).append("=").append(signParams.get(string)).append("&");
                 }
 
-                if (AppConfig.isEncryption && !TextUtils.isEmpty(ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords())) {
-                    multipartBodybuilder.addFormDataPart("_p", DecryptUtil.desEncryptNotToURLEncoded(sb.toString(), ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords()));
-                } else {
-                    for (String paramKey : signParams.keySet()) {
-                        // 两种方式添加公共参数
-                        // method 1
-                        multipartBodybuilder.addFormDataPart(paramKey, signParams.get(paramKey));
-                        // method 2
-//                    MultipartBody.Part part = MultipartBody.Part.createFormData(paramKey, commonParams.get(paramKey));
-//                    multipartBodybuilder.addPart(part);
-                    }
-                }
+//                if (AppConfig.isEncryption && !TextUtils.isEmpty(ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords())) {
+//                    multipartBodybuilder.addFormDataPart("_p", DecryptUtil.desEncryptNotToURLEncoded(sb.toString(), ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords()));
+//                } else {
+//                    for (String paramKey : signParams.keySet()) {
+//                        // 两种方式添加公共参数
+//                        // method 1
+//                        multipartBodybuilder.addFormDataPart(paramKey, signParams.get(paramKey));
+//                        // method 2
+////                    MultipartBody.Part part = MultipartBody.Part.createFormData(paramKey, commonParams.get(paramKey));
+////                    multipartBodybuilder.addPart(part);
+//                    }
+//                }
 
             }
 
@@ -373,9 +366,11 @@ CommonInterceptor implements Interceptor {
      * 对get请求做统一参数处理
      */
     private Request rebuildGetRequest(Request request) {
+
         if (commonParams == null || commonParams.size() == 0) {
             return request;
         }
+
         String url = request.url().toString();
 
 //        url = NUtil.get(url);
@@ -387,11 +382,11 @@ CommonInterceptor implements Interceptor {
         }
         url += getCommonFieldString();
 
-        if (AppConfig.isEncryption && !TextUtils.isEmpty(ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords())) {
-            String parameter = url.substring(url.indexOf("?") + 1, url.length());
-            parameter = DecryptUtil.URLDecoder(parameter);
-            url = url.substring(0, url.indexOf("?") + 1) + "_p=" + DecryptUtil.desEncryptToURLEncoded(parameter, ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords());
-        }
+//        if (AppConfig.isEncryption && !TextUtils.isEmpty(ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords())) {
+//            String parameter = url.substring(url.indexOf("?") + 1, url.length());
+//            parameter = DecryptUtil.URLDecoder(parameter);
+//            url = url.substring(0, url.indexOf("?") + 1) + "_p=" + DecryptUtil.desEncryptToURLEncoded(parameter, ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords());
+//        }
         Request.Builder requestBuilder = request.newBuilder();
 
         return requestBuilder.url(url).build();

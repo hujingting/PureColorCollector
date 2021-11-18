@@ -1,4 +1,4 @@
-//package com.app.model.net;
+package com.tbs.common.net.config;//package com.app.model.net;
 //
 //import android.content.Context;
 //import android.util.Log;

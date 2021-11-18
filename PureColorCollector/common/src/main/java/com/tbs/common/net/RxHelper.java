@@ -1,8 +1,7 @@
-package com.app.net;
+package com.tbs.common.net;
 
 
 import android.content.Context;
-
 
 import com.trello.rxlifecycle2.android.ActivityEvent;
 import com.trello.rxlifecycle2.components.RxActivity;

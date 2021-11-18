@@ -1,4 +1,4 @@
-package com.app.model.protocol;
+package com.tbs.common.model;
 
 /**
  * @author guopeng

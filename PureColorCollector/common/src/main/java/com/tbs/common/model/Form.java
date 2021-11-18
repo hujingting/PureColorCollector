@@ -1,4 +1,4 @@
-package com.app.model.form;
+package com.tbs.common.model;
 
 import com.alibaba.fastjson.annotation.JSONField;
 

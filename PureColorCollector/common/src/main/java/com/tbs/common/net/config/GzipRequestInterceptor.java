@@ -1,4 +1,4 @@
-package com.app.model.net;
+package com.tbs.common.net.config;
 
 import java.io.IOException;
 

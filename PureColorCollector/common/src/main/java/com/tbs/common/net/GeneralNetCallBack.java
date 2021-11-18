@@ -1,4 +1,4 @@
-package com.app.net;
+package com.tbs.common.net;
 
 public class GeneralNetCallBack<T> implements NetCallback {
 

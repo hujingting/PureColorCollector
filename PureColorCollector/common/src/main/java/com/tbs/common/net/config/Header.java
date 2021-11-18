@@ -1,4 +1,4 @@
-package com.app.model.net;
+package com.tbs.common.net.config;
 
 /**
  * Created by apple on 16/11/30.

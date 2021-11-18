@@ -1,12 +1,8 @@
-package com.app.model;
+package com.tbs.common.config;
 
 import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
-
-import com.app.controller.IFunctionRouter;
-import com.app.util.Util;
-import com.igexin.sdk.GTIntentService;
 
 /**
  * @author guopeng
@@ -32,7 +28,7 @@ public class AppConfig {
     //后台service类
     public Class<? extends Service> gt_service = null;
     //接收来自个推的消息
-    public Class<? extends GTIntentService> pushService = null;
+//    public Class<? extends GTIntentService> pushService = null;
     // * 为了让推送服务在部分主流机型上更稳定运行，从2.9.5.0版本开始，个推支持第三方应用配置使用自定义Service来作为推送服务运行的载体。* 解决部分手机无法获取clientid从而无法收到推送问题
     public Class<? extends Service> msgPushService = null;
     //快捷方式启动类名
@@ -76,7 +72,7 @@ public class AppConfig {
     /**
      * 作用:产品功能路由
      */
-    public IFunctionRouter appFunctionRouter = null;
+//    public IFunctionRouter appFunctionRouter = null;
     /**
      * 地理经纬度
      */
@@ -134,8 +130,8 @@ public class AppConfig {
 
     public AppConfig(Application application) {
         this.application = application;
-        version_code = Util.getVersionCode(application.getApplicationContext());
-        version_name = Util.getVersionName(application.getApplicationContext());
+//        version_code = Util.getVersionCode(application.getApplicationContext());
+//        version_name = Util.getVersionName(application.getApplicationContext());
     }
 
     public boolean getDebug() {

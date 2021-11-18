@@ -1,12 +1,14 @@
-package com.app.util;
+package com.tbs.common.utils;
 
 import android.text.TextUtils;
 import android.util.Base64;
+
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;

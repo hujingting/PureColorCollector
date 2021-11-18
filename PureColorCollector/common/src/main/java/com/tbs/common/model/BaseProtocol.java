@@ -1,10 +1,6 @@
-package com.app.model.protocol;
+package com.tbs.common.model;
 
 import android.text.TextUtils;
-
-import com.app.controller.ControllerFactory;
-import com.app.model.RuntimeData;
-import com.app.model.form.Form;
 
 /**
  * @author guopeng
@@ -138,17 +134,6 @@ public abstract class BaseProtocol extends Form {
 
     public void setError_url(String error_url) {
         this.error_url = error_url;
-    }
-
-    public String getSid() {
-        return sid;
-    }
-
-    public void setSid(String sid) {
-        if (!TextUtils.isEmpty(sid)) {
-            ControllerFactory.getAppController().getFunctionRouter().updateSid(sid);
-        }
-        this.sid = sid;
     }
 
     public long getNow_at() {
