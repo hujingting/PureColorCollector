@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PureColorCollector</string>
+    <string name="app_name">PureColor</string>
 
     <string name="permission_request_denied">Permission request denied</string>
 </resources>

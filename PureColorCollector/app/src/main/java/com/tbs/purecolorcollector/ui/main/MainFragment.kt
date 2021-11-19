@@ -27,10 +27,10 @@ import com.tbs.purecolorcollector.MainActivity
 import com.tbs.purecolorcollector.R
 import com.tbs.purecolorcollector.databinding.MainFragmentBinding
 import com.tbs.common.utils.StatusBarUtils
+import com.tbs.purecolorcollector.base.BaseFragment
 import com.tbs.purecolorcollector.utils.GlideEngine
 import com.tbs.purecolorcollector.utils.HexColorUtil
 import java.io.File
-import java.net.URI
 
 
 class MainFragment : BaseFragment() {

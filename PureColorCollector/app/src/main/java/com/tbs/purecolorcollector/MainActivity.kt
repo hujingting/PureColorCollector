@@ -11,10 +11,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.tbs.common.model.GeneralResultP
-import com.tbs.common.net.NetCallback
-import com.tbs.common.net.RequestServiceUtil
-import com.tbs.common.net.RequestUtils
 import com.tbs.common.utils.AndroidVersion
 import com.tbs.purecolorcollector.databinding.MainActivityBinding
 import com.tbs.purecolorcollector.ui.main.MainFragment
@@ -22,10 +18,13 @@ import com.tbs.common.utils.ScreenUtils
 import com.tbs.common.utils.toast
 import com.tbs.doSelected
 import com.tbs.initFragment
-import com.tbs.purecolorcollector.ui.main.ColorFragment
+import com.tbs.purecolorcollector.ui.color.ColorFragment
 import com.tbs.purecolorcollector.utils.HexColorUtil
-//import com.tbs.purecolorcollector.utils.common.utils.FileUtils
+import com.tbs.purecolorcollector.utils.common.utils.BitmapUtil
+import com.tbs.purecolorcollector.utils.common.utils.FileUtils
 import java.util.*
+
+//import com.tbs.purecolorcollector.utils.common.utils.FileUtils
 
 class MainActivity : AppCompatActivity() {
 
@@ -55,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
 
         setSupportActionBar(binding.toolbar)
 
@@ -123,9 +123,9 @@ class MainActivity : AppCompatActivity() {
                 val canvas = Canvas(bitmap)
                 canvas.drawColor(Color.parseColor(currentColor))
 
-//                val imagePathString = FileUtils.getFilePath(this, UUID.randomUUID().toString() + "_" + currentColor + ".png")
-//                val file = BitmapUtil.saveBitmapToFile(bitmap, imagePathString)
-//                FileUtils.saveImage(bitmap, UUID.randomUUID().toString() + "_" + currentColor);
+                val imagePathString = FileUtils.getFilePath(this, UUID.randomUUID().toString() + "_" + currentColor + ".png")
+                val file = BitmapUtil.saveBitmapToFile(bitmap, imagePathString)
+                FileUtils.saveImage(bitmap, UUID.randomUUID().toString() + "_" + currentColor);
 
                 Toast.makeText(this, "已保存", Toast.LENGTH_SHORT).show()
             }

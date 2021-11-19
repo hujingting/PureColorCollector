@@ -1,4 +1,4 @@
-package com.tbs.purecolorcollector.ui.main
+package com.tbs.purecolorcollector.base
 
 import android.content.pm.PackageManager
 import androidx.core.content.ContextCompat

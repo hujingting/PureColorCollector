@@ -1,4 +1,4 @@
-package com.tbs.purecolorcollector.ui.main;
+package com.tbs.purecolorcollector;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
  * date : 2021/8/12上午11:17
  */
 public class TestActivity extends BasePreviewActivity {
+
     @Override
     protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

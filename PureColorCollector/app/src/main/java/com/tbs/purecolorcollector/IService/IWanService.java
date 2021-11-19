@@ -1,4 +1,4 @@
-package com.tbs.common.net;
+package com.tbs.purecolorcollector.IService;
 
 
 
@@ -7,10 +7,10 @@ import com.tbs.common.model.GeneralResultP;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 
-public interface ApiService {
+public interface IWanService {
 
     /**
-     * 退出登录
+     * 玩安卓评论
      *
      * @return
      */

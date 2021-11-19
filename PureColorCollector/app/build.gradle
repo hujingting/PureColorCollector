@@ -5,7 +5,7 @@ plugins {
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.tbs.purecolorcollector"
@@ -76,12 +76,18 @@ dependencies {
     /**
      * 相册 https://github.com/zhihu/Matisse
      */
-    api project(':matisse')
+    implementation project(':matisse')
 
     /**
      * 公共库
      */
     api project(':common')
+
+    /**
+     * 小宇宙app广场组件
+     * https://github.com/iftechio/SquareLayoutManager
+     */
+    implementation project(':library')
 
     /**
      * 相册库 https://github.com/LuckSiege/PictureSelector/blob/master/README_CN.md
