@@ -81,6 +81,10 @@ class ColorFragment : BaseFragment() {
 //        }
     }
 
+    override fun addViewListener() {
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

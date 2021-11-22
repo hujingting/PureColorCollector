@@ -1,4 +1,4 @@
-package com.tbs.purecolorcollector
+package com.tbs.purecolorcollector.ui
 
 import android.app.WallpaperManager
 import android.graphics.Bitmap
@@ -18,6 +18,7 @@ import com.tbs.common.utils.ScreenUtils
 import com.tbs.common.utils.toast
 import com.tbs.doSelected
 import com.tbs.initFragment
+import com.tbs.purecolorcollector.R
 import com.tbs.purecolorcollector.ui.color.ColorFragment
 import com.tbs.purecolorcollector.utils.HexColorUtil
 import com.tbs.purecolorcollector.utils.common.utils.BitmapUtil

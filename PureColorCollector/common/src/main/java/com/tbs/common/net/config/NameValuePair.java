@@ -5,6 +5,7 @@ package com.tbs.common.net.config;
  */
 
 public class NameValuePair {
+
     private String value;
     private String name;
     private String alias="";

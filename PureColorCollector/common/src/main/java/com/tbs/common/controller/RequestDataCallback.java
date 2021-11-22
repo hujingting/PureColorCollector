@@ -2,10 +2,6 @@ package com.tbs.common.controller;
 
 /**
  * @ClassName: RequestDataCallback
- * @Description: TODO(数据回传类)
- * @author guopeng
- * @date 2014 2014年9月22日 下午4:34:53
- *
  */
 public class RequestDataCallback<T> {
 	//返回json对象

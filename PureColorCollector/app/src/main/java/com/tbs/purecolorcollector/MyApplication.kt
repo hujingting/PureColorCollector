@@ -1,8 +1,7 @@
 package com.tbs.purecolorcollector
 
-import android.app.Application
 import android.content.Context
-import com.tbs.common.BaseApplication
+import com.tbs.common.base.BaseApplication
 import com.tbs.purecolorcollector.utils.PureColorUtils
 import com.tbs.common.utils.ScreenUtils
 

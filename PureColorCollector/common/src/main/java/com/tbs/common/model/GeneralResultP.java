@@ -13,8 +13,6 @@ public class GeneralResultP extends BaseProtocol {
 
     private int is_share =-1;//0代表无共享用户，1代表有
 
-
-
     public String getUrl() {
         return url;
     }

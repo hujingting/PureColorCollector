@@ -7,9 +7,7 @@ import java.security.cert.CertificateException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import javax.net.ssl.X509TrustManager;
-
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -22,7 +20,7 @@ public class RequestServiceUtil {
 
     private static final int DEFAULT_TIMEOUT = 10;
     private static final Map<String, Retrofit> baseUrl2retrofit = new HashMap<>();
-    private static final String base_url = "https://www.wanandroid.com";
+    private static final String base_url = "https://www.wanandroid.com";//玩安卓域名
 
     public static synchronized <S> S createService(Class<S> serviceClass) {
         return createService(serviceClass, null);
@@ -38,7 +36,6 @@ public class RequestServiceUtil {
                 OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
                         .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                         .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
-                // Retrofit要求baseUrl以 '/' 为结尾
                 Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                         .addConverterFactory(GsonConverterFactory.create())
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create());
@@ -74,6 +71,7 @@ public class RequestServiceUtil {
 //                } catch (Exception e) {
 //                    e.printStackTrace();
 //                }
+
                 OkHttpClient client = clientBuilder
                         .sslSocketFactory(new SSLSocketFactoryCompat(trustAllCert), trustAllCert)
                         .build();

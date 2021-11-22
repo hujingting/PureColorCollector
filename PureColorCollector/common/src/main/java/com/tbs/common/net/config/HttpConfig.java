@@ -9,6 +9,7 @@ import java.util.List;
  * Create Time 2017-06-10
  */
 public class HttpConfig {
+
     private boolean debug=false;//true:debug模式
     private String userAgent="";//用户代理 它是一个特殊字符串头，使得服务器能够识别客户使用的操作系统及版本、CPU 类型、浏览器及版本、浏览器渲染引擎、浏览器语言、浏览器插件等。
     private boolean agent=true;//有代理的情况能不能访问，true:有代理能访问 false:有代理不能访问
@@ -102,7 +103,7 @@ public class HttpConfig {
             commonField.add(new NameValuePair(key,value));
         }
     }
-//
+
     public void removeCommonField(String key){
         for(int i=commonField.size()-1;i>=0;i--){
             if(commonField.get(i).equals(key)){
@@ -110,7 +111,7 @@ public class HttpConfig {
             }
         }
     }
-//
+
     public void addCommonField(String key,String value){
         commonField.add(new NameValuePair(key,value));
     }
@@ -128,7 +129,7 @@ public class HttpConfig {
                 sb.append(URLEncoder.encode(item.getValue(),"utf-8"));
                 i++;
             }
-        }catch (Exception e){
+        } catch (Exception e){
 
         }
         return  sb.toString();
