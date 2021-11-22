@@ -1,19 +1,19 @@
 package com.tbs.common.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.text.TextUtils
 import android.widget.Toast
 import androidx.annotation.StringRes
-import com.tbs.common.BaseApplication
+import com.tbs.common.base.BaseApplication
 
 /**
  * des Toast工具类
- * @date 2020/5/14
- * @author zs
  */
 
+@SuppressLint("ShowToast")
 fun Context.toast(content: String, duration: Int = Toast.LENGTH_SHORT) {
-    if (TextUtils.isEmpty(content))return
+    if (TextUtils.isEmpty(content)) return
     Toast.makeText(this, content, duration).apply {
         show()
     }
@@ -25,21 +25,21 @@ fun Context.toast(@StringRes id: Int, duration: Int = Toast.LENGTH_SHORT) {
 
 
 fun toast(content: String, duration: Int = Toast.LENGTH_SHORT) {
-    if (TextUtils.isEmpty(content))return
+    if (TextUtils.isEmpty(content)) return
     BaseApplication.getContext().toast(content, duration)
 }
 
-fun toast(@StringRes id: Int, duration: Int= Toast.LENGTH_SHORT) {
+fun toast(@StringRes id: Int, duration: Int = Toast.LENGTH_SHORT) {
     BaseApplication.getContext().toast(id, duration)
 }
 
-fun longToast(content: String,duration: Int= Toast.LENGTH_LONG) {
-    if (TextUtils.isEmpty(content))return
-    BaseApplication.getContext().toast(content,duration)
+fun longToast(content: String, duration: Int = Toast.LENGTH_LONG) {
+    if (TextUtils.isEmpty(content)) return
+    BaseApplication.getContext().toast(content, duration)
 }
 
-fun longToast(@StringRes id: Int,duration: Int= Toast.LENGTH_LONG) {
-    BaseApplication.getContext().toast(id,duration)
+fun longToast(@StringRes id: Int, duration: Int = Toast.LENGTH_LONG) {
+    BaseApplication.getContext().toast(id, duration)
 }
 
 

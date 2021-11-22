@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.tbs.purecolorcollector;
+package com.tbs.purecolorcollector.utils;
 
 import android.content.Context;
 import android.graphics.Point;
 
+import com.tbs.purecolorcollector.R;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.filter.Filter;
 import com.zhihu.matisse.internal.entity.IncapableCause;

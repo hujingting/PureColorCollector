@@ -79,7 +79,7 @@ public class CommonInterceptor implements Interceptor {
             respBody = buffer.clone().readString(charset);
         }
 
-        String restxt =new String(respBody.getBytes()) ;
+        String restxt = new String(respBody.getBytes());
 //        if (AppConfig.isEncryption) {
 //            byte[] data = DecryptUtil.desDecrypt(respBody.getBytes(), ControllerFactory.getAppController().getFunctionRouter().obtainKeyWords());
 //            String info = new String(data, StandardCharsets.UTF_8);

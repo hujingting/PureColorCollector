@@ -23,7 +23,7 @@ import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
 import com.skydoves.colorpickerview.ColorEnvelope
 import com.skydoves.colorpickerview.listeners.ColorEnvelopeListener
-import com.tbs.purecolorcollector.MainActivity
+import com.tbs.purecolorcollector.ui.MainActivity
 import com.tbs.purecolorcollector.R
 import com.tbs.purecolorcollector.databinding.MainFragmentBinding
 import com.tbs.common.utils.StatusBarUtils
@@ -60,28 +60,7 @@ class MainFragment : BaseFragment() {
         return binding.root
     }
 
-    @SuppressLint("UseCompatLoadingForDrawables")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
-
-        /**
-         * 观察 LiveData 对象
-         */
-        viewModel.currentColor.observe(viewLifecycleOwner, Observer {
-
-            binding.tvShowColor.setText(it.hexCode)
-
-//            binding.main.setBackgroundColor(it.color)
-
-            it?.let { StatusBarUtils.setColor(requireActivity(), it.color) }
-
-            if (activity is MainActivity) {
-                it?.let { (activity as MainActivity).setToolBarBg(it.color) }
-                (activity as MainActivity).setCurrentColor("#" + it?.hexCode)
-            }
-        })
+    override fun addViewListener() {
 
         binding.tvShowColor.addTextChangedListener(object : TextWatcher {
 
@@ -138,32 +117,6 @@ class MainFragment : BaseFragment() {
          * 去相册
          */
         binding.tvChoosePhoto.setOnClickListener {
-//            val intent = Intent(Intent.ACTION_PICK)
-//            intent.type = "image/*"
-//            startActivityForResult(intent, 1000)
-
-//            handlePermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA), object : PermissionListener {
-//                override fun onGranted() {
-//                    Matisse.from(fragment)
-//                        .choose(MimeType.ofImage())
-//                        .countable(true)
-//                        .maxSelectable(1)
-////                        .addFilter(GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-//                        .gridExpectedSize(resources.getDimensionPixelSize(R.dimen.grid_expected_size))
-//                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-//                        //这两行要连用 是否在选择图片中展示照相 和适配安卓7.0 FileProvider
-//                        .capture(true)
-//                        .captureStrategy(CaptureStrategy(true,"com.tbs.purecolorcollector.FileProvider"))
-//                        .thumbnailScale(0.85f)
-//                        .imageEngine(GlideEngine())
-//                        .showPreview(true) // Default is `true`
-//                        .forResult(REQUEST_CODE_CHOOSE)
-//                }
-//
-//                override fun onDenied(deniedPermissions: List<String>) {
-//                    Toast.makeText(activity, R.string.permission_request_denied, Toast.LENGTH_SHORT).show()
-//                }
-//            })
 
             PictureSelector.create(this)
                 .openGallery(PictureMimeType.ofImage())//显示的媒体类型
@@ -224,6 +177,32 @@ class MainFragment : BaseFragment() {
          */
 //        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.big_mouth_bird)
 //        createPaletteAsync(bitmap)
+
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        // TODO: Use the ViewModel
+
+        /**
+         * 观察 LiveData 对象
+         */
+        viewModel.currentColor.observe(viewLifecycleOwner, Observer {
+
+            binding.tvShowColor.setText(it.hexCode)
+
+//            binding.main.setBackgroundColor(it.color)
+
+            it?.let { StatusBarUtils.setColor(requireActivity(), it.color) }
+
+            if (activity is MainActivity) {
+                it?.let { (activity as MainActivity).setToolBarBg(it.color) }
+                (activity as MainActivity).setCurrentColor("#" + it?.hexCode)
+            }
+        })
+
 
     }
 

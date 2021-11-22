@@ -1,4 +1,4 @@
-package com.tbs.common
+package com.tbs.common.base
 
 import android.app.Application
 import android.content.Context
@@ -15,7 +15,7 @@ open class BaseApplication : Application(){
     }
 
     companion object{
-        private lateinit var baseApplication:BaseApplication
+        private lateinit var baseApplication: BaseApplication
 
         fun getContext(): Context {
             return baseApplication

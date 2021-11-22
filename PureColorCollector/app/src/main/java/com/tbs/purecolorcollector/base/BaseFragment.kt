@@ -1,6 +1,10 @@
 package com.tbs.purecolorcollector.base
 
 import android.content.pm.PackageManager
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import java.util.ArrayList
@@ -9,14 +13,20 @@ import java.util.ArrayList
  * author jingting
  * date : 2021/8/10下午3:34
  */
-open class BaseFragment : Fragment() {
+abstract class BaseFragment : Fragment() {
 
     private var mListener: PermissionListener? = null
+    var rootView: View? = null
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        addViewListener()
+    }
+
+    abstract fun addViewListener()
 
     /**
      * 检查和处理运行时权限，并将用户授权的结果通过PermissionListener进行回调。
-     *`
      * @param permissions
      * 要检查和处理的运行时权限数组
      * @param listener
@@ -59,7 +69,9 @@ open class BaseFragment : Fragment() {
                 }
             }
             else -> {
+
             }
         }
     }
 }
+
