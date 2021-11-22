@@ -40,9 +40,14 @@ android {
         jvmTarget = '1.8'
     }
 
-    viewBinding {
-        enabled = true
+    buildFeatures {
+
+        dataBinding = true
+
+        // for view binding:
+        // viewBinding = true
     }
+
 }
 
 def getTime() {
@@ -50,7 +55,6 @@ def getTime() {
 }
 
 dependencies {
-
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.1'
