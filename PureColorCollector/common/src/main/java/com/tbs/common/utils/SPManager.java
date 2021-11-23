@@ -1,80 +1,109 @@
-package com.tbs.common.utils
+package com.tbs.common.utils;
 
-import android.annotation.SuppressLint
-import android.annotation.TargetApi
-import android.content.Context
-import android.content.SharedPreferences
-import android.os.Build
-import com.tbs.common.base.BaseApplication.Companion.getContext
-import com.tbs.common.utils.SPManager
-import com.google.gson.Gson
-import com.tbs.common.base.BaseApplication
-import java.util.ArrayList
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
+import android.os.Build;
 
-class SPManager @TargetApi(Build.VERSION_CODES.HONEYCOMB) @SuppressLint("CommitPrefEdits") private constructor() {
-    fun putString(key: String?, value: String?) {
+import com.google.gson.Gson;
+import com.tbs.common.base.BaseApplication;
+import com.tbs.common.model.RuntimeData;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class SPManager {
+
+    private static SharedPreferences sp;
+    private static Context mContext;
+    private static Editor edit;
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    @SuppressLint("CommitPrefEdits")
+    private SPManager() {
+
+        sp = BaseApplication.Companion.getContext().getSharedPreferences(mContext.getPackageName(), Context.MODE_PRIVATE | Context.MODE_MULTI_PROCESS);
+        edit = sp.edit();
+    }
+
+    public static SPManager getInstance() {
+        return new SPManager();
+    }
+
+    public void putString(String key, String value) {
         if (edit != null) {
-            edit!!.putString(key, value)
-            edit!!.commit()
+            edit.putString(key, value);
+            edit.commit();
         }
     }
 
-    fun putInt(key: String?, value: Int) {
+    public void putInt(String key, int value) {
         if (edit != null) {
-            edit!!.putInt(key, value)
-            edit!!.commit()
+            edit.putInt(key, value);
+            edit.commit();
         }
     }
 
-    fun putLong(key: String?, value: Long) {
+    public void putLong(String key, long value) {
         if (edit != null) {
-            edit!!.putLong(key, value)
-            edit!!.commit()
+            edit.putLong(key, value);
+            edit.commit();
         }
     }
 
-    fun putFloat(key: String?, value: Float) {
+    public void putFloat(String key, float value) {
         if (edit != null) {
-            edit!!.putFloat(key, value)
-            edit!!.commit()
+            edit.putFloat(key, value);
+            edit.commit();
         }
     }
 
-    fun putBoolean(key: String?, value: Boolean) {
+    public void putBoolean(String key, boolean value) {
         if (edit != null) {
-            edit!!.putBoolean(key, value)
-            edit!!.commit()
+            edit.putBoolean(key, value);
+            edit.commit();
         }
     }
 
-    fun getString(key: String?): String? {
-        return if (sharedPreferences != null) {
-            sharedPreferences!!.getString(key, null)
-        } else null
+    public String getString(String key) {
+        if (sp != null) {
+            return sp.getString(key, null);
+        }
+        return null;
     }
 
-    fun getInt(key: String?): Int {
-        return if (sharedPreferences != null) {
-            sharedPreferences!!.getInt(key, 0)
-        } else 0
+    public int getInt(String key) {
+        if (sp != null) {
+            return sp.getInt(key, 0);
+        }
+        return 0;
     }
 
-    fun getLong(key: String?): Long {
-        return if (sharedPreferences != null) {
-            sharedPreferences!!.getLong(key, 0)
-        } else 0
+    public long getLong(String key) {
+        if (sp != null) {
+            return sp.getLong(key, 0);
+        }
+        return 0;
     }
 
-    fun getFloat(key: String?): Float {
-        return if (sharedPreferences != null) {
-            sharedPreferences!!.getFloat(key, 0.0f)
-        } else 0.0f
+    public float getFloat(String key) {
+        if (sp != null) {
+            return sp.getFloat(key, 0.0f);
+        }
+        return 0.0f;
     }
 
-    fun getBoolean(key: String?): Boolean {
-        return if (sharedPreferences != null) {
-            sharedPreferences!!.getBoolean(key, false)
-        } else false
+    public boolean getBoolean(String key) {
+        if (sp != null) {
+            return sp.getBoolean(key, false);
+        }
+        return false;
+    }
+
+    public SharedPreferences getSharedPreferences() {
+        return sp;
     }
 
     /**
@@ -83,13 +112,13 @@ class SPManager @TargetApi(Build.VERSION_CODES.HONEYCOMB) @SuppressLint("CommitP
      * @param tag
      * @param datalist
      */
-    fun <T> setDataList(tag: String?, datalist: List<T>?) {
-        if (sharedPreferences != null) {
-            val gson = Gson()
+    public <T> void setDataList(String tag, List<T> datalist) {
+        if (sp != null) {
+            Gson gson = new Gson();
             //转换成json数据，再保存
-            val strJson = gson.toJson(datalist)
-            edit!!.putString(tag, strJson)
-            edit!!.commit()
+            String strJson = gson.toJson(datalist);
+            edit.putString(tag, strJson);
+            edit.commit();
         }
     }
 
@@ -99,27 +128,16 @@ class SPManager @TargetApi(Build.VERSION_CODES.HONEYCOMB) @SuppressLint("CommitP
      * @param tag
      * @return
      */
-    fun getDataList(tag: String?): List<String> {
-        val dataList: List<String> = ArrayList()
-        val strJson = sharedPreferences!!.getString(tag, null) ?: return dataList
-        val gson = Gson()
-        return gson.fromJson(strJson, ArrayList::class.java)
+    public List<String> getDataList(String tag) {
+        List<String> dataList = new ArrayList<>();
+        String strJson = sp.getString(tag, null);
+
+        if (null == strJson) {
+            return dataList;
+        }
+        Gson gson = new Gson();
+
+        return gson.fromJson(strJson, ArrayList.class);
     }
 
-    companion object {
-        var sharedPreferences: SharedPreferences?
-            get() = Companion.field
-            private set
-        private val mContext: Context? = null
-        private var edit: SharedPreferences.Editor?
-        val instance: SPManager
-            get() = SPManager()
-    }
-
-    init {
-        sharedPreferences = getContext().getSharedPreferences(
-            mContext!!.packageName, Context.MODE_PRIVATE or Context.MODE_MULTI_PROCESS
-        )
-        edit = sharedPreferences.edit()
-    }
 }

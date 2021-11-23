@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.tbs.purecolorcollector.MyApplication
 import com.tbs.purecolorcollector.R
 import com.tbs.purecolorcollector.base.BaseFragment
 import com.tbs.purecolorcollector.databinding.ColorFragmentBinding
+import io.iftech.android.library.emoji.EmojiB
+import io.iftech.android.library.emoji.EmojiUtils
 import io.iftech.android.library.square.SquareLayoutManager
 import kotlin.random.Random
 
@@ -23,6 +26,7 @@ class ColorFragment : BaseFragment() {
     private var _binding: ColorFragmentBinding?= null
     private val binding get() = _binding!!
     private var squareLayoutManager: SquareLayoutManager? = null
+    private var emojiList: List<EmojiB> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,35 +40,44 @@ class ColorFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-            override fun onCreateViewHolder(
-                parent: ViewGroup,
-                viewType: Int
-            ): RecyclerView.ViewHolder {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.view_holder_debug_rv_square, parent, false)
-                return object : RecyclerView.ViewHolder(view) {}
-            }
+        emojiList = EmojiUtils.loadEmoji(MyApplication.getContext())
 
-            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-                holder.itemView.setBackgroundColor(
-                    Color.argb(
-                        255,
-                        Random.nextInt(255),
-                        Random.nextInt(255),
-                        Random.nextInt(255)
-                    )
-                )
-                holder.itemView.findViewById<TextView>(R.id.tvContent).text = position.toString()
-                holder.itemView.setOnClickListener {
-                    binding.rvSquare.smoothScrollToPosition(position)
-                }
-            }
+        val adapter = ColorAdapter(emojiList)
+        binding.rvSquare.adapter = adapter
 
-            override fun getItemCount(): Int {
-                return 1000
-            }
-        }
+//        val adapter = object : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+//
+//            override fun onCreateViewHolder(
+//                parent: ViewGroup,
+//                viewType: Int
+//            ): RecyclerView.ViewHolder {
+//                val view = LayoutInflater.from(parent.context)
+//                    .inflate(R.layout.view_holder_debug_rv_square, parent, false)
+//                return object : RecyclerView.ViewHolder(view) {
+//                }
+//            }
+//
+//            override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+//                holder.itemView.setBackgroundColor(
+//                    Color.argb(
+//                        255,
+//                        Random.nextInt(255),
+//                        Random.nextInt(255),
+//                        Random.nextInt(255)
+//                    )
+//                )
+//                holder.itemView.findViewById<TextView>(R.id.tvContent).text = position.toString()
+//                holder.itemView.setOnClickListener {
+//                    binding.rvSquare.smoothScrollToPosition(position)
+//                }
+//
+//            }
+//
+//            override fun getItemCount(): Int {
+//                return emojiList.size
+//            }
+//
+//        }
 
         binding.rvSquare.apply {
             this.adapter = adapter

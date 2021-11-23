@@ -22,6 +22,7 @@ import com.tbs.common.net.NetCallback
  * @version 1.0.0
  */
 interface IFunctionRouter {
+
     fun beforeAppStart()
     fun afterAppStart()
     fun appExit()

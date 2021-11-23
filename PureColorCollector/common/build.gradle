@@ -40,7 +40,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-
     //rx
     api rootProject.ext.dependencies["rxjava2"]
     api(rootProject.ext.dependencies["rxandroid2"]) {
@@ -75,7 +74,7 @@ dependencies {
         exclude module: 'rxjava'
         exclude module: 'annotation'
     }
-    api rootProject.ext.dependencies['rxerrorhandler2']
+//    api rootProject.ext.dependencies['rxerrorhandler2']
 
     //network
     api(rootProject.ext.dependencies["retrofit"]) {

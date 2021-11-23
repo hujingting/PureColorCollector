@@ -5,7 +5,7 @@ import com.tbs.common.config.AppConfig
 /**
  * @author guopeng
  * @ClassName: RuntimeData
- * @Description: (存储运行时数据 ， 比如当前用户信息 ， SESSION ， APP上下文Context)
+ * @Description: (存储运行时数据 ，比如当前用户信息 ， SESSION ，APP上下文Context)
  */
 object RuntimeData {
     /**
@@ -14,7 +14,9 @@ object RuntimeData {
     internal var appConfig: AppConfig? = null
 
     /**
-     * @Description: (在程序开始时调用 ， 主要用于缓后续使用存ApplicationContext供 、 初始化图片缓存)
+     * @Description: (在程序开始时调用 ，  初始化图片缓存)
      */
-    fun init(appConfig: AppConfig?) {}
+    fun init(appConfig: AppConfig?) {
+
+    }
 }
