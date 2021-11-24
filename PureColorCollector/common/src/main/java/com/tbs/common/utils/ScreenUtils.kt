@@ -10,7 +10,7 @@ object ScreenUtils {
 
     private var mScreenWidth = 0
     private var mScreenHeight = 0
-    val statusBarHeight = 0
+    private val statusBarHeight = 0
     private var mScale = 1f
     private var mFontScale = 1f
     private var mContext: Context? = null

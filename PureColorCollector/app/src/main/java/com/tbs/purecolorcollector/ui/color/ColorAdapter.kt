@@ -20,8 +20,7 @@ import kotlin.random.Random
 class ColorAdapter(private val emojiList: List<EmojiB>) : RecyclerView.Adapter<ColorAdapter.PaymentHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentHolder {
-        val itemBinding =
-            ItemColorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding = ItemColorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PaymentHolder(itemBinding)
     }
 
@@ -34,6 +33,7 @@ class ColorAdapter(private val emojiList: List<EmojiB>) : RecyclerView.Adapter<C
 
     class PaymentHolder(private val itemBinding: ItemColorBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
+
         fun bind(emojiB: EmojiB) {
 
             itemBinding.root.setBackgroundColor(

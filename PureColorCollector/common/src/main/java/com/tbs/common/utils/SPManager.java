@@ -9,7 +9,6 @@ import android.os.Build;
 
 import com.google.gson.Gson;
 import com.tbs.common.base.BaseApplication;
-import com.tbs.common.model.RuntimeData;
 
 import java.util.ArrayList;
 import java.util.List;

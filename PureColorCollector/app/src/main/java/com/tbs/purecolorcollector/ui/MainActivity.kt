@@ -17,6 +17,8 @@ import com.tbs.common.utils.AndroidVersion
 import com.tbs.purecolorcollector.databinding.MainActivityBinding
 import com.tbs.purecolorcollector.ui.main.MainFragment
 import com.tbs.common.utils.ScreenUtils
+import com.tbs.common.utils.common.utils.BitmapUtil
+import com.tbs.common.utils.common.utils.FileUtils
 import com.tbs.common.utils.toast
 import com.tbs.doSelected
 import com.tbs.initFragment
@@ -24,8 +26,6 @@ import com.tbs.purecolorcollector.R
 import com.tbs.purecolorcollector.controller.WanController
 import com.tbs.purecolorcollector.ui.color.ColorFragment
 import com.tbs.purecolorcollector.utils.HexColorUtil
-import com.tbs.purecolorcollector.utils.common.utils.BitmapUtil
-import com.tbs.purecolorcollector.utils.common.utils.FileUtils
 import java.util.*
 import java.util.function.Consumer
 //import com.tbs.purecolorcollector.utils.common.utils.FileUtils
@@ -139,6 +139,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         R.id.action_settings_desktop -> {
+
             if (!HexColorUtil.validate(currentColor)) {
                 toast("请输入正确的色值", Toast.LENGTH_SHORT)
             } else {
