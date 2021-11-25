@@ -1,5 +1,7 @@
 package com.tbs.common.config;
 
+import com.tbs.common.controller.IFunctionRouter;
+
 /**
  * @author guopeng
  * @ClassName: AppConfig
@@ -9,6 +11,16 @@ package com.tbs.common.config;
 public class AppConfig {
 
     private boolean debug = false;
+
+    //友盟统计
+    public String umengKey = "";
+    //渠道
+    public String channel = "";
+
+    /**
+     * 作用:产品功能路由
+     */
+    public IFunctionRouter appFunctionRouter = null;
 
     public boolean getDebug() {
         return this.debug;

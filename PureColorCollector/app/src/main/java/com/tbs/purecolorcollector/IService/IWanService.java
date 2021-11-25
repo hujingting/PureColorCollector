@@ -4,6 +4,7 @@ package com.tbs.purecolorcollector.IService;
 
 import com.tbs.common.model.GeneralResultP;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 
@@ -15,5 +16,5 @@ public interface IWanService {
      * @return
      */
     @GET("/wenda/comments/14500/json")
-    Observable<GeneralResultP> getComments();
+    Flowable<GeneralResultP> getComments();
 }

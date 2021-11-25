@@ -11,27 +11,29 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.tbs.common.model.GeneralResultP
+import com.tbs.common.net.RequestServiceUtil
 import com.tbs.common.utils.AndroidVersion
 import com.tbs.purecolorcollector.databinding.MainActivityBinding
 import com.tbs.purecolorcollector.ui.main.MainFragment
 import com.tbs.common.utils.ScreenUtils
+import com.tbs.common.utils.common.utils.BitmapUtil
+import com.tbs.common.utils.common.utils.FileUtils
 import com.tbs.common.utils.toast
 import com.tbs.doSelected
 import com.tbs.initFragment
 import com.tbs.purecolorcollector.R
+import com.tbs.purecolorcollector.controller.WanController
 import com.tbs.purecolorcollector.ui.color.ColorFragment
 import com.tbs.purecolorcollector.utils.HexColorUtil
-import com.tbs.purecolorcollector.utils.common.utils.BitmapUtil
-import com.tbs.purecolorcollector.utils.common.utils.FileUtils
 import java.util.*
-
+import java.util.function.Consumer
 //import com.tbs.purecolorcollector.utils.common.utils.FileUtils
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: MainActivityBinding
     private var currentColor : String = "#00F9FF"
-
     private val fragmentList = arrayListOf<Fragment>()
 
     private val mainFragment by lazy {
@@ -56,14 +58,12 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-
         setSupportActionBar(binding.toolbar)
 
         binding.vpHome.initFragment(supportFragmentManager, fragmentList).run {
             //全部缓存,避免切换回重新加载
             offscreenPageLimit = fragmentList.size
         }
-
 
         binding.vpHome.doSelected {
             binding.bottomNV.menu.getItem(it).isChecked = true
@@ -83,6 +83,10 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+        WanController.getComments()?.subscribe {
+
+        }?.isDisposed
 
     }
 
@@ -135,6 +139,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         R.id.action_settings_desktop -> {
+
             if (!HexColorUtil.validate(currentColor)) {
                 toast("请输入正确的色值", Toast.LENGTH_SHORT)
             } else {

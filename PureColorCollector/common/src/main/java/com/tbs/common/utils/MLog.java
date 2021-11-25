@@ -2,6 +2,7 @@ package com.tbs.common.utils;
 
 
 public class MLog {
+
     public static boolean debug = true;
     private static final String TAG_DEFAULT = "LoggerXXX";
 
