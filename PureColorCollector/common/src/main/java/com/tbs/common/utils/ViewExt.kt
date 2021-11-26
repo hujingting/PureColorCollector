@@ -26,8 +26,8 @@ import com.tbs.common.utils.toast
  * viewPager2适配fragment
  */
 fun ViewPager2.initFragment(
-    fragment: Fragment,
-    fragments: MutableList<Fragment>
+        fragment: Fragment,
+        fragments: MutableList<Fragment>
 ): ViewPager2 {
     //设置适配器
     adapter = object : FragmentStateAdapter(fragment) {
@@ -42,13 +42,13 @@ fun ViewPager2.initFragment(
  * 通过BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT支持懒加载
  */
 fun ViewPager.initFragment(
-    manager: FragmentManager,
-    fragments: MutableList<Fragment>
+        manager: FragmentManager,
+        fragments: MutableList<Fragment>
 ): ViewPager {
     //设置适配器
     adapter = object : FragmentStatePagerAdapter(
-        manager,
-        BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+            manager,
+            BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
     ) {
         override fun getCount() = fragments.size
 
@@ -71,9 +71,9 @@ fun ViewPager.doSelected(selected: (Int) -> Unit) {
         override fun onPageScrollStateChanged(state: Int) {}
 
         override fun onPageScrolled(
-            position: Int,
-            positionOffset: Float,
-            positionOffsetPixels: Int
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
         ) {
         }
 
@@ -115,7 +115,6 @@ fun View.clickNoRepeat(interval: Long = 400, onClick: (View) -> Unit) {
 }
 
 
-
 /**
  * 复制剪切板
  */
@@ -152,9 +151,9 @@ fun copy(context: Context, msg: String) {
  */
 fun Context.getThemeColor(attr: Int): Int {
     val array: TypedArray = theme.obtainStyledAttributes(
-        intArrayOf(
-            attr
-        )
+            intArrayOf(
+                    attr
+            )
     )
     val color = array.getColor(0, -0x50506)
     array.recycle()
