@@ -407,6 +407,7 @@ class SquareLayoutManager @JvmOverloads constructor(
 
                 requestLayout()
             }
+
             doOnEnd {
                 if (lastSelectedPosition != position) {
                     onItemSelectedListener(position)
