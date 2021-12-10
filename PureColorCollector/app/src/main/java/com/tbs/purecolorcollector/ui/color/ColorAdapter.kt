@@ -38,7 +38,7 @@ class ColorAdapter(context: Context?) : BasicRecycleAdapter<Int>(context) {
 
         holder.itemView.setBackgroundColor(color)
 
-        holder.tvContent.text = position.toString()
+//        holder.tvContent.text = position.toString()
 
         holder.itemView.setOnClickListener {
             listener?.click(position, color)
