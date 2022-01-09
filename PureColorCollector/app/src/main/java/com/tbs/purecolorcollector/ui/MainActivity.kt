@@ -11,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.tbs.common.base.BaseBindingActivity
 import com.tbs.common.model.GeneralResultP
 import com.tbs.common.net.RequestServiceUtil
 import com.tbs.common.utils.AndroidVersion
@@ -30,9 +31,8 @@ import java.util.*
 import java.util.function.Consumer
 //import com.tbs.purecolorcollector.utils.common.utils.FileUtils
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseBindingActivity<MainActivityBinding>() {
 
-    private lateinit var binding: MainActivityBinding
     private var currentColor : String = "#00F9FF"
     private val fragmentList = arrayListOf<Fragment>()
 
@@ -53,10 +53,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = MainActivityBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
 
         setSupportActionBar(binding.toolbar)
 

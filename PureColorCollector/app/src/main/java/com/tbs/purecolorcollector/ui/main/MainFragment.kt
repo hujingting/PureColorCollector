@@ -33,7 +33,7 @@ import com.tbs.purecolorcollector.utils.HexColorUtil
 import java.io.File
 
 
-class MainFragment : BaseFragment() {
+class MainFragment : BaseFragment<MainFragmentBinding>() {
 
     private val REQUEST_CODE_CHOOSE = 23
 
@@ -43,22 +43,6 @@ class MainFragment : BaseFragment() {
 
     private lateinit var viewModel: MainViewModel
 
-    private var _binding: MainFragmentBinding? = null
-
-    private var fragment : BaseFragment? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = MainFragmentBinding.inflate(inflater, container, false)
-        fragment = this
-        return binding.root
-    }
 
     override fun addViewListener() {
 
@@ -133,7 +117,7 @@ class MainFragment : BaseFragment() {
                         }
 
                         val localMedia = result?.get(0);
-                        var imagePath = ""
+                        var imagePath: String
                         if (localMedia?.isCompressed == true) {
                             imagePath = localMedia.compressPath
                         } else if (localMedia?.isCut == true) {
@@ -229,11 +213,6 @@ class MainFragment : BaseFragment() {
 //                createPaletteAsync(drawable.bitmap)
             }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }
