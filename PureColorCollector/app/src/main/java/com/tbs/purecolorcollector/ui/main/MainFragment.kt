@@ -33,32 +33,14 @@ import com.tbs.purecolorcollector.utils.HexColorUtil
 import java.io.File
 
 
-class MainFragment : BaseFragment() {
-
-    private val REQUEST_CODE_CHOOSE = 23
-
+class MainFragment : BaseFragment<MainFragmentBinding>() {
+    
     companion object {
         fun newInstance() = MainFragment()
     }
 
     private lateinit var viewModel: MainViewModel
 
-    private var _binding: MainFragmentBinding? = null
-
-    private var fragment : BaseFragment? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = MainFragmentBinding.inflate(inflater, container, false)
-        fragment = this
-        return binding.root
-    }
 
     override fun addViewListener() {
 
@@ -109,7 +91,7 @@ class MainFragment : BaseFragment() {
          * 去相册
          */
         binding.tvChoosePhoto.setOnClickListener {
-            goAblum();
+            goAblum()
         }
 
         /**
@@ -211,11 +193,6 @@ class MainFragment : BaseFragment() {
 //                binding.tvPalette.setBackgroundColor(color)
 //            }
 //        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
 }
