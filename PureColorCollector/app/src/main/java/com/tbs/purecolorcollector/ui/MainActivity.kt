@@ -7,6 +7,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -51,8 +52,13 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
         }
     }
 
+    override fun onCreateViewBinding(layoutInflater: LayoutInflater): MainActivityBinding {
+        return MainActivityBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         setSupportActionBar(binding.toolbar)
 

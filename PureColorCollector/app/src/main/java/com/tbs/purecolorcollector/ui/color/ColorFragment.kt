@@ -58,13 +58,13 @@ class ColorFragment : BaseFragment<ColorFragmentBinding>(), OnClickListener {
                 squareLayoutManager = this
                 setOnItemSelectedListener { postion ->
 
-                    val colorRGB = colorList[postion]
-                    val colorHex = String.format("#%02X%02X%02X", colorRGB.red, colorRGB.green, colorRGB.blue)
-                    MLog.d("jt-->", colorHex.toString())
-
-                    if (activity != null) {
-                        (activity as MainActivity).setCurrentColor(colorHex)
-                    }
+//                    val colorRGB = colorList[postion]
+//                    val colorHex = String.format("#%02X%02X%02X", colorRGB.red, colorRGB.green, colorRGB.blue)
+//                    MLog.d("jt-->", colorHex.toString())
+//
+//                    if (activity != null) {
+//                        (activity as MainActivity).setCurrentColor(colorHex)
+//                    }
 
 //                    Toast.makeText(context, "当前选中：$postion", Toast.LENGTH_SHORT).show()
                 }

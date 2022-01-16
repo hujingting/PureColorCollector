@@ -34,7 +34,7 @@ import java.io.File
 
 
 class MainFragment : BaseFragment<MainFragmentBinding>() {
-    
+
     companion object {
         fun newInstance() = MainFragment()
     }
