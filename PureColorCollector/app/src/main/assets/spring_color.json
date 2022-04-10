@@ -1,0 +1,147 @@
+{
+
+  "spring_colors": [
+
+    {
+
+      "solar_term_name":"立春",
+      "solar_term_colors":[
+        {
+          "color_name":"黄白游",
+          "color_rgb":[255,247,153]
+        },
+        {
+          "color_name":"松花",
+          "color_rgb":[255,238,111]
+        },
+        {
+          "color_name":"缃叶",
+          "color_rgb":[236,212,82]
+        },
+        {
+          "color_name":"苍黄",
+          "color_rgb":[182,160,20]
+        }
+      ]
+
+    },
+
+    {
+      "solar_term_name":"东风解冻",
+      "solar_term_colors":[
+        {
+          "color_name":"天缥",
+          "color_rgb":[213,235,225]
+        },
+        {
+          "color_name":"沧浪",
+          "color_rgb":[177,213,200]
+        },
+        {
+          "color_name":"苍筤",
+          "color_rgb":[153,188,172]
+        },
+        {
+          "color_name":"缥碧",
+          "color_rgb":[128,164,146]
+        }
+      ]
+
+    },
+
+    {
+      "solar_term_name":"蛰虫始振",
+      "solar_term_colors":[
+        {
+          "color_name":"流黄",
+          "color_rgb":[139,112,66]
+        },
+        {
+          "color_name":"栗壳",
+          "color_rgb":[119,80,57]
+        },
+        {
+          "color_name":"龙战",
+          "color_rgb":[95,67,33]
+        },
+        {
+          "color_name":"青骊",
+          "color_rgb":[66,37,23]
+        }
+      ]
+
+    },
+
+    {
+      "solar_term_name":"鱼陟负冰",
+      "solar_term_colors":[
+        {
+          "color_name":"海天霞",
+          "color_rgb":[243,168,148]
+        },
+        {
+          "color_name":"缙云",
+          "color_rgb":[238,121,89]
+        },
+        {
+          "color_name":"纁黄",
+          "color_rgb":[186,81,64]
+        },
+        {
+          "color_name":"珊瑚赫",
+          "color_rgb":[193,44,31]
+        }
+      ]
+
+    },
+
+    {
+      "solar_term_name":"雨水",
+      "solar_term_colors":[
+        {
+          "color_name":"盈盈",
+          "color_rgb":[249,211,227]
+        },
+        {
+          "color_name":"水红",
+          "color_rgb":[236,176,193]
+        },
+        {
+          "color_name":"苏梅",
+          "color_rgb":[221,118,148]
+        },
+        {
+          "color_name":"紫茎屏风",
+          "color_rgb":[167,98,131]
+        }
+      ]
+
+    },
+
+
+    {
+      "solar_term_name":"獭祭鱼",
+      "solar_term_colors":[
+        {
+          "color_name":"蕸灰",
+          "color_rgb":[190,177,170]
+        },
+        {
+          "color_name":"黄埃",
+          "color_rgb":[180,146,115]
+        },
+        {
+          "color_name":"老僧衣",
+          "color_rgb":[164,95,68]
+        },
+        {
+          "color_name":"玄天",
+          "color_rgb":[107,84,88]
+        }
+      ]
+
+    }
+
+  ]
+
+}

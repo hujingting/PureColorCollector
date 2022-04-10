@@ -3,21 +3,13 @@ package com.tbs.purecolorcollector.ui.color
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
-import androidx.core.graphics.ColorUtils
-import androidx.core.graphics.blue
-import androidx.core.graphics.green
-import androidx.core.graphics.red
-import com.tbs.common.utils.MLog
 import com.tbs.purecolorcollector.MyApplication
 import com.tbs.purecolorcollector.base.BaseFragment
 import com.tbs.purecolorcollector.base.BasicRecycleAdapter.OnClickListener
 import com.tbs.purecolorcollector.databinding.ColorFragmentBinding
-import com.tbs.purecolorcollector.ui.MainActivity
 import io.iftech.android.library.emoji.EmojiB
 import io.iftech.android.library.emoji.EmojiUtils
 import io.iftech.android.library.square.SquareLayoutManager
-import java.lang.String
 import kotlin.random.Random
 
 /**

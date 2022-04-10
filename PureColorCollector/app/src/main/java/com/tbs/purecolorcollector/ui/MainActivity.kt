@@ -27,6 +27,7 @@ import com.tbs.initFragment
 import com.tbs.purecolorcollector.R
 import com.tbs.purecolorcollector.controller.WanController
 import com.tbs.purecolorcollector.ui.color.ColorFragment
+import com.tbs.purecolorcollector.ui.season.SeasonFragment
 import com.tbs.purecolorcollector.utils.HexColorUtil
 import java.util.*
 import java.util.function.Consumer
@@ -45,8 +46,14 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
         ColorFragment()
     }
 
+    private val seasonFragment by lazy {
+        SeasonFragment()
+    }
+
+
     init {
         fragmentList.apply {
+            add(seasonFragment)
             add(mainFragment)
             add(colorFragment)
         }
@@ -80,8 +87,9 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
 
         binding.bottomNV.setOnItemSelectedListener {
             when(it.itemId) {
-                R.id.menu_home -> binding.vpHome.setCurrentItem(0,false)
-                R.id.menu_project -> binding.vpHome.setCurrentItem(1, false)
+                R.id.season_tab -> binding.vpHome.setCurrentItem(0, false)
+                R.id.menu_home -> binding.vpHome.setCurrentItem(1,false)
+                R.id.menu_project -> binding.vpHome.setCurrentItem(2, false)
             }
             true
         }
