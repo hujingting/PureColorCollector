@@ -69,7 +69,7 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
 
         setSupportActionBar(binding.toolbar)
 
-        binding.vpHome.initFragment(supportFragmentManager, fragmentList).run {
+        binding.vpHome.initFragment(supportFragmentManager, fragmentList).run {                                                      
             //全部缓存,避免切换回重新加载
             offscreenPageLimit = fragmentList.size
         }
