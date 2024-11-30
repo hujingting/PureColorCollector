@@ -35,8 +35,6 @@ import java.io.File
 
 class MainFragment : BaseFragment<MainFragmentBinding>() {
 
-    private val REQUEST_CODE_CHOOSE = 23
-
     companion object {
         fun newInstance() = MainFragment()
     }
@@ -81,15 +79,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
          */
         binding.colorPickerView.setColorListener(object : ColorEnvelopeListener {
             override fun onColorSelected(envelope: ColorEnvelope?, fromUser: Boolean) {
-//                envelope?.let { binding.tvShowColor.setBackgroundColor(it.color) }
-//                binding.tvShowColor.setText("#" + envelope?.hexCode)
                 viewModel.currentColor.value = envelope
-
-//                envelope?.let { binding.toolbar.setBackgroundColor(it.color) }
-//                if (activity is MainActivity) {
-//                    envelope?.let { (activity as MainActivity).setToolBarBg(it.color) }
-//                    (activity as MainActivity).setCurrentColor("#" + envelope?.hexCode)
-//                }
             }
         })
 
@@ -101,47 +91,7 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
          * 去相册
          */
         binding.tvChoosePhoto.setOnClickListener {
-
-            PictureSelector.create(this)
-                .openGallery(PictureMimeType.ofImage())//显示的媒体类型
-                .imageEngine(GlideEngine.createGlideEngine())//图片加载引擎
-                .selectionMode(PictureConfig.SINGLE)//单选
-                .isCamera(true)//是否显示拍照按钮
-                .isEnableCrop(true)//是否开启裁剪
-                .hideBottomControls(false)
-                .forResult(object : OnResultCallbackListener<LocalMedia> {
-                    override fun onResult(result: MutableList<LocalMedia>?) {
-
-                        if (result?.size == 0) {
-                            return
-                        }
-
-                        val localMedia = result?.get(0);
-                        var imagePath: String
-                        if (localMedia?.isCompressed == true) {
-                            imagePath = localMedia.compressPath
-                        } else if (localMedia?.isCut == true) {
-                            imagePath = localMedia.cutPath
-                        } else {
-                            imagePath = localMedia?.path.toString()
-                        }
-
-                        if (TextUtils.isEmpty(imagePath)) {
-                            return
-                        }
-
-                        val file = File(imagePath)
-                        val selectedUri = Uri.fromFile(file)
-                        val selectImage = selectedUri?.let { activity?.contentResolver?.openInputStream(it) }
-                        val drawable = BitmapDrawable(resources, selectImage)
-                        binding.colorPickerView.setPaletteDrawable(drawable)
-
-                    }
-
-                    override fun onCancel() {
-                    }
-
-                })
+            goAblum()
         }
 
         /**
@@ -162,6 +112,53 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
 //        val bitmap = BitmapFactory.decodeResource(resources, R.drawable.big_mouth_bird)
 //        createPaletteAsync(bitmap)
 
+    }
+
+    /**
+     * 去相册
+     */
+    private fun goAblum() {
+        PictureSelector.create(this)
+            .openGallery(PictureMimeType.ofImage())//显示的媒体类型
+            .imageEngine(GlideEngine.createGlideEngine())//图片加载引擎
+            .selectionMode(PictureConfig.SINGLE)//单选
+            .isCamera(true)//是否显示拍照按钮
+            .isEnableCrop(true)//是否开启裁剪
+            .hideBottomControls(false)
+            .forResult(object : OnResultCallbackListener<LocalMedia> {
+                override fun onResult(result: MutableList<LocalMedia>?) {
+
+                    if (result?.size == 0) {
+                        return
+                    }
+
+                    val localMedia = result?.get(0);
+                    var imagePath = ""
+                    if (localMedia?.isCompressed == true) {
+                        imagePath = localMedia.compressPath
+                    } else if (localMedia?.isCut == true) {
+                        imagePath = localMedia.cutPath
+                    } else {
+                        imagePath = localMedia?.path.toString()
+                    }
+
+                    if (TextUtils.isEmpty(imagePath)) {
+                        return
+                    }
+
+                    val file = File(imagePath)
+                    val selectedUri = Uri.fromFile(file)
+                    val selectImage = selectedUri?.let { activity?.contentResolver?.openInputStream(it) }
+                    val drawable = BitmapDrawable(resources, selectImage)
+                    binding.colorPickerView.setPaletteDrawable(drawable)
+
+                }
+
+                override fun onCancel() {
+
+                }
+
+            })
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
@@ -186,8 +183,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
                 (activity as MainActivity).setCurrentColor("#" + it?.hexCode)
             }
         })
-
-
     }
 
     private fun createPaletteAsync(bitmap: Bitmap) {
@@ -198,21 +193,6 @@ class MainFragment : BaseFragment<MainFragmentBinding>() {
 //                binding.tvPalette.setBackgroundColor(color)
 //            }
 //        }
-    }
-
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_CHOOSE) {
-            if (resultCode == RESULT_OK) {
-
-//                val selectedUri = Matisse.obtainResult(data)[0]
-//                val selectImage = selectedUri?.let { activity?.contentResolver?.openInputStream(it) }
-//                val drawable = BitmapDrawable(resources, selectImage)
-//                binding.colorPickerView.setPaletteDrawable(drawable)
-//                createPaletteAsync(drawable.bitmap)
-            }
-        }
     }
 
 }

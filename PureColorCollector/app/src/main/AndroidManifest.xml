@@ -22,7 +22,8 @@
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.PureColorCollector">
 
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity"
+            android:exported="true">
 
             <intent-filter>
 

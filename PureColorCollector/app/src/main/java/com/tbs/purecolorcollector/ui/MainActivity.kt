@@ -7,6 +7,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -26,6 +27,7 @@ import com.tbs.initFragment
 import com.tbs.purecolorcollector.R
 import com.tbs.purecolorcollector.controller.WanController
 import com.tbs.purecolorcollector.ui.color.ColorFragment
+import com.tbs.purecolorcollector.ui.season.SeasonFragment
 import com.tbs.purecolorcollector.utils.HexColorUtil
 import java.util.*
 import java.util.function.Consumer
@@ -44,19 +46,30 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
         ColorFragment()
     }
 
+    private val seasonFragment by lazy {
+        SeasonFragment()
+    }
+
+
     init {
         fragmentList.apply {
+            add(seasonFragment)
             add(mainFragment)
             add(colorFragment)
         }
     }
 
+    override fun onCreateViewBinding(layoutInflater: LayoutInflater): MainActivityBinding {
+        return MainActivityBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         setSupportActionBar(binding.toolbar)
 
-        binding.vpHome.initFragment(supportFragmentManager, fragmentList).run {
+        binding.vpHome.initFragment(supportFragmentManager, fragmentList).run {                                                      
             //全部缓存,避免切换回重新加载
             offscreenPageLimit = fragmentList.size
         }
@@ -74,8 +87,9 @@ class MainActivity : BaseBindingActivity<MainActivityBinding>() {
 
         binding.bottomNV.setOnItemSelectedListener {
             when(it.itemId) {
-                R.id.menu_home -> binding.vpHome.setCurrentItem(0,false)
-                R.id.menu_project -> binding.vpHome.setCurrentItem(1, false)
+                R.id.season_tab -> binding.vpHome.setCurrentItem(0, false)
+                R.id.menu_home -> binding.vpHome.setCurrentItem(1,false)
+                R.id.menu_project -> binding.vpHome.setCurrentItem(2, false)
             }
             true
         }
