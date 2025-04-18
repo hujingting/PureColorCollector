@@ -26,21 +26,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 当用户选择文件后
     imageInput.addEventListener('change', function(e) {
-        const file = e.target.files[0]; // 获取选中的文件
+        const file = e.target.files[0];
         if (file) {
-            const reader = new FileReader(); // 创建文件读取器
+            const reader = new FileReader();
             
-            // 文件读取成功后
             reader.onload = function(e) {
-                previewImage.src = e.target.result; // 设置图片预览源
-                previewContainer.style.display = 'block'; // 显示预览区域
+                previewImage.src = e.target.result;
+                previewContainer.style.display = 'block';
 
-                // 等待图片加载完成，以确保颜色提取准确
+                // 等待图片加载完成后提取颜色
                 previewImage.onload = function() {
-                    // 使用 ColorThief 提取图片中的 5 种主要颜色
                     try {
-                        const palette = colorThief.getPalette(previewImage, 5);
-                        displayColors(palette); // 显示提取的颜色列表
+                        // 提取更多颜色 (8种)，增加质量参数
+                        const palette = colorThief.getPalette(previewImage, 8, 10);
+                        // 对颜色进行排序和过滤，去除相似颜色
+                        const uniqueColors = filterSimilarColors(palette);
+                        displayColors(uniqueColors);
                     } catch (error) {
                         console.error("颜色提取失败:", error);
                         showTooltip(uploadButton.getBoundingClientRect().x, uploadButton.getBoundingClientRect().y, '颜色提取失败，请尝试其他图片');
@@ -48,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 };
             };
 
-            // 读取文件内容作为 Data URL
             reader.readAsDataURL(file);
         }
     });
@@ -164,16 +164,78 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- 核心功能函数 ---
 
     /**
+     * 计算两个颜色之间的欧几里得距离
+     * @param {Array<number>} color1 - 第一个颜色 [r, g, b]
+     * @param {Array<number>} color2 - 第二个颜色 [r, g, b]
+     * @returns {number} 颜色距离
+     */
+    function getColorDistance(color1, color2) {
+        return Math.sqrt(
+            Math.pow(color1[0] - color2[0], 2) +
+            Math.pow(color1[1] - color2[1], 2) +
+            Math.pow(color1[2] - color2[2], 2)
+        );
+    }
+
+    /**
+     * 过滤相似颜色，保留差异明显的颜色
+     * @param {Array<Array<number>>} colors - 颜色数组
+     * @returns {Array<Array<number>>} 过滤后的颜色数组
+     */
+    function filterSimilarColors(colors) {
+        if (!colors || colors.length === 0) return [];
+
+        const threshold = 30; // 颜色差异阈值
+        const filteredColors = [colors[0]]; // 保留第一个颜色
+
+        for (let i = 1; i < colors.length; i++) {
+            let isUnique = true;
+            
+            // 与已保留的颜色比较
+            for (let j = 0; j < filteredColors.length; j++) {
+                const distance = getColorDistance(colors[i], filteredColors[j]);
+                if (distance < threshold) {
+                    isUnique = false;
+                    break;
+                }
+            }
+
+            // 如果颜色足够独特，则保留
+            if (isUnique) {
+                filteredColors.push(colors[i]);
+            }
+        }
+
+        // 按亮度排序
+        return filteredColors.sort((a, b) => {
+            const brightnessA = (a[0] * 299 + a[1] * 587 + a[2] * 114) / 1000;
+            const brightnessB = (b[0] * 299 + b[1] * 587 + b[2] * 114) / 1000;
+            return brightnessB - brightnessA; // 从亮到暗排序
+        });
+    }
+
+    /**
+     * 计算颜色的饱和度
+     * @param {Array<number>} color - RGB颜色数组
+     * @returns {number} 饱和度值 (0-1)
+     */
+    function calculateSaturation(color) {
+        const [r, g, b] = color;
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        return max === 0 ? 0 : (max - min) / max;
+    }
+
+    /**
      * 显示从图片提取的颜色列表
      * @param {Array<Array<number>>} colors - 颜色数组，每个颜色是 [r, g, b]
      */
     function displayColors(colors) {
-        extractedColors = colors; // 保存提取的颜色供后续使用
+        extractedColors = colors;
         const colorsContainer = document.querySelector('.colors-list');
-        colorsContainer.innerHTML = ''; // 清空旧的颜色列表
+        colorsContainer.innerHTML = '';
 
         colors.forEach((color, index) => {
-            // 创建每个颜色项的 DOM 结构
             const colorInfo = document.createElement('div');
             colorInfo.className = 'color-info';
 
@@ -181,13 +243,18 @@ document.addEventListener('DOMContentLoaded', function() {
             colorBox.className = 'color-box';
             
             const rgbColor = `rgb(${color[0]}, ${color[1]}, ${color[2]})`;
-            const hexColor = rgbToHex(color[0], color[1], color[2]); // 转换为十六进制
+            const hexColor = rgbToHex(color[0], color[1], color[2]);
             
-            colorBox.style.backgroundColor = rgbColor; // 设置预览色块的背景
+            colorBox.style.backgroundColor = rgbColor;
+
+            // 计算颜色的亮度和饱和度
+            const brightness = (color[0] * 299 + color[1] * 587 + color[2] * 114) / 1000;
+            const saturation = calculateSaturation(color);
 
             const colorText = document.createElement('span');
             colorText.className = 'color-text';
-            colorText.textContent = `${hexColor} (RGB: ${color[0]}, ${color[1]}, ${color[2]})`; // 显示颜色值
+            colorText.textContent = `${hexColor} (RGB: ${color[0]}, ${color[1]}, ${color[2]})
+                                   亮度: ${Math.round(brightness/2.55)}%, 饱和度: ${Math.round(saturation*100)}%`;
 
             // 创建保存单个颜色的按钮
             const saveBtn = document.createElement('button');
@@ -233,9 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
 
-        // 显示 "应用渐变背景" 按钮
-        gradientButton.style.display = 'inline-block'; // 使用 inline-block 或 block
-        // 隐藏 "保存渐变壁纸" 按钮 (只有在应用渐变后才显示)
+        gradientButton.style.display = colors.length >= 2 ? 'inline-block' : 'none';
         saveGradientBtn.style.display = 'none';
     }
 
