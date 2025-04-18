@@ -524,4 +524,172 @@ body {
         font-size: 11px; /* 减小提示框字体 */
         padding: 4px 8px;
     }
+}
+
+/* --- 深色模式适配 --- */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a; /* 深色背景 */
+        color: #ffffff; /* 浅色文字 */
+    }
+
+    .container {
+        background-color: rgba(40, 40, 40, 0.9); /* 深色半透明背景 */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* 调整阴影 */
+    }
+
+    /* 自定义颜色容器 */
+    .custom-color-container {
+        background-color: rgba(30, 30, 30, 0.8); /* 稍深的背景 */
+    }
+
+    /* 自定义颜色输入框 */
+    #customColorInput {
+        background-color: #2d2d2d;
+        border-color: #444;
+        color: #fff;
+    }
+
+    #customColorInput:focus {
+        border-color: #4285f4;
+        background-color: #333;
+    }
+
+    #customColorInput.error {
+        border-color: #ea4335;
+        background-color: #3a2828;
+    }
+
+    /* 颜色预览框边框 */
+    .custom-color-preview {
+        border-color: #444;
+        background-color: #2d2d2d;
+    }
+
+    /* 颜色列表项 */
+    .color-info {
+        background-color: #2d2d2d;
+        color: #fff;
+    }
+
+    .color-info:hover {
+        background-color: #383838;
+    }
+
+    .color-info.selected {
+        background-color: #1a3049; /* 深蓝色背景 */
+        border-left-color: #4285f4;
+    }
+
+    /* 颜色框边框 */
+    .color-box {
+        border-color: #444;
+    }
+
+    /* 文本颜色 */
+    .color-text {
+        color: #e0e0e0;
+    }
+
+    /* 保存路径容器 */
+    .save-path-container {
+        background-color: rgba(30, 30, 30, 0.8);
+    }
+
+    /* 选中的路径显示 */
+    .selected-path {
+        background-color: #2d2d2d;
+        border-color: #444;
+        color: #e0e0e0;
+    }
+
+    /* 按钮样式调整 */
+    .upload-btn:hover,
+    .path-btn:hover,
+    .save-custom-btn:hover:not(:disabled) {
+        background-color: #3367d6;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 禁用按钮样式 */
+    .save-custom-btn:disabled {
+        background-color: #444;
+        color: #888;
+    }
+
+    /* 保存按钮 */
+    .save-btn {
+        background-color: #4e5459;
+    }
+
+    .save-btn:hover {
+        background-color: #636b72;
+    }
+
+    /* 提示框样式 */
+    .copy-tooltip {
+        background-color: #4285f4;
+        color: #fff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    /* 渐变按钮特殊处理 */
+    .gradient-btn {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    .gradient-btn:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    /* 错误状态 */
+    .error {
+        color: #ff6b6b;
+    }
+}
+
+/* 针对深色模式下的高对比度设置 */
+@media (prefers-color-scheme: dark) and (prefers-contrast: high) {
+    .container {
+        background-color: rgba(20, 20, 20, 0.95);
+    }
+
+    .color-text {
+        color: #ffffff;
+    }
+
+    .selected-path {
+        color: #ffffff;
+    }
+
+    #customColorInput {
+        border-color: #666;
+    }
+}
+
+/* 针对深色模式的动画优化 */
+@media (prefers-color-scheme: dark) and (prefers-reduced-motion: no-preference) {
+    .container {
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .color-info {
+        transition: all 0.2s ease;
+    }
+}
+
+/* 针对深色模式的移动端优化 */
+@media (prefers-color-scheme: dark) and (max-width: 768px) {
+    .container {
+        background-color: rgba(30, 30, 30, 0.95);
+    }
+
+    .color-info {
+        background-color: #252525;
+    }
+
+    .custom-color-container,
+    .save-path-container {
+        background-color: #252525;
+    }
 } 
