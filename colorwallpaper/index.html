@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- <div class="save-path-container">
+        <div class="save-path-container">
             <button id="selectPathBtn" class="path-btn">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/>
@@ -16,8 +16,11 @@
                 选择保存位置
             </button>
             <div id="selectedPath" class="selected-path">未设置保存位置</div>
-        </div> -->
-        
+        </div>
+        <div class="upload-container">
+            <input type="file" id="imageInput" accept="image/*" hidden>
+            <button id="uploadButton" class="upload-btn">选择图片</button>
+        </div>
         <div class="custom-color-container">
             <div class="custom-color-input">
                 <input type="text" id="customColorInput" placeholder="#FFFFFF" maxlength="7">
@@ -30,12 +33,6 @@
                 保存自定义颜色壁纸
             </button>
         </div>
-
-        <div class="upload-container">
-            <input type="file" id="imageInput" accept="image/*" hidden>
-            <button id="uploadButton" class="upload-btn">选择图片</button>
-        </div>
-
         <div id="preview-container" class="preview-container" style="display: none;">
             <img id="previewImage" src="" alt="预览图片">
             <div class="colors-list">
