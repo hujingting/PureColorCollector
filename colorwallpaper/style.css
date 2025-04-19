@@ -28,20 +28,28 @@ body {
 
 /* --- 上传按钮样式 --- */
 .upload-btn {
-    background-color: #4285f4; /* 蓝色背景 */
-    color: white; /* 白色文字 */
-    padding: 12px 24px; /* 内边距 */
-    border: none; /* 无边框 */
-    border-radius: 5px; /* 圆角 */
-    cursor: pointer; /* 鼠标指针样式 */
-    font-size: 16px; /* 字体大小 */
-    min-width: 200px; /* 最小宽度 */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* 过渡效果 */
+    background-color: #7c4dff; /* 改为紫色系的颜色 */
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    display: inline-flex; /* 使用 inline-flex 实现自适应宽度 */
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* 如果之后要添加图标，预留间距 */
+    width: 100%; /* 设置宽度占满容器 */
+    height: 60px;
+    max-width: 200px; /* 设置最大宽度，与其他按钮保持一致 */
+    margin: 0 auto; /* 居中显示 */
 }
 
 .upload-btn:hover {
-    background-color: #3367d6; /* 悬停时颜色变深 */
-    transform: translateY(-2px); /* 轻微上移效果 */
+    background-color: #6c42e5; /* 悬停时的颜色 */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(124, 77, 255, 0.25); /* 添加阴影效果 */
 }
 
 /* --- 图片预览区域 --- */
@@ -407,14 +415,15 @@ body {
 
     /* 调整按钮大小 */
     .upload-btn, .gradient-btn, .save-custom-btn, .path-btn {
-        padding: 10px 16px; /* 减小按钮内边距 */
+        padding: 10px 20px; /* 稍微减小内边距 */
         font-size: 14px; /* 减小字体大小 */
         min-width: auto; /* 移除最小宽度 */
     }
 
     /* 调整上传按钮的最小宽度，使其不太宽 */
     .upload-btn {
-        min-width: 150px;
+        width: 100%; /* 在移动端保持占满宽度 */
+        max-width: none; /* 移除最大宽度限制 */
     }
 
     #previewImage {
