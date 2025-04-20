@@ -28,28 +28,119 @@ body {
 
 /* --- 上传按钮样式 --- */
 .upload-btn {
-    background-color: #7c4dff; /* 改为紫色系的颜色 */
+    background: linear-gradient(135deg, #4285f4, #0d47a1); /* 保持原有的蓝色渐变背景 */
     color: white;
-    padding: 12px 24px;
+    padding: 16px 32px; /* 增加内边距使按钮更大 */
     border: none;
-    border-radius: 5px;
+    border-radius: 12px; /* 增大圆角 */
     cursor: pointer;
-    font-size: 16px;
-    transition: all 0.3s ease;
-    display: inline-flex; /* 使用 inline-flex 实现自适应宽度 */
+    font-size: 18px; /* 增大字体 */
+    font-weight: 600; /* 加粗字体 */
+    letter-spacing: 0.5px; /* 增加字间距 */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 平滑的过渡效果 */
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px; /* 如果之后要添加图标，预留间距 */
-    width: 100%; /* 设置宽度占满容器 */
-    height: 60px;
-    max-width: 200px; /* 设置最大宽度，与其他按钮保持一致 */
-    margin: 0 auto; /* 居中显示 */
+    gap: 12px; /* 增加图标和文字的间距 */
+    width: 100%;
+    height: 64px; /* 增加高度 */
+    max-width: 280px; /* 增加最大宽度 */
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden; /* 为波纹效果准备 */
+    
+    /* 立体感阴影 */
+    box-shadow: 0 4px 6px rgba(66, 133, 244, 0.2),
+                0 8px 16px rgba(66, 133, 244, 0.1),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
+/* 添加上传图标 */
+.upload-btn::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* 悬停效果 */
 .upload-btn:hover {
-    background-color: #6c42e5; /* 悬停时的颜色 */
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(124, 77, 255, 0.25); /* 添加阴影效果 */
+    box-shadow: 0 6px 12px rgba(66, 133, 244, 0.25),
+                0 12px 24px rgba(66, 133, 244, 0.15),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+/* 点击效果 */
+.upload-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(66, 133, 244, 0.2),
+                0 4px 8px rgba(66, 133, 244, 0.1),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+/* 波纹动画效果 */
+.upload-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.upload-btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(100, 100);
+        opacity: 0;
+    }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .upload-btn {
+        height: 56px; /* 稍微降低高度 */
+        padding: 12px 24px; /* 减小内边距 */
+        font-size: 16px; /* 减小字体 */
+        border-radius: 10px; /* 稍微减小圆角 */
+        max-width: none; /* 移除最大宽度限制 */
+    }
+    
+    .upload-btn::before {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+    .upload-btn {
+        box-shadow: 0 4px 6px rgba(66, 133, 244, 0.15),
+                    0 8px 16px rgba(66, 133, 244, 0.1),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.2);
+    }
+
+    .upload-btn:hover {
+        box-shadow: 0 6px 12px rgba(66, 133, 244, 0.2),
+                    0 12px 24px rgba(66, 133, 244, 0.15),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.2);
+    }
 }
 
 /* --- 图片预览区域 --- */
@@ -654,6 +745,16 @@ body {
     /* 错误状态 */
     .error {
         color: #ff6b6b;
+    }
+
+    .upload-btn {
+        background: linear-gradient(135deg, #5294ff, #1565c0); /* 深色模式下使用稍亮的蓝色 */
+        box-shadow: 0 4px 12px rgba(66, 133, 244, 0.15);
+    }
+
+    .upload-btn:hover {
+        background: linear-gradient(135deg, #64a4ff, #1976d2);
+        box-shadow: 0 6px 16px rgba(66, 133, 244, 0.25);
     }
 }
 
