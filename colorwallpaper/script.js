@@ -1,5 +1,6 @@
 // 确保 DOM 完全加载后再执行脚本
 document.addEventListener('DOMContentLoaded', function() {
+    console.info('[App] 应用初始化开始');
     // 获取 DOM 元素
     const uploadButton = document.getElementById('uploadButton'); // 上传按钮
     const imageInput = document.getElementById('imageInput'); // 文件输入框 (隐藏)
@@ -28,6 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
     imageInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
         if (file) {
+            console.info('[Upload] 开始处理图片:', { name: file.name, size: file.size, type: file.type });
+            
             const reader = new FileReader();
             
             reader.onload = function(e) {
@@ -36,17 +39,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 // 等待图片加载完成后提取颜色
                 previewImage.onload = function() {
+                    console.info('[ColorExtract] 开始提取颜色');
                     try {
                         // 提取更多颜色 (8种)，增加质量参数
                         const palette = colorThief.getPalette(previewImage, 8, 10);
+                        console.info('[ColorExtract] 原始颜色提取完成，数量:', palette.length);
                         // 对颜色进行排序和过滤，去除相似颜色
                         const uniqueColors = filterSimilarColors(palette);
+                        console.info('[ColorExtract] 过滤后的颜色数量:', uniqueColors.length);
                         displayColors(uniqueColors);
                     } catch (error) {
-                        console.error("颜色提取失败:", error);
+                        console.error("[ColorExtract] 颜色提取失败:", error);
                         showTooltip(uploadButton.getBoundingClientRect().x, uploadButton.getBoundingClientRect().y, '颜色提取失败，请尝试其他图片');
                     }
                 };
+            };
+
+            reader.onerror = function(error) {
+                console.error('[Upload] 文件读取失败:', error);
             };
 
             reader.readAsDataURL(file);
@@ -66,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 处理自定义颜色输入框的输入事件
     customColorInput.addEventListener('input', function(e) {
         let color = e.target.value.trim(); // 获取并清理输入值
+        console.info('[CustomColor] 输入颜色值:', color);
         
         // 自动添加 # 号
         if (color.length > 0 && color.charAt(0) !== '#') {
@@ -76,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const isValid = /^#[0-9A-F]{6}$/i.test(color);
         
         if (isValid) {
-            // 颜色有效
+            console.info('[CustomColor] 颜色格式有效');
             customColorPreview.style.backgroundColor = color; // 更新预览框颜色
             customColorInput.classList.remove('error'); // 移除错误样式
             saveCustomColorBtn.disabled = false; // 启用保存按钮
@@ -86,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 customColorInput.value = color.toUpperCase();
             }
         } else {
-            // 颜色无效
+            console.warn('[CustomColor] 无效的颜色格式');
             customColorPreview.style.backgroundColor = '#FFFFFF'; // 重置预览框颜色
             customColorInput.classList.add('error'); // 添加错误样式
             saveCustomColorBtn.disabled = true; // 禁用保存按钮
@@ -132,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 点击 "选择保存位置" 按钮
     selectPathBtn.addEventListener('click', async function() {
+        console.info('[Path] 开始选择保存路径');
         try {
             // 检查浏览器是否支持 showDirectoryPicker API
             if (!('showDirectoryPicker' in window)) {
@@ -149,13 +161,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const permission = await dirHandle.requestPermission({ mode: 'readwrite' });
             if (permission === 'granted') {
                 showTooltip(event.clientX, event.clientY, '默认保存位置已设置！');
+                console.info('[Path] 成功设置保存路径:', dirHandle.name);
             } else {
                 showTooltip(event.clientX, event.clientY, '未授予文件夹写入权限');
             }
         } catch (err) {
             // 用户取消选择或其他错误
             if (err.name !== 'AbortError') {
-                console.error("选择文件夹失败:", err);
+                console.error("[Path] 选择文件夹失败:", err);
                 showTooltip(event.clientX, event.clientY, '选择文件夹失败');
             }
         }
@@ -309,8 +322,10 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param {Array<Array<number>>} colors - 颜色数组 [r, g, b]
      */
     function applyGradientBackground(colors) {
+        console.info('[Gradient] 开始应用渐变背景，颜色数量:', colors.length);
         // 至少需要两种颜色才能创建渐变
         if (!colors || colors.length < 2) {
+            console.warn('[Gradient] 颜色数量不足，无法生成渐变');
             showTooltip(gradientButton.getBoundingClientRect().x, gradientButton.getBoundingClientRect().y, '颜色不足，无法生成渐变');
             return;
         }
@@ -453,7 +468,7 @@ document.addEventListener('DOMContentLoaded', function() {
      * @returns {Promise<boolean>} - 是否成功保存到默认文件夹
      */
     async function saveFileToDirectory(blob, fileName) {
-        // 检查是否已设置默认文件夹句柄
+        console.info('[Save] 尝试保存文件到指定目录:', fileName);
         if (defaultDirectoryHandle) {
             try {
                 // 检查并请求写入权限
@@ -473,9 +488,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 await writable.write(blob);
                 // 关闭流
                 await writable.close();
+                console.info('[Save] 文件成功保存到指定目录');
                 return true; // 保存成功
             } catch (err) {
-                console.error('保存到指定文件夹失败:', err);
+                console.error('[Save] 保存到指定文件夹失败:', err);
                 // 如果是权限问题或找不到文件夹，则重置句柄
                 if (err.name === 'NotAllowedError' || err.name === 'NotFoundError') {
                     defaultDirectoryHandle = null;
@@ -493,6 +509,7 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param {string} hexColor - 十六进制颜色字符串 (例如 "#FF0000")
      */
     async function saveAs4KImage(rgbColor, hexColor) {
+        console.info('[Save] 开始生成4K纯色图片:', hexColor);
         // 1. 创建 Canvas
         const canvas = document.createElement('canvas');
         canvas.width = 3840; // 4K 宽度
@@ -552,6 +569,7 @@ document.addEventListener('DOMContentLoaded', function() {
      * @param {Array<Array<number>>} colors - 颜色数组 [r, g, b]
      */
     async function saveGradientAs4K(colors) {
+        console.info('[Save] 开始生成4K渐变图片，颜色数量:', colors.length);
         // 1. 创建 Canvas
         const canvas = document.createElement('canvas');
         canvas.width = 3840;
