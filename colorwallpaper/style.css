@@ -802,4 +802,115 @@ body {
     .save-path-container {
         background-color: #252525;
     }
+}
+
+/* 传统色按钮容器 */
+.traditional-colors-container {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+/* 传统色按钮样式 */
+.traditional-colors-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px;
+    /* 使用更有中国特色的红色渐变 */
+    background: linear-gradient(135deg, #E53935, #B71C1C);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    /* 添加双层阴影效果 */
+    box-shadow: 0 4px 15px rgba(229, 57, 53, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    /* 添加描边效果 */
+    outline: 1px solid rgba(255, 255, 255, 0.2);
+    outline-offset: -3px;
+    width: 100%;
+    max-width: 200px;
+}
+
+/* 添加图标样式 */
+.traditional-colors-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    transition: transform 0.3s ease;
+}
+
+/* 悬停效果 */
+.traditional-colors-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #F44336, #C62828);
+    box-shadow: 0 6px 20px rgba(229, 57, 53, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.traditional-colors-btn:hover svg {
+    transform: rotate(180deg);
+}
+
+/* 点击效果 */
+.traditional-colors-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(229, 57, 53, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+/* 波纹动画效果 */
+.traditional-colors-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.traditional-colors-btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+    .traditional-colors-btn {
+        background: linear-gradient(135deg, #FF5252, #D32F2F);
+        box-shadow: 0 4px 15px rgba(255, 82, 82, 0.2),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.2);
+    }
+    
+    .traditional-colors-btn:hover {
+        background: linear-gradient(135deg, #FF6E6E, #E53935);
+        box-shadow: 0 6px 20px rgba(255, 82, 82, 0.3),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .traditional-colors-btn {
+        padding: 12px 24px;
+        font-size: 15px;
+        max-width: none;
+    }
+    
+    .traditional-colors-btn svg {
+        width: 18px;
+        height: 18px;
+    }
 } 

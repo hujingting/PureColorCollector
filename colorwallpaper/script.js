@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectPathBtn = document.getElementById('selectPathBtn'); // 选择保存路径按钮
     const selectedPath = document.getElementById('selectedPath'); // 显示已选路径的元素
     let defaultDirectoryHandle = null; // 存储用户选择的默认保存文件夹句柄
+    const traditionalColorsBtn = document.getElementById('traditionalColorsBtn');
 
     // --- 事件监听器 ---
 
@@ -172,6 +173,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 showTooltip(event.clientX, event.clientY, '选择文件夹失败');
             }
         }
+    });
+
+    // 点击 "传统颜色" 按钮
+    traditionalColorsBtn.addEventListener('click', function() {
+        window.location.href = 'traditional-colors.html';
     });
 
     // --- 核心功能函数 ---
