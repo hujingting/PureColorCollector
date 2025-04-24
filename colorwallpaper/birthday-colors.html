@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日色 - PureColorCollector</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles specific to the birthday colors page */
+        .month-section {
+            margin-bottom: 40px;
+        }
+
+        .month-title {
+            font-size: clamp(22px, 2.5vw, 28px);
+            font-weight: bold;
+            color: var(--text-primary);
+            margin: 20px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        .birthday-colors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: clamp(15px, 2vw, 20px);
+            padding: 10px;
+        }
+
+        .bday-color-card {
+            background: var(--bg-container);
+            border-radius: 10px;
+            box-shadow: 0 2px 6px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            overflow: hidden; /* Ensure content fits */
+        }
+
+        .bday-color-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px var(--shadow-color);
+        }
+
+        .bday-color-preview {
+            height: 100px;
+            cursor: pointer; /* Indicate copy action */
+        }
+
+        .bday-color-info {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex-grow: 1; /* Ensure info area takes space */
+        }
+
+        .bday-date {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .bday-color-name {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-style: italic;
+            flex-grow: 1; /* Push hex value down */
+        }
+
+        .bday-color-hex {
+            font-family: monospace;
+            color: var(--text-secondary);
+            font-size: 12px;
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: clamp(15px, 2vh, 20px);
+            left: clamp(15px, 2vw, 20px);
+            z-index: 1000;
+            /* Styles copied from traditional-colors.html */
+            padding: 10px 20px;
+            background: var(--bg-container);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px var(--shadow-color);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-2px);
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        /* Ensure container centers content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-top: 80px; /* Space for fixed back button */
+        }
+         .container h1 {
+            margin-bottom: 40px;
+            text-align: center;
+            font-size: clamp(28px, 4vw, 36px);
+        }
+
+        /* Adjust grid for different screen sizes */
+         @media (max-width: 480px) {
+            .birthday-colors-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 10px;
+            }
+            .bday-color-preview {
+                height: 80px;
+            }
+             .container {
+                padding-top: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-btn" onclick="window.location.href='index.html'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+        </svg>
+        返回
+    </button>
+    <div class="container">
+        <h1>生日色</h1>
+        <div id="birthdayColorsContainer">
+            <!-- Birthday colors will be loaded here by JavaScript -->
+        </div>
+    </div>
+    <script src="birthday-colors.js"></script>
+</body>
+</html> 

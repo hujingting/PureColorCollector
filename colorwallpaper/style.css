@@ -913,4 +913,143 @@ body {
         width: 18px;
         height: 18px;
     }
-} 
+}
+
+/* Container for action buttons */
+.action-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 25px 0;
+    flex-wrap: nowrap;
+}
+
+/* Remove margin from individual button containers if needed */
+.traditional-colors-container,
+.birthday-colors-container {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Adjust button styles for stacked layout */
+.traditional-colors-btn,
+.birthday-colors-btn {
+    width: 100%;
+    max-width: 280px;
+}
+
+/* Mobile Styles for Action Buttons Container */
+@media (max-width: 480px) {
+    .action-buttons-container {
+        gap: 15px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .traditional-colors-btn,
+    .birthday-colors-btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* Birthday Colors Button Styles */
+.birthday-colors-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 28px; /* Match padding */
+    /* Keep the unique purple/blue gradient */
+    background: linear-gradient(135deg, #8E24AA, #4285f4);
+    color: white;
+    border: none;
+    border-radius: 8px; /* Match border-radius */
+    font-size: 16px; /* Match font-size */
+    font-weight: 500; /* Match font-weight */
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Match transition */
+    position: relative;
+    overflow: hidden;
+    /* Match box-shadow structure, adjust color to purple */
+    box-shadow: 0 4px 15px rgba(142, 36, 170, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    /* Match outline */
+    outline: 1px solid rgba(255, 255, 255, 0.2);
+    outline-offset: -3px;
+    /* Keep width/max-width from previous adjustments */
+    width: 100%;
+    max-width: 280px;
+}
+
+/* Match icon style */
+.birthday-colors-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    transition: transform 0.3s ease; /* Match transition */
+}
+
+/* Match hover effect structure */
+.birthday-colors-btn:hover {
+    transform: translateY(-2px); /* Match transform */
+    background: linear-gradient(135deg, #9C27B0, #5294ff); /* Adjusted hover gradient */
+    /* Match hover shadow structure, adjust color */
+    box-shadow: 0 6px 20px rgba(142, 36, 170, 0.3),
+                inset 0 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+/* Keep a simple scale effect for the birthday icon on hover */
+.birthday-colors-btn:hover svg {
+    transform: scale(1.1);
+}
+
+/* Match active effect structure */
+.birthday-colors-btn:active {
+    transform: translateY(1px); /* Match transform */
+    /* Match active shadow structure, adjust color */
+    box-shadow: 0 2px 8px rgba(142, 36, 170, 0.2),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+/* Keep ripple effect */
+.birthday-colors-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.birthday-colors-btn:focus:not(:active)::after {
+    animation: ripple 1s ease-out;
+}
+
+/* Dark Mode for Birthday Colors Button */
+@media (prefers-color-scheme: dark) {
+    .birthday-colors-btn {
+        /* Adjusted dark mode gradient */
+        background: linear-gradient(135deg, #AB47BC, #5294ff);
+        /* Match dark mode shadow structure, adjust color */
+        box-shadow: 0 4px 15px rgba(171, 71, 188, 0.2),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.2);
+    }
+
+    .birthday-colors-btn:hover {
+        /* Adjusted dark mode hover gradient */
+        background: linear-gradient(135deg, #BA68C8, #64a4ff);
+         /* Match dark mode hover shadow structure, adjust color */
+        box-shadow: 0 6px 20px rgba(171, 71, 188, 0.3),
+                    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Mobile Styles remain consistent due to previous adjustments */ 

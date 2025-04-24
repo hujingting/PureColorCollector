@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectedPath = document.getElementById('selectedPath'); // 显示已选路径的元素
     let defaultDirectoryHandle = null; // 存储用户选择的默认保存文件夹句柄
     const traditionalColorsBtn = document.getElementById('traditionalColorsBtn');
+    const birthdayColorsBtn = document.getElementById('birthdayColorsBtn'); // Get the new button
 
     // --- 事件监听器 ---
 
@@ -176,9 +177,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 点击 "传统颜色" 按钮
-    traditionalColorsBtn.addEventListener('click', function() {
-        window.location.href = 'traditional-colors.html';
-    });
+    if (traditionalColorsBtn) {
+        traditionalColorsBtn.addEventListener('click', function() {
+            console.info('[Navigation] Navigating to traditional colors page');
+            window.location.href = 'traditional-colors.html';
+        });
+    } else {
+         console.warn('[Init] Traditional Colors button not found');
+    }
+
+    // Add event listener for the Birthday Colors button
+    if (birthdayColorsBtn) {
+        birthdayColorsBtn.addEventListener('click', function() {
+            console.info('[Navigation] Navigating to birthday colors page');
+            window.location.href = 'birthday-colors.html';
+        });
+    } else {
+         console.warn('[Init] Birthday Colors button not found');
+    }
 
     // --- 核心功能函数 ---
 
