@@ -3,10 +3,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const traditionalColors = {
         // 立春：新生、萌发
         '立春': [
-            { name: "春梅红", pinyin: "chūn méi hóng", hex: "#F1939C", rgb: [241, 147, 156] },
-            { name: "柳绿", pinyin: "liǔ lǜ", hex: "#9ED048", rgb: [158, 208, 72] },
-            { name: "豆绿", pinyin: "dòu lǜ", hex: "#9EC141", rgb: [158, 193, 65] },
-            { name: "油绿", pinyin: "yóu lǜ", hex: "#00BC12", rgb: [0, 188, 18] }
+            // { name: "春梅红", pinyin: "chūn méi hóng", hex: "#F1939C", rgb: [241, 147, 156] },
+            // { name: "柳绿", pinyin: "liǔ lǜ", hex: "#9ED048", rgb: [158, 208, 72] },
+            // { name: "豆绿", pinyin: "dòu lǜ", hex: "#9EC141", rgb: [158, 193, 65] },
+            // { name: "油绿", pinyin: "yóu lǜ", hex: "#00BC12", rgb: [0, 188, 18] }
+            { name: "黄白游", pinyin: "", hex: "#FFF799", rgb: [] },
+            { name: "松花", pinyin: "", hex: "#FFEE6F", rgb: [] },
+            { name: "缃叶", pinyin: "", hex: "#ECD452", rgb: [] },
+            { name: "苍黄", pinyin: "", hex: "#B6A014", rgb: [] },
+            { name: "天縹", pinyin: "", hex: "#D5EBE1", rgb: [] },
+            { name: "沧浪", pinyin: "", hex: "#B1D5C8", rgb: [] },
+            { name: "苍筤", pinyin: "", hex: "#99BCAC", rgb: [] },
+            { name: "缥碧", pinyin: "", hex: "#80A492", rgb: [] },
+            { name: "流黄", pinyin: "", hex: "#8B7042", rgb: [] },
+            { name: "栗壳", pinyin: "", hex: "#775039", rgb: [] },
+            { name: "龙战", pinyin: "", hex: "#5F4321", rgb: [] },
+            { name: "青骊", pinyin: "", hex: "#422517", rgb: [] },
+            { name: "海天霞", pinyin: "", hex: "#F3A694", rgb: [] },
+            { name: "缙云", pinyin: "", hex: "#EE7959", rgb: [] },
+            { name: "纁黄", pinyin: "", hex: "#BA5140", rgb: [] },
+            { name: "珊瑚赫", pinyin: "", hex: "#C12C1F", rgb: [] }
         ],
         // 雨水：滋润、生长
         '雨水': [
