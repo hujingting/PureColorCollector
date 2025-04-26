@@ -26,9 +26,10 @@ document.addEventListener('DOMContentLoaded', function() {
         ],
         // 雨水：滋润、生长
         '雨水': [
-            { name: "雨后蓝", pinyin: "yǔ hòu lán", hex: "#7CB3C1", rgb: [124, 179, 193] },
-            { name: "水蓝", pinyin: "shuǐ lán", hex: "#2B73AF", rgb: [43, 115, 175] },
-            { name: "湖蓝", pinyin: "hú lán", hex: "#30DFF3", rgb: [48, 223, 243] }
+            // { name: "雨后蓝", pinyin: "yǔ hòu lán", hex: "#7CB3C1", rgb: [124, 179, 193] },
+            // { name: "水蓝", pinyin: "shuǐ lán", hex: "#2B73AF", rgb: [43, 115, 175] },
+            // { name: "湖蓝", pinyin: "hú lán", hex: "#30DFF3", rgb: [48, 223, 243] }
+            
         ],
         // 惊蛰：唤醒、复苏
         '惊蛰': [
