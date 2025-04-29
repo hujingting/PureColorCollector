@@ -29,7 +29,22 @@ document.addEventListener('DOMContentLoaded', function() {
             // { name: "雨后蓝", pinyin: "yǔ hòu lán", hex: "#7CB3C1", rgb: [124, 179, 193] },
             // { name: "水蓝", pinyin: "shuǐ lán", hex: "#2B73AF", rgb: [43, 115, 175] },
             // { name: "湖蓝", pinyin: "hú lán", hex: "#30DFF3", rgb: [48, 223, 243] }
-            
+            { name: "盈盈", pinyin: "", hex: "#F9D3E3", rgb: [] },
+            { name: "水红", pinyin: "", hex: "#ECB0C1", rgb: [] },
+            { name: "苏梅", pinyin: "", hex: "#DD7694", rgb: [] },
+            { name: "紫茎屏风", pinyin: "", hex: "#A76283", rgb: [] },
+            { name: "葭灰", pinyin: "", hex: "#BEB1AA", rgb: [] },
+            { name: "黄埃", pinyin: "", hex: "#B49273", rgb: [] },
+            { name: "老僧衣", pinyin: "", hex: "#A46244", rgb: [] },
+            { name: "玄天", pinyin: "", hex: "#6B5458", rgb: [] },
+            { name: "黄河琉璃", pinyin: "", hex: "#E5A84B", rgb: [] },
+            { name: "库金", pinyin: "", hex: "#E18A3B", rgb: [] },
+            { name: "缊韨", pinyin: "", hex: "#984F31", rgb: [] },
+            { name: "紫瓯", pinyin: "", hex: "#7C461E", rgb: [] },
+            { name: "欧碧", pinyin: "", hex: "#C0D695", rgb: [] },
+            { name: "春辰", pinyin: "", hex: "#A9BE7B", rgb: [] },
+            { name: "碧山", pinyin: "", hex: "#779649", rgb: [] },
+            { name: "青青", pinyin: "", hex: "#4F6F46", rgb: [] }
         ],
         // 惊蛰：唤醒、复苏
         '惊蛰': [
