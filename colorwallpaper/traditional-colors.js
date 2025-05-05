@@ -48,135 +48,511 @@ document.addEventListener('DOMContentLoaded', function() {
         ],
         // 惊蛰：唤醒、复苏
         '惊蛰': [
-            { name: "春芽绿", pinyin: "chūn yá lǜ", hex: "#96C24E", rgb: [150, 194, 78] },
-            { name: "嫩芽绿", pinyin: "nèn yá lǜ", hex: "#BCE672", rgb: [188, 230, 114] },
-            { name: "芽绿", pinyin: "yá lǜ", hex: "#9FC343", rgb: [159, 195, 67] }
+            // { name: "春芽绿", pinyin: "chūn yá lǜ", hex: "#96C24E", rgb: [150, 194, 78] },
+            // { name: "嫩芽绿", pinyin: "nèn yá lǜ", hex: "#BCE672", rgb: [188, 230, 114] },
+            // { name: "芽绿", pinyin: "yá lǜ", hex: "#9FC343", rgb: [159, 195, 67] }
+            { name: "赤缇", pinyin: "", hex: "#BA5B49", rgb: [] },
+            { name: "朱草", pinyin: "", hex: "#A64036", rgb: [] },
+            { name: "綪茷", pinyin: "", hex: "#9E2A22", rgb: [] },
+            { name: "顺圣", pinyin: "", hex: "#7C191E", rgb: [] },
+            { name: "桃夭", pinyin: "", hex: "#F6BEC8", rgb: [] },
+            { name: "杨妃", pinyin: "", hex: "#F091A0", rgb: [] },
+            { name: "长春", pinyin: "", hex: "#DC6B82", rgb: [] },
+            { name: "牙绯", pinyin: "", hex: "#C35C5D", rgb: [] },
+            { name: "黄栗留", pinyin: "", hex: "#FEDC5E", rgb: [] },
+            { name: "栀子", pinyin: "", hex: "#FAC03D", rgb: [] },
+            { name: "黄不老", pinyin: "", hex: "#DB9B34", rgb: [] },
+            { name: "柘黄", pinyin: "", hex: "#C67915", rgb: [] },
+            { name: "青鸾", pinyin: "", hex: "#9AA7B1", rgb: [] },
+            { name: "菘蓝", pinyin: "", hex: "#6B798E", rgb: [] },
+            { name: "青黛", pinyin: "", hex: "#45465E", rgb: [] },
+            { name: "绀蝶", pinyin: "", hex: "#2C2F3B", rgb: [] }
         ],
         // 春分：平衡、和谐
         '春分': [
-            { name: "春绿", pinyin: "chūn lǜ", hex: "#0AA344", rgb: [10, 163, 68] },
-            { name: "玉色", pinyin: "yù sè", hex: "#BCE0D1", rgb: [188, 224, 209] },
-            { name: "青玉", pinyin: "qīng yù", hex: "#41B349", rgb: [65, 179, 73] }
+            // { name: "春绿", pinyin: "chūn lǜ", hex: "#0AA344", rgb: [10, 163, 68] },
+            // { name: "玉色", pinyin: "yù sè", hex: "#BCE0D1", rgb: [188, 224, 209] },
+            // { name: "青玉", pinyin: "qīng yù", hex: "#41B349", rgb: [65, 179, 73] }
+
+            { name: "皦玉", pinyin: "", hex: "#EBEEE8", rgb: [] },
+            { name: "吉量", pinyin: "", hex: "#EBEDDF", rgb: [] },
+            { name: "韶粉", pinyin: "", hex: "#E0E0D0", rgb: [] },
+            { name: "霜地", pinyin: "", hex: "#C7C6B6", rgb: [] },
+            { name: "夏籥", pinyin: "", hex: "#D2AF9D", rgb: [] },
+            { name: "紫磨金", pinyin: "", hex: "#BC836B", rgb: [] },
+            { name: "檀色", pinyin: "", hex: "#B26D5D", rgb: [] },
+            { name: "赭罗", pinyin: "", hex: "#9A6655", rgb: [] },
+            { name: "黄丹", pinyin: "", hex: "#EA5514", rgb: [] },
+            { name: "洛神珠", pinyin: "", hex: "#D23918", rgb: [] },
+            { name: "丹雘", pinyin: "", hex: "#C8161D", rgb: [] },
+            { name: "水华朱", pinyin: "", hex: "#A72126", rgb: [] },
+            { name: "青冥", pinyin: "", hex: "#3271AE", rgb: [] },
+            { name: "青雘", pinyin: "", hex: "#007175", rgb: [] },
+            { name: "青緺", pinyin: "", hex: "#284852", rgb: [] },
+            { name: "骐驎", pinyin: "", hex: "#12264F", rgb: [] }
         ],
         // 清明：明净、清澈
         '清明': [
-            { name: "青碧", pinyin: "qīng bì", hex: "#48C0A3", rgb: [72, 192, 163] },
-            { name: "碧绿", pinyin: "bì lǜ", hex: "#1BD1A5", rgb: [27, 209, 165] },
-            { name: "青水", pinyin: "qīng shuǐ", hex: "#93D5DC", rgb: [147, 213, 220] }
+            // { name: "青碧", pinyin: "qīng bì", hex: "#48C0A3", rgb: [72, 192, 163] },
+            // { name: "碧绿", pinyin: "bì lǜ", hex: "#1BD1A5", rgb: [27, 209, 165] },
+            // { name: "青水", pinyin: "qīng shuǐ", hex: "#93D5DC", rgb: [147, 213, 220] }
+
+            { name: "紫蒲", pinyin: "", hex: "#A6559D", rgb: [] },
+            { name: "赪紫", pinyin: "", hex: "#8A1874", rgb: [] },
+            { name: "齐紫", pinyin: "", hex: "#6C216D", rgb: [] },
+            { name: "凝夜紫", pinyin: "", hex: "#422256", rgb: [] },
+            { name: "冻缥", pinyin: "", hex: "#9D9D82", rgb: [] },
+            { name: "春碧", pinyin: "", hex: "#9D9D82", rgb: [] },
+            { name: "执大象", pinyin: "", hex: "#919177", rgb: [] },
+            { name: "苔古", pinyin: "", hex: "#79836C", rgb: [] },
+            { name: "香炉紫烟", pinyin: "", hex: "#D3CCD6", rgb: [] },
+            { name: "紫菂", pinyin: "", hex: "#9B8EA9", rgb: [] },
+            { name: "拂紫绵", pinyin: "", hex: "#7E527F", rgb: [] },
+            { name: "三公子", pinyin: "", hex: "#663D74", rgb: [] },
+            { name: "琅玕紫", pinyin: "", hex: "#CB5C83", rgb: [] },
+            { name: "红踯躅", pinyin: "", hex: "#B83570", rgb: [] },
+            { name: "魏红", pinyin: "", hex: "#A73766", rgb: [] },
+            { name: "魏紫", pinyin: "", hex: "#903754", rgb: [] }
         ],
         // 谷雨：生机、繁茂
         '谷雨': [
-            { name: "葱青", pinyin: "cōng qīng", hex: "#789262", rgb: [120, 146, 98] },
-            { name: "葱绿", pinyin: "cōng lǜ", hex: "#9DC62E", rgb: [157, 198, 46] },
-            { name: "松花绿", pinyin: "sōng huā lǜ", hex: "#BCE672", rgb: [188, 230, 114] }
+            // { name: "葱青", pinyin: "cōng qīng", hex: "#789262", rgb: [120, 146, 98] },
+            // { name: "葱绿", pinyin: "cōng lǜ", hex: "#9DC62E", rgb: [157, 198, 46] },
+            // { name: "松花绿", pinyin: "sōng huā lǜ", hex: "#BCE672", rgb: [188, 230, 114] }
+
+            { name: "昌荣", pinyin: "", hex: "#DCC7E1", rgb: [] },
+            { name: "紫薄汗", pinyin: "", hex: "#BBA1CB", rgb: [] },
+            { name: "茈藐", pinyin: "", hex: "#A67EB7", rgb: [] },
+            { name: "紫紶", pinyin: "", hex: "#7D5284", rgb: [] },
+            { name: "苍葭", pinyin: "", hex: "#A8BF8F", rgb: [] },
+            { name: "庭芜绿", pinyin: "", hex: "#68945C", rgb: [] },
+            { name: "翠微", pinyin: "", hex: "#4C8045", rgb: [] },
+            { name: "翠虬", pinyin: "", hex: "#446A37", rgb: [] },
+            { name: "碧落", pinyin: "", hex: "#AED0EE", rgb: [] },
+            { name: "挼蓝", pinyin: "", hex: "#6E9BC5", rgb: [] },
+            { name: "青雀头黛", pinyin: "", hex: "#354E6B", rgb: [] },
+            { name: "螺子黛", pinyin: "", hex: "#13393E", rgb: [] },
+            { name: "露褐", pinyin: "", hex: "#BD8253", rgb: [] },
+            { name: "檀褐", pinyin: "", hex: "#945635", rgb: [] },
+            { name: "緅絺", pinyin: "", hex: "#804C2E", rgb: [] },
+            { name: "目童子", pinyin: "", hex: "#5B3222", rgb: [] }
+
         ],
         // 立夏：炽热、明亮
         '立夏': [
-            { name: "火红", pinyin: "huǒ hóng", hex: "#FF2D51", rgb: [255, 45, 81] },
-            { name: "朱红", pinyin: "zhū hóng", hex: "#FF4C00", rgb: [255, 76, 0] },
-            { name: "丹", pinyin: "dān", hex: "#FF4E20", rgb: [255, 78, 32] }
+            // { name: "火红", pinyin: "huǒ hóng", hex: "#FF2D51", rgb: [255, 45, 81] },
+            // { name: "朱红", pinyin: "zhū hóng", hex: "#FF4C00", rgb: [255, 76, 0] },
+            // { name: "丹", pinyin: "dān", hex: "#FF4E20", rgb: [255, 78, 32] }
+
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "#", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] },
+            { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 小满：饱满、充实
         '小满': [
             { name: "金黄", pinyin: "jīn huáng", hex: "#FFB61E", rgb: [255, 182, 30] },
             { name: "赤金", pinyin: "chì jīn", hex: "#F2BE45", rgb: [242, 190, 69] },
             { name: "雄黄", pinyin: "xióng huáng", hex: "#FF9900", rgb: [255, 153, 0] }
+
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 芒种：成熟、丰收
         '芒种': [
             { name: "麦秆黄", pinyin: "mài gǎn huáng", hex: "#F8DF70", rgb: [248, 223, 112] },
             { name: "油黄", pinyin: "yóu huáng", hex: "#FFB61E", rgb: [255, 182, 30] },
             { name: "杏黄", pinyin: "xìng huáng", hex: "#FFA631", rgb: [255, 166, 49] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
+
         ],
         // 夏至：极盛、炽烈
         '夏至': [
             { name: "正红", pinyin: "zhèng hóng", hex: "#FF0000", rgb: [255, 0, 0] },
             { name: "赤红", pinyin: "chì hóng", hex: "#FF3300", rgb: [255, 51, 0] },
             { name: "绛红", pinyin: "jiàng hóng", hex: "#8C4356", rgb: [140, 67, 86] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 小暑：炎热、明艳
         '小暑': [
             { name: "海棠红", pinyin: "hǎi táng hóng", hex: "#DB5A6B", rgb: [219, 90, 107] },
             { name: "茜色", pinyin: "qiàn sè", hex: "#CB3A56", rgb: [203, 58, 86] },
             { name: "火红", pinyin: "huǒ hóng", hex: "#FF2D51", rgb: [255, 45, 81] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 大暑：酷暑、炙烤
         '大暑': [
             { name: "赫赤", pinyin: "hè chì", hex: "#C91F37", rgb: [201, 31, 55] },
             { name: "银朱", pinyin: "yín zhū", hex: "#FF461F", rgb: [255, 70, 31] },
             { name: "朱砂", pinyin: "zhū shā", hex: "#FF4C00", rgb: [255, 76, 0] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 立秋：萧瑟、肃清
         '立秋': [
             { name: "栗色", pinyin: "lì sè", hex: "#60281E", rgb: [96, 40, 30] },
             { name: "玄色", pinyin: "xuán sè", hex: "#622A1D", rgb: [98, 42, 29] },
             { name: "紫檀", pinyin: "zǐ tán", hex: "#4C221B", rgb: [76, 34, 27] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 处暑：凉爽、清和
         '处暑': [
             { name: "秋蓝", pinyin: "qiū lán", hex: "#8FB2C9", rgb: [143, 178, 201] },
             { name: "靛青", pinyin: "diàn qīng", hex: "#177CB0", rgb: [23, 124, 176] },
             { name: "群青", pinyin: "qún qīng", hex: "#4C8DAE", rgb: [76, 141, 174] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 白露：清澈、透明
         '白露': [
             { name: "月白", pinyin: "yuè bái", hex: "#EEF7F2", rgb: [238, 247, 242] },
             { name: "霜色", pinyin: "shuāng sè", hex: "#E9F1F6", rgb: [233, 241, 246] },
             { name: "云峰白", pinyin: "yún fēng bái", hex: "#D8E3E7", rgb: [216, 227, 231] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
+
         // 秋分：均衡、沉静
         '秋分': [
             { name: "琉璃蓝", pinyin: "liú lí lán", hex: "#1781B5", rgb: [23, 129, 181] },
             { name: "青金", pinyin: "qīng jīn", hex: "#1A94BC", rgb: [26, 148, 188] },
             { name: "鸢尾蓝", pinyin: "yuān wěi lán", hex: "#158BB8", rgb: [21, 139, 184] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 寒露：清寒、肃杀
         '寒露': [
             { name: "苍色", pinyin: "cāng sè", hex: "#75878A", rgb: [117, 135, 138] },
             { name: "黛色", pinyin: "dài sè", hex: "#6B6882", rgb: [107, 104, 130] },
             { name: "青黛", pinyin: "qīng dài", hex: "#426666", rgb: [66, 102, 102] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 霜降：凋零、萧瑟
         '霜降': [
             { name: "紫灰", pinyin: "zǐ huī", hex: "#665757", rgb: [102, 87, 87] },
             { name: "黝", pinyin: "yǒu", hex: "#6B6882", rgb: [107, 104, 130] },
             { name: "黯", pinyin: "àn", hex: "#41555D", rgb: [65, 85, 93] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 立冬：肃穆、沉静
         '立冬': [
             { name: "玄青", pinyin: "xuán qīng", hex: "#3D3B4F", rgb: [61, 59, 79] },
             { name: "乌色", pinyin: "wū sè", hex: "#392F41", rgb: [57, 47, 65] },
             { name: "黝黑", pinyin: "yǒu hēi", hex: "#665757", rgb: [102, 87, 87] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 小雪：素洁、晶莹
         '小雪': [
             { name: "霜白", pinyin: "shuāng bái", hex: "#F0F0F4", rgb: [240, 240, 244] },
             { name: "雪白", pinyin: "xuě bái", hex: "#F0FCFF", rgb: [240, 252, 255] },
             { name: "素白", pinyin: "sù bái", hex: "#F2FDFF", rgb: [242, 253, 255] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 大雪：皓白、晶洁
         '大雪': [
             { name: "莹白", pinyin: "yíng bái", hex: "#E3F9FD", rgb: [227, 249, 253] },
             { name: "冰白", pinyin: "bīng bái", hex: "#E0F0F5", rgb: [224, 240, 245] },
             { name: "银白", pinyin: "yín bái", hex: "#E9E7EF", rgb: [233, 231, 239] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 冬至：幽深、静谧
         '冬至': [
             { name: "藏蓝", pinyin: "zàng lán", hex: "#2E4E7E", rgb: [46, 78, 126] },
             { name: "靛蓝", pinyin: "diàn lán", hex: "#065279", rgb: [6, 82, 121] },
             { name: "绀青", pinyin: "gàn qīng", hex: "#2F2F35", rgb: [47, 47, 53] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 小寒：冷冽、清寒
         '小寒': [
             { name: "墨色", pinyin: "mò sè", hex: "#50616D", rgb: [80, 97, 109] },
             { name: "黛蓝", pinyin: "dài lán", hex: "#425066", rgb: [66, 80, 102] },
             { name: "青黑", pinyin: "qīng hēi", hex: "#395260", rgb: [57, 82, 96] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 大寒：深邃、寒凝
         '大寒': [
             { name: "漆黑", pinyin: "qī hēi", hex: "#161823", rgb: [22, 24, 35] },
             { name: "瑾黑", pinyin: "jǐn hēi", hex: "#1C1C22", rgb: [28, 28, 34] },
             { name: "玄青", pinyin: "xuán qīng", hex: "#2B333E", rgb: [43, 51, 62] }
+
+             // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "#", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] },
+            // { name: "", pinyin: "", hex: "", rgb: [] }
         ]
     };
 
