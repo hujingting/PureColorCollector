@@ -144,6 +144,29 @@ document.addEventListener('DOMContentLoaded', function() {
             // { name: "朱红", pinyin: "zhū hóng", hex: "#FF4C00", rgb: [255, 76, 0] },
             // { name: "丹", pinyin: "dān", hex: "#FF4E20", rgb: [255, 78, 32] }
 
+            { name: "青粲", pinyin: "", hex: "#C3D94E", rgb: [] },
+            { name: "翠缥", pinyin: "", hex: "#B7D332", rgb: [] },
+            { name: "人籁", pinyin: "", hex: "#9EBC19", rgb: [] },
+            { name: "水龙吟", pinyin: "", hex: "#84A729", rgb: [] },
+            { name: "地籁", pinyin: "", hex: "#DFCEB4", rgb: [] },
+            { name: "大块", pinyin: "", hex: "#BFA782", rgb: [] },
+            { name: "养生主", pinyin: "", hex: "#B49B7F", rgb: [] },
+            { name: "大云", pinyin: "", hex: "#94784F", rgb: [] },
+            { name: "溶溶月", pinyin: "", hex: "#BEC2BC", rgb: [] },
+            { name: "绍衣", pinyin: "", hex: "#A8A19C", rgb: [] },
+            { name: "石莲褐", pinyin: "", hex: "#92897B", rgb: [] },
+            { name: "黑朱", pinyin: "", hex: "#70695D", rgb: [] },
+            { name: "朱颜酡", pinyin: "", hex: "#F29A76", rgb: [] },
+            { name: "苕荣", pinyin: "", hex: "#ED6D3D", rgb: [] },
+            { name: "檎丹", pinyin: "", hex: "#E94829", rgb: [] },
+            { name: "丹罽", pinyin: "", hex: "#E60012", rgb: [] }
+        ],
+        // 小满：饱满、充实
+        '小满': [
+            // { name: "金黄", pinyin: "jīn huáng", hex: "#FFB61E", rgb: [255, 182, 30] },
+            // { name: "赤金", pinyin: "chì jīn", hex: "#F2BE45", rgb: [242, 190, 69] },
+            // { name: "雄黄", pinyin: "xióng huáng", hex: "#FF9900", rgb: [255, 153, 0] }
+
             { name: "", pinyin: "", hex: "", rgb: [] },
             { name: "", pinyin: "", hex: "", rgb: [] },
             { name: "", pinyin: "", hex: "", rgb: [] },
@@ -160,29 +183,6 @@ document.addEventListener('DOMContentLoaded', function() {
             { name: "", pinyin: "", hex: "", rgb: [] },
             { name: "", pinyin: "", hex: "", rgb: [] },
             { name: "", pinyin: "", hex: "", rgb: [] }
-        ],
-        // 小满：饱满、充实
-        '小满': [
-            { name: "金黄", pinyin: "jīn huáng", hex: "#FFB61E", rgb: [255, 182, 30] },
-            { name: "赤金", pinyin: "chì jīn", hex: "#F2BE45", rgb: [242, 190, 69] },
-            { name: "雄黄", pinyin: "xióng huáng", hex: "#FF9900", rgb: [255, 153, 0] }
-
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "#", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] },
-            // { name: "", pinyin: "", hex: "", rgb: [] }
         ],
         // 芒种：成熟、丰收
         '芒种': [
