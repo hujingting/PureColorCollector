@@ -18,25 +18,45 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const container = document.getElementById('birthdayColorsContainer');
     const months = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"];
-    let currentMonth = -1;
-    let monthSection;
-    let gridContainer;
+    const navScroll = document.querySelector('.nav-scroll');
+    
+    // 创建导航项
+    months.forEach((month, index) => {
+        const navItem = document.createElement('div');
+        navItem.className = 'nav-item';
+        navItem.textContent = month;
+        navItem.addEventListener('click', () => {
+            const target = document.getElementById(`month-${index}`);
+            target.scrollIntoView({ behavior: 'smooth' });
+            
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            navItem.classList.add('active');
+        });
+        navScroll.appendChild(navItem);
+    });
 
+    // 按月份排序
     birthdayColorsData.sort((a, b) => {
         if (a.month !== b.month) return a.month - b.month;
         return a.day - b.day;
     });
 
+    let currentMonth = -1;
+    let monthSection;
+    let gridContainer;
+
     birthdayColorsData.forEach(color => {
         if (color.month !== currentMonth) {
             currentMonth = color.month;
-            // Create new month section
             monthSection = document.createElement('div');
             monthSection.className = 'month-section';
 
             const title = document.createElement('h2');
             title.className = 'month-title';
-            title.textContent = months[currentMonth - 1]; // Array is 0-indexed
+            title.id = `month-${currentMonth - 1}`;
+            title.textContent = months[currentMonth - 1];
             monthSection.appendChild(title);
 
             gridContainer = document.createElement('div');
@@ -46,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
             container.appendChild(monthSection);
         }
 
-        // Create color card
+        // 创建颜色卡片
         const card = document.createElement('div');
         card.className = 'bday-color-card';
         card.innerHTML = `
@@ -54,19 +74,64 @@ document.addEventListener('DOMContentLoaded', function() {
             <div class="bday-color-info">
                 <span class="bday-date">${color.month}月${color.day}日</span>
                 <span class="bday-color-name">${color.name}</span>
-                <span class="bday-color-hex">${color.hex}</span>
+                <div class="color-actions">
+                    <span class="bday-color-hex">${color.hex}</span>
+                    <button class="download-btn" title="下载4K壁纸">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                        </svg>
+                        4K
+                    </button>
+                </div>
             </div>
         `;
 
-        // Add copy functionality
+        // 添加复制功能
         const preview = card.querySelector('.bday-color-preview');
         preview.addEventListener('click', () => {
             copyToClipboard(color.hex);
         });
 
-        if (gridContainer) {
-            gridContainer.appendChild(card);
-        }
+        // 添加下载按钮点击事件
+        const downloadBtn = card.querySelector('.download-btn');
+        downloadBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            saveAs4KImage(color);
+        });
+
+        gridContainer.appendChild(card);
+    });
+
+    // 添加滚动监听
+    const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0
+    };
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                const index = id.split('-')[1];
+                const navItems = document.querySelectorAll('.nav-item');
+                navItems.forEach(item => item.classList.remove('active'));
+                navItems[index].classList.add('active');
+
+                if (window.innerWidth <= 768) {
+                    const navScroll = document.querySelector('.nav-scroll');
+                    const activeItem = navItems[index];
+                    navScroll.scrollTo({
+                        left: activeItem.offsetLeft - navScroll.clientWidth / 2 + activeItem.clientWidth / 2,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.month-title').forEach(title => {
+        observer.observe(title);
     });
 
     // --- Helper Functions ---
@@ -119,5 +184,71 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             tooltip.style.opacity = '0';
         }, 1500);
+    }
+
+    async function saveAs4KImage(color) {
+        console.info('[Save] 开始生成4K纯色图片:', color.name, color.hex);
+        
+        const canvas = document.createElement('canvas');
+        canvas.width = 3840;
+        canvas.height = 2160;
+        
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = color.hex;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // 添加颜色信息水印
+        ctx.font = 'bold 60px Arial';
+        ctx.fillStyle = isLightColor(color.hex) ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)';
+        ctx.textAlign = 'right';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(`${color.name} ${color.hex}`, canvas.width - 40, canvas.height - 40);
+
+        try {
+            const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+            const fileName = `${color.name}-${color.hex.substring(1)}-4k.png`;
+
+            if ('showSaveFilePicker' in window) {
+                try {
+                    const handle = await window.showSaveFilePicker({
+                        suggestedName: fileName,
+                        types: [{
+                            description: 'PNG图片',
+                            accept: {'image/png': ['.png']},
+                        }],
+                    });
+                    const writable = await handle.createWritable();
+                    await writable.write(blob);
+                    await writable.close();
+                    showTooltip(event.clientX, event.clientY, '壁纸已保存！');
+                } catch (err) {
+                    if (err.name !== 'AbortError') {
+                        console.error('[Save] 保存失败:', err);
+                        fallbackSave(canvas, fileName);
+                    }
+                }
+            } else {
+                fallbackSave(canvas, fileName);
+            }
+        } catch (error) {
+            console.error('[Save] 生成图片失败:', error);
+            showTooltip(event.clientX, event.clientY, '生成图片失败');
+        }
+    }
+
+    function isLightColor(hex) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        return brightness > 128;
+    }
+
+    function fallbackSave(canvas, fileName) {
+        const link = document.createElement('a');
+        link.download = fileName;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        showTooltip(event.clientX, event.clientY, '壁纸已开始下载');
     }
 }); 

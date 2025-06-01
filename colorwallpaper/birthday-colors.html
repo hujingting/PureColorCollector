@@ -6,83 +6,248 @@
     <title>生日色 - PureColorCollector</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Styles specific to the birthday colors page */
-        .month-section {
-            margin-bottom: 40px;
+        /* 调整主容器布局 */
+        .container {
+            max-width: min(1400px, 95vw);
+            margin: 0 auto;
+            margin-right: max(160px, calc(120px + 5vw));
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        .month-title {
-            font-size: clamp(22px, 2.5vw, 28px);
-            font-weight: bold;
-            color: var(--text-primary);
-            margin: 20px 0 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--border-color);
-            text-align: center;
-        }
-
-        .birthday-colors-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: clamp(15px, 2vw, 20px);
-            padding: 10px;
-        }
-
-        .bday-color-card {
-            background: var(--bg-container);
-            border-radius: 10px;
-            box-shadow: 0 2px 6px var(--shadow-color);
+        /* 颜色列表容器 */
+        .birthday-colors-list {
             display: flex;
             flex-direction: column;
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 月份标题样式 */
+        .month-title {
+            font-size: clamp(20px, 2vw, 24px);
+            font-weight: bold;
+            color: var(--text-primary);
+            margin: 20px 0 15px;
+            padding-left: 15px;
+            border-left: 4px solid #E53935;
+            position: relative;
+        }
+
+        /* 颜色网格布局 */
+        .birthday-colors-grid {
+            display: grid;
+            gap: clamp(15px, 2vw, 20px);
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* 颜色卡片样式 */
+        .bday-color-card {
+            background: var(--bg-container);
+            border-radius: 12px;
+            padding: clamp(12px, 1.5vw, 15px);
+            box-shadow: 0 2px 8px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            cursor: pointer;
             transition: all 0.3s ease;
-            overflow: hidden; /* Ensure content fits */
+            height: 100%;
         }
 
         .bday-color-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px var(--shadow-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-color);
         }
 
         .bday-color-preview {
-            height: 100px;
-            cursor: pointer; /* Indicate copy action */
+            height: clamp(120px, 15vw, 140px);
+            border-radius: 8px;
+            margin-bottom: 10px;
         }
 
         .bday-color-info {
-            padding: 10px;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            flex-grow: 1; /* Ensure info area takes space */
+            gap: 2px;
         }
 
         .bday-date {
-            font-size: 14px;
+            font-size: 18px;
             font-weight: 500;
             color: var(--text-primary);
         }
 
         .bday-color-name {
-            font-size: 13px;
+            font-size: 14px;
             color: var(--text-secondary);
             font-style: italic;
-            flex-grow: 1; /* Push hex value down */
+        }
+
+        .color-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2px;
+            padding-top: 2px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .download-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .download-btn svg {
+            width: 14px;
+            height: 14px;
         }
 
         .bday-color-hex {
             font-family: monospace;
             color: var(--text-secondary);
-            font-size: 12px;
-            text-align: right;
-            margin-top: 5px;
+            font-size: 13px;
         }
 
+        /* 导航栏样式 */
+        .months-nav {
+            position: fixed;
+            top: 80px;
+            right: max(20px, calc(2vw + 10px));
+            z-index: 100;
+            background: var(--bg-container);
+            border-radius: 12px;
+            box-shadow: 0 2px 10px var(--shadow-color);
+            max-height: calc(100vh - 100px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            width: 120px;
+        }
+
+        .nav-scroll {
+            overflow-y: auto;
+            padding: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) transparent;
+        }
+
+        .nav-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .nav-scroll::-webkit-scrollbar-thumb {
+            background-color: var(--border-color);
+            border-radius: 4px;
+        }
+
+        .nav-item {
+            padding: 8px 16px;
+            margin: 4px 0;
+            cursor: pointer;
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-item:hover {
+            background: var(--hover-bg);
+            color: var(--text-primary);
+        }
+
+        .nav-item.active {
+            background: #4285f4;
+            color: white;
+        }
+
+        /* 响应式布局 */
+        @media (min-width: 1400px) {
+            .birthday-colors-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                max-width: 1200px;
+            }
+        }
+
+        @media (min-width: 1024px) and (max-width: 1399px) {
+            .birthday-colors-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                max-width: 1000px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .birthday-colors-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+            }
+            
+            .container {
+                margin-right: 140px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .container {
+                margin: 0 auto 70px auto;
+                padding: 15px;
+                max-width: 100%;
+            }
+
+            .months-nav {
+                top: auto;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                max-height: 60px;
+                border-radius: 12px 12px 0 0;
+                background: var(--bg-container);
+                backdrop-filter: blur(10px);
+            }
+
+            .nav-scroll {
+                display: flex;
+                overflow-x: auto;
+                padding: 10px;
+                gap: 10px;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .nav-item {
+                flex: 0 0 auto;
+            }
+
+            .birthday-colors-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
+
+        /* 添加返回按钮样式 */
         .back-btn {
             position: fixed;
             top: clamp(15px, 2vh, 20px);
             left: clamp(15px, 2vw, 20px);
-            z-index: 1000;
-            /* Styles copied from traditional-colors.html */
             padding: 10px 20px;
             background: var(--bg-container);
             border: none;
@@ -94,6 +259,7 @@
             box-shadow: 0 2px 8px var(--shadow-color);
             color: var(--text-primary);
             transition: all 0.3s ease;
+            z-index: 1000;
         }
 
         .back-btn:hover {
@@ -101,31 +267,11 @@
             box-shadow: 0 4px 12px var(--shadow-color);
         }
 
-        /* Ensure container centers content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            padding-top: 80px; /* Space for fixed back button */
-        }
-         .container h1 {
-            margin-bottom: 40px;
+        .container h1 {
+            margin: clamp(30px, 5vh, 50px) 0;
+            color: var(--text-primary);
+            font-size: clamp(24px, 3vw, 32px);
             text-align: center;
-            font-size: clamp(28px, 4vw, 36px);
-        }
-
-        /* Adjust grid for different screen sizes */
-         @media (max-width: 480px) {
-            .birthday-colors-grid {
-                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-                gap: 10px;
-            }
-            .bday-color-preview {
-                height: 80px;
-            }
-             .container {
-                padding-top: 70px;
-            }
         }
     </style>
 </head>
@@ -136,10 +282,15 @@
         </svg>
         返回
     </button>
+    <div class="months-nav">
+        <div class="nav-scroll">
+            <!-- 导航内容将由 JS 动态生成 -->
+        </div>
+    </div>
     <div class="container">
         <h1>生日色</h1>
-        <div id="birthdayColorsContainer">
-            <!-- Birthday colors will be loaded here by JavaScript -->
+        <div class="birthday-colors-list" id="birthdayColorsContainer">
+            <!-- 颜色卡片将通过 JavaScript 动态添加 -->
         </div>
     </div>
     <script src="birthday-colors.js"></script>
