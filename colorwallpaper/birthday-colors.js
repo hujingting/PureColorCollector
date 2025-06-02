@@ -1,27 +1,31 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Sample Birthday Color Data (Ideally load from JSON)
-    // Format: { month: M, day: D, name: "Color Name", hex: "#HEXHEX", description: "Optional description" }
-    const birthdayColorsData = [
-        // January
-        { month: 1, day: 1, name: "雪白", hex: "#FFFFFF", description: "纯洁与新的开始" },
-        { month: 1, day: 2, name: "银鼠", hex: "#AFAFAF", description: "智慧与冷静" },
-        { month: 1, day: 15, name: "冰蓝", hex: "#ADD8E6", description: "宁静与清晰" },
-        // February
-        { month: 2, day: 1, name: "淡紫", hex: "#E6E6FA", description: "神秘与浪漫" },
-        { month: 2, day: 14, name: "玫瑰红", hex: "#FF007F", description: "热情与爱" },
-        { month: 2, day: 28, name: "青玉", hex: "#41B349", description: "生机与希望" },
-         // March
-         { month: 3, day: 1, name: "嫩芽绿", hex: "#BCE672", description: "新生与活力" },
-         { month: 3, day: 20, name: "鹅黄", hex: "#FFFACD", description: "温暖与快乐" },
-         // ... Add all 366 colors here or load from JSON
-    ];
+    // 按月份分类的生日色
+    const birthdayColors = {
+        // 一月
+        '一月': [
+            { name: "雪白", pinyin: "", hex: "#FFFFFF", rgb: [255, 255, 255] },
+            { name: "银鼠", pinyin: "", hex: "#AFAFAF", rgb: [175, 175, 175] },
+            { name: "冰蓝", pinyin: "", hex: "#ADD8E6", rgb: [173, 216, 230] }
+        ],
+        // 二月
+        '二月': [
+            { name: "淡紫", pinyin: "dàn zǐ", hex: "#E6E6FA", rgb: [230, 230, 250] },
+            { name: "玫瑰红", pinyin: "méi guī hóng", hex: "#FF007F", rgb: [255, 0, 127] },
+            { name: "青玉", pinyin: "qīng yù", hex: "#41B349", rgb: [65, 179, 73] }
+        ],
+        // 三月
+        '三月': [
+            { name: "嫩芽绿", pinyin: "nèn yá lǜ", hex: "#BCE672", rgb: [188, 230, 114] },
+            { name: "鹅黄", pinyin: "é huáng", hex: "#FFFACD", rgb: [255, 250, 205] }
+        ]
+        // ... 可以继续添加其他月份
+    };
 
-    const container = document.getElementById('birthdayColorsContainer');
-    const months = ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"];
+    const colorsList = document.getElementById('birthdayColorsContainer');
     const navScroll = document.querySelector('.nav-scroll');
     
     // 创建导航项
-    months.forEach((month, index) => {
+    Object.keys(birthdayColors).forEach((month, index) => {
         const navItem = document.createElement('div');
         navItem.className = 'nav-item';
         navItem.textContent = month;
@@ -37,69 +41,63 @@ document.addEventListener('DOMContentLoaded', function() {
         navScroll.appendChild(navItem);
     });
 
-    // 按月份排序
-    birthdayColorsData.sort((a, b) => {
-        if (a.month !== b.month) return a.month - b.month;
-        return a.day - b.day;
-    });
+    // 创建月份分类展示
+    Object.entries(birthdayColors).forEach(([month, colors], index) => {
+        // 创建月份标题并添加 id
+        const monthTitle = document.createElement('div');
+        monthTitle.className = 'month-title';
+        monthTitle.id = `month-${index}`;
+        monthTitle.textContent = month;
+        colorsList.appendChild(monthTitle);
 
-    let currentMonth = -1;
-    let monthSection;
-    let gridContainer;
+        // 创建颜色卡片容器
+        const monthColors = document.createElement('div');
+        monthColors.className = 'birthday-colors-grid';
 
-    birthdayColorsData.forEach(color => {
-        if (color.month !== currentMonth) {
-            currentMonth = color.month;
-            monthSection = document.createElement('div');
-            monthSection.className = 'month-section';
-
-            const title = document.createElement('h2');
-            title.className = 'month-title';
-            title.id = `month-${currentMonth - 1}`;
-            title.textContent = months[currentMonth - 1];
-            monthSection.appendChild(title);
-
-            gridContainer = document.createElement('div');
-            gridContainer.className = 'birthday-colors-grid';
-            monthSection.appendChild(gridContainer);
-
-            container.appendChild(monthSection);
-        }
-
-        // 创建颜色卡片
-        const card = document.createElement('div');
-        card.className = 'bday-color-card';
-        card.innerHTML = `
-            <div class="bday-color-preview" style="background-color: ${color.hex}" title="点击复制 ${color.hex}"></div>
-            <div class="bday-color-info">
-                <span class="bday-date">${color.month}月${color.day}日</span>
-                <span class="bday-color-name">${color.name}</span>
-                <div class="color-actions">
-                    <span class="bday-color-hex">${color.hex}</span>
-                    <button class="download-btn" title="下载4K壁纸">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-                        </svg>
-                        4K
-                    </button>
+        // 添加该月份下的所有颜色卡片
+        colors.forEach(color => {
+            const card = document.createElement('div');
+            card.className = 'bday-color-card';
+            card.innerHTML = `
+                <div class="bday-color-preview" style="background-color: ${color.hex}" title="点击复制 ${color.hex}"></div>
+                <div class="bday-color-info">
+                    <span class="bday-color-name">${color.name}</span>
+                    <span class="bday-color-pinyin">${color.pinyin}</span>
+                    <div class="color-actions">
+                        <span class="bday-color-hex">${color.hex}</span>
+                        <button class="download-btn" title="下载4K壁纸">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                            </svg>
+                            4K
+                        </button>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
 
-        // 添加复制功能
-        const preview = card.querySelector('.bday-color-preview');
-        preview.addEventListener('click', () => {
-            copyToClipboard(color.hex);
+            // 点击颜色预览区域复制颜色值
+            const preview = card.querySelector('.bday-color-preview');
+            preview.addEventListener('click', () => {
+                navigator.clipboard.writeText(color.hex)
+                    .then(() => {
+                        showTooltip(event.clientX, event.clientY, '颜色已复制！');
+                    })
+                    .catch(() => {
+                        showTooltip(event.clientX, event.clientY, '复制失败');
+                    });
+            });
+
+            // 添加下载按钮点击事件
+            const downloadBtn = card.querySelector('.download-btn');
+            downloadBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                saveAs4KImage(color);
+            });
+
+            monthColors.appendChild(card);
         });
 
-        // 添加下载按钮点击事件
-        const downloadBtn = card.querySelector('.download-btn');
-        downloadBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            saveAs4KImage(color);
-        });
-
-        gridContainer.appendChild(card);
+        colorsList.appendChild(monthColors);
     });
 
     // 添加滚动监听
@@ -134,58 +132,26 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(title);
     });
 
-    // --- Helper Functions ---
-
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text)
-            .then(() => {
-                showTooltip(event.clientX, event.clientY, '颜色已复制！');
-            })
-            .catch(() => {
-                showTooltip(event.clientX, event.clientY, '复制失败');
-            });
-    }
-
-    // Show tooltip function (you might want to reuse this from other JS files)
+    // 显示提示框的函数
     function showTooltip(x, y, text) {
         let tooltip = document.querySelector('.copy-tooltip');
         if (!tooltip) {
             tooltip = document.createElement('div');
             tooltip.className = 'copy-tooltip';
-            // Add basic tooltip styles if not already in style.css
-            tooltip.style.position = 'fixed';
-            tooltip.style.background = 'rgba(0,0,0,0.7)';
-            tooltip.style.color = 'white';
-            tooltip.style.padding = '5px 10px';
-            tooltip.style.borderRadius = '4px';
-            tooltip.style.fontSize = '12px';
-            tooltip.style.zIndex = '1001';
-            tooltip.style.opacity = '0';
-            tooltip.style.transition = 'opacity 0.2s';
-            tooltip.style.pointerEvents = 'none';
             document.body.appendChild(tooltip);
         }
 
         tooltip.textContent = text;
-        // Adjust position calculation if needed
-        const tooltipRect = tooltip.getBoundingClientRect();
-        let left = x - tooltipRect.width / 2;
-        let top = y - tooltipRect.height - 10; // Position above cursor
-
-        // Prevent tooltip from going off-screen
-         if (left < 5) left = 5;
-         if (top < 5) top = y + 15;
-         if (left + tooltipRect.width > window.innerWidth - 5) left = window.innerWidth - tooltipRect.width - 5;
-
-        tooltip.style.left = `${left}px`;
-        tooltip.style.top = `${top}px`;
-        tooltip.style.opacity = '1';
+        tooltip.style.left = `${x}px`;
+        tooltip.style.top = `${y - 30}px`;
+        tooltip.classList.add('show');
 
         setTimeout(() => {
-            tooltip.style.opacity = '0';
+            tooltip.classList.remove('show');
         }, 1500);
     }
 
+    // 添加保存4K图片的函数
     async function saveAs4KImage(color) {
         console.info('[Save] 开始生成4K纯色图片:', color.name, color.hex);
         
@@ -199,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 添加颜色信息水印
         ctx.font = 'bold 60px Arial';
-        ctx.fillStyle = isLightColor(color.hex) ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)';
+        ctx.fillStyle = isLightColor(color.rgb) ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)';
         ctx.textAlign = 'right';
         ctx.textBaseline = 'bottom';
         ctx.fillText(`${color.name} ${color.hex}`, canvas.width - 40, canvas.height - 40);
@@ -236,14 +202,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function isLightColor(hex) {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
+    // 判断颜色是否为浅色
+    function isLightColor(rgb) {
+        const [r, g, b] = rgb;
         const brightness = (r * 299 + g * 587 + b * 114) / 1000;
         return brightness > 128;
     }
 
+    // 回退保存方法
     function fallbackSave(canvas, fileName) {
         const link = document.createElement('a');
         link.download = fileName;
