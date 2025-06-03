@@ -1052,4 +1052,91 @@ body {
     }
 }
 
-/* Mobile Styles remain consistent due to previous adjustments */ 
+/* Mobile Styles remain consistent due to previous adjustments */
+
+/* 颜色卡片信息样式 */
+.bday-color-info {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* 颜色卡片头部样式 */
+.bday-color-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* 日期样式 */
+.bday-color-date {
+    font-size: 14px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* 颜色名称样式 */
+.bday-color-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+/* 颜色描述样式 */
+.bday-color-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* 颜色操作区域样式 */
+.color-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+}
+
+/* 颜色值样式 */
+.bday-color-hex {
+    font-family: monospace;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+    .bday-color-date {
+        color: var(--text-secondary-dark);
+    }
+    
+    .bday-color-name {
+        color: var(--text-primary-dark);
+    }
+    
+    .bday-color-desc,
+    .bday-color-hex {
+        color: var(--text-secondary-dark);
+    }
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .bday-color-date {
+        font-size: 13px;
+    }
+    
+    .bday-color-name {
+        font-size: 18px;
+    }
+    
+    .bday-color-desc {
+        font-size: 13px;
+    }
+    
+    .bday-color-hex {
+        font-size: 13px;
+    }
+} 
