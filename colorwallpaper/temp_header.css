@@ -1,0 +1,57 @@
+        /* Fixed Header Styles */
+        .page-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .header-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        /* Adjust container to account for fixed header */
+        .container {
+            margin-top: 80px !important;
+            /* Override other margins */
+            padding-top: 20px;
+        }
+
+        /* Remove old back button styles if necessary, or just override */
+        .back-btn-fixed {
+            display: none;
+        }

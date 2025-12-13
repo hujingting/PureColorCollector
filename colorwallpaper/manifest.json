@@ -1,0 +1,15 @@
+{
+    "name": "Pure Color Collector",
+    "short_name": "PureColor",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#87CEEB",
+    "icons": [
+        {
+            "src": "icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
