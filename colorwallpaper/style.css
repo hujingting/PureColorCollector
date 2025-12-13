@@ -1,1142 +1,581 @@
-/* --- 全局和 Body 样式 --- */
-body {
+/* --- Variables & Design System --- */
+:root {
+    /* Palette - Light by default */
+    --primary: #00BFFF;
+    --primary-hover: #0099CC;
+    --secondary: #87CEEB;
+    --accent: #1E90FF;
+    --surface: rgba(255, 255, 255, 0.7);
+    --surface-hover: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --bg-gradient: linear-gradient(135deg, #e0f7ff 0%, #b3e5fc 100%);
+
+    /* Typography */
+    --font-sans: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    /* Spacing & Radius */
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --radius-sm: 8px;
+    --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.12);
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    --surface: rgba(30, 30, 30, 0.6);
+    --surface-hover: rgba(40, 40, 40, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+}
+
+/* System Dark Mode Preference (auto-apply if no manual override) */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --text-main: #f3f4f6;
+        --text-muted: #9ca3af;
+        --surface: rgba(30, 30, 30, 0.6);
+        --surface-hover: rgba(40, 40, 40, 0.8);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    }
+}
+
+/* --- Global Reset & Base --- */
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif; /* 设置默认字体 */
-    min-height: 100vh; /* 确保 body 至少占满整个视口高度 */
-    display: flex; /* 使用 Flexbox 布局 */
-    justify-content: center; /* 水平居中 */
-    align-items: center; /* 垂直居中 */
-    background-color: #f5f5f5; /* 默认浅灰色背景 */
-    transition: background-color 0.5s ease, background 0.5s ease; /* 背景颜色和平滑过渡 */
 }
 
-/* --- 主容器样式 --- */
+body {
+    font-family: var(--font-sans);
+    background: var(--bg-gradient);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    transition: background 0.5s ease;
+    overflow-x: hidden;
+}
+
+/* --- Typography --- */
+h1 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* --- Layout Containers --- */
 .container {
-    text-align: center; /* 内部元素居中对齐 */
-    background-color: white; /* 默认白色背景 */
-    padding: 3rem; /* 较大的内边距 */
-    border-radius: 15px; /* 圆角 */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* 添加阴影 */
-    backdrop-filter: blur(10px); /* 毛玻璃效果 (兼容性可能有限) */
-    background-color: rgba(255, 255, 255, 0.9); /* 半透明白色背景，增强毛玻璃效果 */
-    transition: background-color 0.5s ease, box-shadow 0.3s ease; /* 平滑过渡效果 */
-    min-width: 500px; /* 容器最小宽度 */
-    max-width: 90%; /* 容器最大宽度，防止在大屏幕上过宽 */
-    box-sizing: border-box; /* padding 和 border 包含在宽度内 */
-}
-
-/* --- 上传按钮样式 --- */
-.upload-btn {
-    background: linear-gradient(135deg, #4285f4, #0d47a1); /* 保持原有的蓝色渐变背景 */
-    color: white;
-    padding: 16px 32px; /* 增加内边距使按钮更大 */
-    border: none;
-    border-radius: 12px; /* 增大圆角 */
-    cursor: pointer;
-    font-size: 18px; /* 增大字体 */
-    font-weight: 600; /* 加粗字体 */
-    letter-spacing: 0.5px; /* 增加字间距 */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* 平滑的过渡效果 */
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px; /* 增加图标和文字的间距 */
     width: 100%;
-    height: 64px; /* 增加高度 */
-    max-width: 280px; /* 增加最大宽度 */
+    max-width: 1200px;
     margin: 0 auto;
-    position: relative;
-    overflow: hidden; /* 为波纹效果准备 */
-    
-    /* 立体感阴影 */
-    box-shadow: 0 4px 6px rgba(66, 133, 244, 0.2),
-                0 8px 16px rgba(66, 133, 244, 0.1),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
-}
-
-/* 添加上传图标 */
-.upload-btn::before {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M19 7v2.99s-1.99.01-2 0V7h-3s.01-1.99 0-2h3V2h2v3h3v2h-3zm-3 4V8h-3V5H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-8h-3zM5 19l3-4 2 3 3-4 4 5H5z'/%3E%3C/svg%3E");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-/* 悬停效果 */
-.upload-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(66, 133, 244, 0.25),
-                0 12px 24px rgba(66, 133, 244, 0.15),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
-}
-
-/* 点击效果 */
-.upload-btn:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 4px rgba(66, 133, 244, 0.2),
-                0 4px 8px rgba(66, 133, 244, 0.1),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
-}
-
-/* 波纹动画效果 */
-.upload-btn::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.5);
-    opacity: 0;
-    border-radius: 100%;
-    transform: scale(1, 1) translate(-50%);
-    transform-origin: 50% 50%;
-}
-
-.upload-btn:focus:not(:active)::after {
-    animation: ripple 1s ease-out;
-}
-
-@keyframes ripple {
-    0% {
-        transform: scale(0, 0);
-        opacity: 0.5;
-    }
-    100% {
-        transform: scale(100, 100);
-        opacity: 0;
-    }
-}
-
-/* 移动端适配 */
-@media (max-width: 768px) {
-    .upload-btn {
-        height: 56px; /* 稍微降低高度 */
-        padding: 12px 24px; /* 减小内边距 */
-        font-size: 16px; /* 减小字体 */
-        border-radius: 10px; /* 稍微减小圆角 */
-        max-width: none; /* 移除最大宽度限制 */
-    }
-    
-    .upload-btn::before {
-        width: 20px;
-        height: 20px;
-    }
-}
-
-/* 深色模式适配 */
-@media (prefers-color-scheme: dark) {
-    .upload-btn {
-        box-shadow: 0 4px 6px rgba(66, 133, 244, 0.15),
-                    0 8px 16px rgba(66, 133, 244, 0.1),
-                    inset 0 2px 4px rgba(255, 255, 255, 0.2);
-    }
-
-    .upload-btn:hover {
-        box-shadow: 0 6px 12px rgba(66, 133, 244, 0.2),
-                    0 12px 24px rgba(66, 133, 244, 0.15),
-                    inset 0 2px 4px rgba(255, 255, 255, 0.2);
-    }
-}
-
-/* --- 图片预览区域 --- */
-.preview-container {
-    margin-top: 20px; /* 与上方元素的间距 */
-}
-
-/* 预览图片样式 */
-#previewImage {
-    max-width: 100%; /* 最大宽度为容器宽度 */
-    max-height: 400px; /* 最大高度限制 */
-    width: auto; /* 宽度自适应 */
-    height: auto; /* 高度自适应 */
-    margin-bottom: 20px; /* 与下方元素的间距 */
-    border-radius: 8px; /* 图片圆角 */
-    object-fit: contain; /* 保持图片比例，完整显示 */
-    border: 1px solid #eee; /* 添加浅色边框 */
-}
-
-/* --- 颜色列表样式 --- */
-.colors-list {
-    margin-top: 25px; /* 与上方元素的间距 */
-    display: flex; /* 使用 Flexbox 布局 */
-    flex-direction: column; /* 垂直排列 */
-    gap: 12px; /* 列表项之间的间距 */
-    align-items: flex-start; /* 左对齐 */
-    width: 100%; /* 占满容器宽度 */
-}
-
-/* 单个颜色信息项 */
-.color-info {
-    display: flex; /* 使用 Flexbox 布局 */
-    align-items: center; /* 垂直居中对齐 */
-    gap: 15px; /* 内部元素间距 */
-    padding: 10px 15px; /* 内边距 */
-    background-color: #f8f8f8; /* 浅灰色背景 */
-    border-radius: 6px; /* 圆角 */
-    cursor: pointer; /* 鼠标指针样式 */
-    transition: all 0.3s ease; /* 平滑过渡 */
-    width: 100%; /* 占满列表宽度 */
-    box-sizing: border-box; /* padding 和 border 包含在宽度内 */
-    position: relative; /* 为内部绝对定位的保存按钮提供参照 */
-}
-
-.color-info:hover {
-    background-color: #f0f0f0; /* 悬停时背景变浅 */
-    transform: translateX(2px); /* 轻微右移效果 */
-}
-
-/* 选中的颜色项样式 */
-.color-info.selected {
-    background-color: #e3f2fd; /* 浅蓝色背景表示选中 */
-    border-left: 4px solid #4285f4; /* 左侧添加蓝色边框 */
-    padding-left: 11px; /* 调整左内边距以补偿边框宽度 */
-}
-
-/* 颜色预览小方块 */
-.color-box {
-    width: 35px; /* 宽度 */
-    height: 35px; /* 高度 */
-    border-radius: 6px; /* 圆角 */
-    border: 1px solid #ddd; /* 边框 */
-    flex-shrink: 0; /* 防止在 flex 布局中被压缩 */
-}
-
-/* 颜色文本信息 (HEX, RGB) */
-.color-text {
-    font-family: monospace; /* 等宽字体，适合显示代码类文本 */
-    font-size: 15px; /* 字体大小 */
-    text-align: left; /* 左对齐 */
-    flex-grow: 1; /* 占据剩余空间 */
-    margin-right: 45px; /* 为右侧的保存按钮留出空间 */
-    word-break: break-all; /* 允许在任意字符处换行，防止溢出 */
-}
-
-/* (旧的 #colorValue 样式，如果不再使用可以考虑删除) */
-/* #colorValue {
-    font-family: monospace;
-    font-size: 16px;
-} */
-
-/* --- 复制提示框样式 --- */
-.copy-tooltip {
-    position: fixed; /* 固定定位，相对于视口 */
-    background-color: #333; /* 深灰色背景 */
-    color: white; /* 白色文字 */
-    padding: 6px 12px; /* 内边距 */
-    border-radius: 4px; /* 圆角 */
-    font-size: 12px; /* 较小的字体大小 */
-    pointer-events: none; /* 不响应鼠标事件 */
-    opacity: 0; /* 默认透明 */
-    transition: opacity 0.3s ease, transform 0.3s ease; /* 平滑过渡效果 */
-    z-index: 1000; /* 确保在顶层显示 */
-    white-space: nowrap; /* 防止文字换行 */
-}
-
-/* 显示提示框时的样式 */
-.copy-tooltip.show {
-    opacity: 1; /* 不透明 */
-}
-
-/* --- 渐变相关按钮和控件样式 --- */
-.gradient-controls {
-    display: flex; /* 使用 Flexbox 布局 */
-    gap: 10px; /* 按钮之间的间距 */
-    justify-content: center; /* 居中对齐 */
-    margin-top: 20px; /* 与上方元素的间距 */
-    flex-wrap: wrap; /* 允许按钮在小屏幕上换行 */
-}
-
-/* 通用渐变按钮样式 */
-.gradient-btn {
-    margin-top: 0; /* 覆盖之前的 margin-top */
-    padding: 10px 20px; /* 内边距 */
-    border: none; /* 无边框 */
-    border-radius: 5px; /* 圆角 */
-    cursor: pointer; /* 鼠标指针样式 */
-    font-size: 14px; /* 字体大小 */
-    /* 默认的彩色渐变背景 (应用按钮) */
-    background: linear-gradient(45deg, #4285f4, #34a853, #fbbc05, #ea4335);
-    background-size: 200% 200%; /* 背景尺寸，用于动画 */
-    color: white; /* 白色文字 */
-    transition: all 0.3s ease; /* 平滑过渡 */
-    animation: gradientButtonAnimation 3s ease infinite; /* 应用背景动画 */
-    display: inline-flex; /* 使用 inline-flex 使内部图标和文字对齐 */
-    align-items: center; /* 垂直居中 */
-    gap: 8px; /* 图标和文字间距 */
-}
-
-.gradient-btn:hover {
-    transform: translateY(-2px); /* 悬停时上移 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
-}
-
-/* 按钮背景动画 */
-@keyframes gradientButtonAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* 保存渐变按钮的特定样式 */
-.save-gradient {
-    /* 使用不同的渐变背景 */
-    background: linear-gradient(45deg, #34a853, #4285f4) !important; /* 使用 !important 覆盖通用样式 */
-    animation: none; /* 取消背景动画 */
-}
-
-.save-gradient:hover {
-    /* 悬停时颜色变深 */
-    background: linear-gradient(45deg, #2e9549, #3367d6) !important;
-}
-
-/* 保存渐变按钮内的 SVG 图标 */
-.save-gradient svg {
-    width: 16px;
-    height: 16px;
-}
-
-/* --- 自定义颜色输入区域样式 --- */
-.custom-color-container {
-    margin-top: 20px; /* 与上方元素间距 */
-    padding: 20px; /* 内边距 */
-    background-color: #f8f8f8; /* 浅灰色背景 */
-    border-radius: 8px; /* 圆角 */
-    display: flex; /* Flexbox 布局 */
-    flex-direction: column; /* 垂直排列 */
-    gap: 15px; /* 内部元素间距 */
-}
-
-/* 包含输入框和预览框的容器 */
-.custom-color-input {
-    display: flex; /* Flexbox 布局 */
-    align-items: center; /* 垂直居中 */
-    gap: 10px; /* 内部元素间距 */
-    justify-content: center; /* 居中 */
-}
-
-/* 自定义颜色输入框 */
-#customColorInput {
-    padding: 8px 12px; /* 内边距 */
-    border: 2px solid #ddd; /* 边框 */
-    border-radius: 5px; /* 圆角 */
-    font-family: monospace; /* 等宽字体 */
-    font-size: 16px; /* 字体大小 */
-    width: 120px; /* 固定宽度 */
-    text-transform: uppercase; /* 输入内容转为大写 */
-    transition: border-color 0.3s, background-color 0.3s; /* 平滑过渡 */
-    text-align: center; /* 文本居中 */
-}
-
-#customColorInput:focus {
-    outline: none; /* 移除默认的蓝色轮廓 */
-    border-color: #4285f4; /* 聚焦时边框变蓝 */
-}
-
-/* 输入错误时的样式 */
-#customColorInput.error {
-    border-color: #ea4335; /* 红色边框表示错误 */
-    background-color: #fff2f2; /* 浅红色背景 */
-}
-
-/* 自定义颜色预览小方块 */
-.custom-color-preview {
-    width: 40px; /* 宽度 */
-    height: 40px; /* 高度 */
-    border-radius: 5px; /* 圆角 */
-    border: 2px solid #ddd; /* 边框 */
-    background-color: #fff; /* 默认白色背景 */
-    transition: background-color 0.3s ease; /* 背景色过渡 */
-}
-
-/* 保存自定义颜色按钮 */
-.save-custom-btn {
-    display: flex; /* Flexbox 布局 */
-    align-items: center; /* 垂直居中 */
-    justify-content: center; /* 水平居中 */
-    gap: 8px; /* 图标和文字间距 */
-    padding: 10px 20px; /* 内边距 */
-    background-color: #4285f4; /* 蓝色背景 */
-    color: white; /* 白色文字 */
-    border: none; /* 无边框 */
-    border-radius: 5px; /* 圆角 */
-    cursor: pointer; /* 鼠标指针样式 */
-    font-size: 14px; /* 字体大小 */
-    transition: all 0.3s ease; /* 平滑过渡 */
-}
-
-.save-custom-btn:hover:not(:disabled) {
-    background-color: #3367d6; /* 悬停时颜色变深 (按钮启用时) */
-    transform: translateY(-2px); /* 上移效果 */
-}
-
-/* 禁用状态下的按钮样式 */
-.save-custom-btn:disabled {
-    background-color: #ccc; /* 灰色背景 */
-    cursor: not-allowed; /* 禁用鼠标样式 */
-    transform: none; /* 取消悬停效果 */
-}
-
-/* 保存按钮内的 SVG 图标 */
-.save-custom-btn svg {
-    width: 16px;
-    height: 16px;
-}
-
-/* --- 保存路径选择区域样式 --- */
-.save-path-container {
-    margin-bottom: 20px; /* 与下方元素间距 */
-    padding: 15px; /* 内边距 */
-    background-color: #f8f8f8; /* 浅灰色背景 */
-    border-radius: 8px; /* 圆角 */
-    display: flex; /* Flexbox 布局 */
-    align-items: center; /* 垂直居中 */
-    gap: 15px; /* 内部元素间距 */
-}
-
-/* 选择路径按钮 */
-.path-btn {
-    display: flex; /* Flexbox 布局 */
-    align-items: center; /* 垂直居中 */
-    gap: 8px; /* 图标和文字间距 */
-    padding: 8px 16px; /* 内边距 */
-    background-color: #4285f4; /* 蓝色背景 */
-    color: white; /* 白色文字 */
-    border: none; /* 无边框 */
-    border-radius: 5px; /* 圆角 */
-    cursor: pointer; /* 鼠标指针样式 */
-    font-size: 14px; /* 字体大小 */
-    transition: all 0.3s ease; /* 平滑过渡 */
-    flex-shrink: 0; /* 防止按钮被压缩 */
-}
-
-.path-btn:hover {
-    background-color: #3367d6; /* 悬停时颜色变深 */
-    transform: translateY(-2px); /* 上移效果 */
-}
-
-/* 路径按钮内的 SVG 图标 */
-.path-btn svg {
-    width: 16px;
-    height: 16px;
-}
-
-/* 显示已选路径的区域 */
-.selected-path {
-    padding: 8px 12px; /* 内边距 */
-    background-color: white; /* 白色背景 */
-    border: 1px solid #ddd; /* 边框 */
-    border-radius: 4px; /* 圆角 */
-    font-size: 14px; /* 字体大小 */
-    color: #666; /* 灰色文字 */
-    flex-grow: 1; /* 占据剩余空间 */
-    white-space: nowrap; /* 不换行 */
-    overflow: hidden; /* 隐藏溢出内容 */
-    text-overflow: ellipsis; /* 使用省略号显示溢出文本 */
-    text-align: left; /* 左对齐 */
-}
-
-/* --- 单个颜色项内的保存按钮 (之前遗漏的样式) --- */
-.save-btn {
-    position: absolute; /* 绝对定位，相对于 .color-info */
-    right: 15px; /* 距离右侧 15px */
-    top: 50%; /* 垂直居中 */
-    transform: translateY(-50%); /* 精确垂直居中 */
-    background-color: #6c757d; /* 灰色背景 */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    width: 32px; /* 固定宽高 */
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 0; /* 默认隐藏 */
-}
-
-/* 鼠标悬停在颜色项上时显示保存按钮 */
-.color-info:hover .save-btn {
-    opacity: 1;
-}
-
-.save-btn:hover {
-    background-color: #5a6268; /* 悬停时颜色变深 */
-    transform: translateY(-50%) scale(1.1); /* 稍微放大 */
-}
-
-.save-btn svg {
-    width: 16px;
-    height: 16px;
-}
-
-/* --- 响应式设计 --- */
-/* 针对平板电脑和较小桌面 (例如 <= 1024px) */
-@media (max-width: 1024px) {
-    .container {
-        padding: 2rem; /* 稍微减小内边距 */
-        min-width: 400px; /* 减小最小宽度 */
-    }
-
-    #previewImage {
-        max-height: 350px; /* 稍微减小图片最大高度 */
-    }
-}
-
-/* 针对手机等小屏幕设备 (例如 <= 768px) */
-@media (max-width: 768px) {
-    body {
-        align-items: flex-start; /* 顶部对齐，允许滚动 */
-        padding: 1rem 0; /* 添加一些垂直内边距 */
-    }
-
-    .container {
-        padding: 1.5rem; /* 进一步减小内边距 */
-        min-width: 0; /* 移除最小宽度限制 */
-        width: 90%; /* 设置宽度为视口的 90% */
-        max-width: 95%; /* 保留最大宽度限制 */
-        margin-top: 1rem; /* 顶部留出一些空间 */
-        margin-bottom: 1rem; /* 底部留出一些空间 */
-    }
-
-    /* 调整按钮大小 */
-    .upload-btn, .gradient-btn, .save-custom-btn, .path-btn {
-        padding: 10px 20px; /* 稍微减小内边距 */
-        font-size: 14px; /* 减小字体大小 */
-        min-width: auto; /* 移除最小宽度 */
-    }
-
-    /* 调整上传按钮的最小宽度，使其不太宽 */
-    .upload-btn {
-        width: 100%; /* 在移动端保持占满宽度 */
-        max-width: none; /* 移除最大宽度限制 */
-    }
-
-    #previewImage {
-        max-height: 300px; /* 进一步减小图片最大高度 */
-        margin-bottom: 15px; /* 减小下方间距 */
-    }
-
-    /* 堆叠自定义颜色输入和保存路径区域 */
-    .custom-color-input,
-    .save-path-container {
-        flex-direction: column; /* 垂直排列 */
-        align-items: stretch; /* 子元素拉伸以填充宽度 */
-        gap: 10px; /* 减小内部间距 */
-    }
-
-    /* 使自定义颜色输入框占满宽度 */
-    #customColorInput {
-        width: 100%; /* 输入框占满宽度 */
-        box-sizing: border-box; /* 确保 padding 不会使其溢出 */
-        text-align: center; /* 保持文本居中 */
-    }
-
-    /* 路径显示区域也居中 */
-    .selected-path {
-        text-align: center; /* 路径居中 */
-        padding: 10px;
-    }
-
-    /* 调整颜色列表项 */
-    .colors-list {
-        gap: 10px; /* 减小列表项间距 */
-        margin-top: 20px; /* 调整上方间距 */
-    }
-
-    .color-info {
-        padding: 8px 10px; /* 减小内边距 */
-        gap: 10px; /* 减小内部元素间距 */
-    }
-
-    /* 调整颜色文本和保存按钮位置 */
-    .color-text {
-        font-size: 13px; /* 减小字体大小 */
-        margin-right: 40px; /* 确保为保存按钮留出空间 */
-        flex-grow: 1; /* 允许文本区域增长 */
-    }
-
-    .save-btn {
-        right: 8px; /* 调整保存按钮位置 */
-        width: 30px; /* 稍微减小按钮大小 */
-        height: 30px;
-    }
-    .save-btn svg {
-        width: 14px;
-        height: 14px;
-    }
-    .color-info.selected {
-         padding-left: 6px; /* 调整选中时的左边距 */
-         border-left-width: 4px;
-    }
-
-
-    /* 调整渐变按钮组 */
-    .gradient-controls {
-        flex-direction: column; /* 垂直堆叠按钮 */
-        align-items: stretch; /* 拉伸按钮以填充宽度 */
-        gap: 10px;
-    }
-
-    .gradient-btn, .save-gradient {
-        justify-content: center; /* 居中按钮内容 */
-    }
-}
-
-/* 针对非常小的屏幕 (例如 <= 480px) */
-@media (max-width: 480px) {
-    .container {
-        padding: 1rem; /* 再次减小内边距 */
-        width: 95%; /* 增加宽度占比 */
-    }
-
-    .upload-btn, .gradient-btn, .save-custom-btn, .path-btn {
-        font-size: 13px; /* 再次减小字体 */
-        padding: 8px 12px;
-    }
-
-    .color-text {
-        font-size: 12px; /* 再次减小颜色文本字体 */
-        margin-right: 35px; /* 调整保存按钮空间 */
-    }
-
-     .color-box {
-        width: 30px;
-        height: 30px;
-     }
-
-    .save-btn {
-        width: 28px;
-        height: 28px;
-        right: 5px;
-    }
-     .save-btn svg {
-        width: 12px;
-        height: 12px;
-    }
-
-    .copy-tooltip {
-        font-size: 11px; /* 减小提示框字体 */
-        padding: 4px 8px;
-    }
-}
-
-/* --- 深色模式适配 --- */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #1a1a1a; /* 深色背景 */
-        color: #ffffff; /* 浅色文字 */
-    }
-
-    .container {
-        background-color: rgba(40, 40, 40, 0.9); /* 深色半透明背景 */
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* 调整阴影 */
-    }
-
-    /* 自定义颜色容器 */
-    .custom-color-container {
-        background-color: rgba(30, 30, 30, 0.8); /* 稍深的背景 */
-    }
-
-    /* 自定义颜色输入框 */
-    #customColorInput {
-        background-color: #2d2d2d;
-        border-color: #444;
-        color: #fff;
-    }
-
-    #customColorInput:focus {
-        border-color: #4285f4;
-        background-color: #333;
-    }
-
-    #customColorInput.error {
-        border-color: #ea4335;
-        background-color: #3a2828;
-    }
-
-    /* 颜色预览框边框 */
-    .custom-color-preview {
-        border-color: #444;
-        background-color: #2d2d2d;
-    }
-
-    /* 颜色列表项 */
-    .color-info {
-        background-color: #2d2d2d;
-        color: #fff;
-    }
-
-    .color-info:hover {
-        background-color: #383838;
-    }
-
-    .color-info.selected {
-        background-color: #1a3049; /* 深蓝色背景 */
-        border-left-color: #4285f4;
-    }
-
-    /* 颜色框边框 */
-    .color-box {
-        border-color: #444;
-    }
-
-    /* 文本颜色 */
-    .color-text {
-        color: #e0e0e0;
-    }
-
-    /* 保存路径容器 */
-    .save-path-container {
-        background-color: rgba(30, 30, 30, 0.8);
-    }
-
-    /* 选中的路径显示 */
-    .selected-path {
-        background-color: #2d2d2d;
-        border-color: #444;
-        color: #e0e0e0;
-    }
-
-    /* 按钮样式调整 */
-    .upload-btn:hover,
-    .path-btn:hover,
-    .save-custom-btn:hover:not(:disabled) {
-        background-color: #3367d6;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    /* 禁用按钮样式 */
-    .save-custom-btn:disabled {
-        background-color: #444;
-        color: #888;
-    }
-
-    /* 保存按钮 */
-    .save-btn {
-        background-color: #4e5459;
-    }
-
-    .save-btn:hover {
-        background-color: #636b72;
-    }
-
-    /* 提示框样式 */
-    .copy-tooltip {
-        background-color: #4285f4;
-        color: #fff;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    /* 渐变按钮特殊处理 */
-    .gradient-btn {
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-    }
-
-    .gradient-btn:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    }
-
-    /* 错误状态 */
-    .error {
-        color: #ff6b6b;
-    }
-
-    .upload-btn {
-        background: linear-gradient(135deg, #5294ff, #1565c0); /* 深色模式下使用稍亮的蓝色 */
-        box-shadow: 0 4px 12px rgba(66, 133, 244, 0.15);
-    }
-
-    .upload-btn:hover {
-        background: linear-gradient(135deg, #64a4ff, #1976d2);
-        box-shadow: 0 6px 16px rgba(66, 133, 244, 0.25);
-    }
-}
-
-/* 针对深色模式下的高对比度设置 */
-@media (prefers-color-scheme: dark) and (prefers-contrast: high) {
-    .container {
-        background-color: rgba(20, 20, 20, 0.95);
-    }
-
-    .color-text {
-        color: #ffffff;
-    }
-
-    .selected-path {
-        color: #ffffff;
-    }
-
-    #customColorInput {
-        border-color: #666;
-    }
-}
-
-/* 针对深色模式的动画优化 */
-@media (prefers-color-scheme: dark) and (prefers-reduced-motion: no-preference) {
-    .container {
-        transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .color-info {
-        transition: all 0.2s ease;
-    }
-}
-
-/* 针对深色模式的移动端优化 */
-@media (prefers-color-scheme: dark) and (max-width: 768px) {
-    .container {
-        background-color: rgba(30, 30, 30, 0.95);
-    }
-
-    .color-info {
-        background-color: #252525;
-    }
-
-    .custom-color-container,
-    .save-path-container {
-        background-color: #252525;
-    }
-}
-
-/* 传统色按钮容器 */
-.traditional-colors-container {
-    margin: 20px 0;
-    display: flex;
-    justify-content: center;
-    padding: 5px;
-}
-
-/* 传统色按钮样式 */
-.traditional-colors-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 14px 28px;
-    /* 使用更有中国特色的红色渐变 */
-    background: linear-gradient(135deg, #E53935, #B71C1C);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    /* 添加双层阴影效果 */
-    box-shadow: 0 4px 15px rgba(229, 57, 53, 0.2),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
-    /* 添加描边效果 */
-    outline: 1px solid rgba(255, 255, 255, 0.2);
-    outline-offset: -3px;
-    width: 100%;
-    max-width: 200px;
-}
-
-/* 添加图标样式 */
-.traditional-colors-btn svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-    transition: transform 0.3s ease;
-}
-
-/* 悬停效果 */
-.traditional-colors-btn:hover {
-    transform: translateY(-2px);
-    background: linear-gradient(135deg, #F44336, #C62828);
-    box-shadow: 0 6px 20px rgba(229, 57, 53, 0.3),
-                inset 0 2px 4px rgba(255, 255, 255, 0.4);
-}
-
-.traditional-colors-btn:hover svg {
-    transform: rotate(180deg);
-}
-
-/* 点击效果 */
-.traditional-colors-btn:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 8px rgba(229, 57, 53, 0.2),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
-}
-
-/* 波纹动画效果 */
-.traditional-colors-btn::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.5);
-    opacity: 0;
-    border-radius: 100%;
-    transform: scale(1, 1) translate(-50%);
-    transform-origin: 50% 50%;
-}
-
-.traditional-colors-btn:focus:not(:active)::after {
-    animation: ripple 1s ease-out;
-}
-
-/* 深色模式适配 */
-@media (prefers-color-scheme: dark) {
-    .traditional-colors-btn {
-        background: linear-gradient(135deg, #FF5252, #D32F2F);
-        box-shadow: 0 4px 15px rgba(255, 82, 82, 0.2),
-                    inset 0 2px 4px rgba(255, 255, 255, 0.2);
-    }
-    
-    .traditional-colors-btn:hover {
-        background: linear-gradient(135deg, #FF6E6E, #E53935);
-        box-shadow: 0 6px 20px rgba(255, 82, 82, 0.3),
-                    inset 0 2px 4px rgba(255, 255, 255, 0.3);
-    }
-}
-
-/* 移动端适配 */
-@media (max-width: 768px) {
-    .traditional-colors-btn {
-        padding: 12px 24px;
-        font-size: 15px;
-        max-width: none;
-    }
-    
-    .traditional-colors-btn svg {
-        width: 18px;
-        height: 18px;
-    }
-}
-
-/* Container for action buttons */
-.action-buttons-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    margin: 25px 0;
-    flex-wrap: nowrap;
+    gap: 2rem;
+    z-index: 1;
 }
 
-/* Remove margin from individual button containers if needed */
-.traditional-colors-container,
-.birthday-colors-container {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    width: 100%;
+/* Glassmorphism Card Utility */
+.glass-card {
+    background: var(--surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Adjust button styles for stacked layout */
-.traditional-colors-btn,
-.birthday-colors-btn {
-    width: 100%;
-    max-width: 280px;
-}
-
-/* Mobile Styles for Action Buttons Container */
-@media (max-width: 480px) {
-    .action-buttons-container {
-        gap: 15px;
-        flex-direction: column;
-        align-items: center;
-    }
-    .traditional-colors-btn,
-    .birthday-colors-btn {
-        width: 100%;
-        max-width: 280px;
-    }
-}
-
-/* Birthday Colors Button Styles */
-.birthday-colors-btn {
+/* --- Header & Navigation --- */
+.header-right {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 14px 28px; /* Match padding */
-    /* Keep the unique purple/blue gradient */
-    background: linear-gradient(135deg, #8E24AA, #4285f4);
-    color: white;
-    border: none;
-    border-radius: 8px; /* Match border-radius */
-    font-size: 16px; /* Match font-size */
-    font-weight: 500; /* Match font-weight */
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Match transition */
-    position: relative;
-    overflow: hidden;
-    /* Match box-shadow structure, adjust color to purple */
-    box-shadow: 0 4px 15px rgba(142, 36, 170, 0.2),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
-    /* Match outline */
-    outline: 1px solid rgba(255, 255, 255, 0.2);
-    outline-offset: -3px;
-    /* Keep width/max-width from previous adjustments */
-    width: 100%;
-    max-width: 280px;
+    gap: 0.5rem;
 }
 
-/* Match icon style */
-.birthday-colors-btn svg {
-    width: 20px;
-    height: 20px;
-    fill: currentColor;
-    transition: transform 0.3s ease; /* Match transition */
-}
-
-/* Match hover effect structure */
-.birthday-colors-btn:hover {
-    transform: translateY(-2px); /* Match transform */
-    background: linear-gradient(135deg, #9C27B0, #5294ff); /* Adjusted hover gradient */
-    /* Match hover shadow structure, adjust color */
-    box-shadow: 0 6px 20px rgba(142, 36, 170, 0.3),
-                inset 0 2px 4px rgba(255, 255, 255, 0.4);
-}
-
-/* Keep a simple scale effect for the birthday icon on hover */
-.birthday-colors-btn:hover svg {
-    transform: scale(1.1);
-}
-
-/* Match active effect structure */
-.birthday-colors-btn:active {
-    transform: translateY(1px); /* Match transform */
-    /* Match active shadow structure, adjust color */
-    box-shadow: 0 2px 8px rgba(142, 36, 170, 0.2),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3);
-}
-
-/* Keep ripple effect */
-.birthday-colors-btn::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: rgba(255, 255, 255, 0.5);
-    opacity: 0;
-    border-radius: 100%;
-    transform: scale(1, 1) translate(-50%);
-    transform-origin: 50% 50%;
-}
-
-.birthday-colors-btn:focus:not(:active)::after {
-    animation: ripple 1s ease-out;
-}
-
-/* Dark Mode for Birthday Colors Button */
-@media (prefers-color-scheme: dark) {
-    .birthday-colors-btn {
-        /* Adjusted dark mode gradient */
-        background: linear-gradient(135deg, #AB47BC, #5294ff);
-        /* Match dark mode shadow structure, adjust color */
-        box-shadow: 0 4px 15px rgba(171, 71, 188, 0.2),
-                    inset 0 2px 4px rgba(255, 255, 255, 0.2);
-    }
-
-    .birthday-colors-btn:hover {
-        /* Adjusted dark mode hover gradient */
-        background: linear-gradient(135deg, #BA68C8, #64a4ff);
-         /* Match dark mode hover shadow structure, adjust color */
-        box-shadow: 0 6px 20px rgba(171, 71, 188, 0.3),
-                    inset 0 2px 4px rgba(255, 255, 255, 0.3);
-    }
-}
-
-/* Mobile Styles remain consistent due to previous adjustments */
-
-/* 颜色卡片信息样式 */
-.bday-color-info {
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-/* 颜色卡片头部样式 */
-.bday-color-header {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-/* 日期样式 */
-.bday-color-date {
-    font-size: 14px;
-    color: var(--text-secondary);
-    font-weight: 500;
-}
-
-/* 颜色名称样式 */
-.bday-color-name {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--text-primary);
-    line-height: 1.2;
-}
-
-/* 颜色描述样式 */
-.bday-color-desc {
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.4;
-}
-
-/* 颜色操作区域样式 */
-.color-actions {
+.app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 4px;
+    padding: 0.8rem 1.5rem;
+    margin-bottom: 2rem;
 }
 
-/* 颜色值样式 */
-.bday-color-hex {
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-logo svg {
+    color: var(--primary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.nav-btn {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-btn:hover {
+    background: var(--surface-hover);
+    transform: translateY(-2px);
+}
+
+.nav-btn.icon-only {
+    padding: 0.6rem;
+    border-radius: 50%;
+}
+
+/* --- Dropdown Menu --- */
+.dropdown-menu {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    min-width: 200px;
+    padding: 0.5rem;
+    display: none;
+    flex-direction: column;
+    gap: 0.25rem;
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-menu.show {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    color: var(--text-main);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.menu-item:hover {
+    background: var(--surface-hover);
+}
+
+.menu-item svg {
+    color: var(--secondary);
+    flex-shrink: 0;
+}
+
+/* --- Hero / Upload Section --- */
+.hero-upload {
+    text-align: center;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.upload-btn {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    padding: 1.2rem 3rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.upload-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 35px rgba(79, 70, 229, 0.5);
+}
+
+.path-select-wrapper {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+}
+
+.path-btn-text {
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+}
+
+/* --- Main Content Area --- */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 2rem;
+    align-items: start;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.content-grid.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Preview Image */
+.image-preview-card {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#previewImage {
+    max-width: 100%;
+    max-height: 600px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+/* Colors Panel (Sidebar) */
+.colors-panel {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.panel-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* Colors List */
+.colors-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.color-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.5);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.color-item:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateX(5px);
+}
+
+.color-item.selected {
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--primary);
+}
+
+.color-swatch {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-sm);
+    margin-right: 1rem;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.color-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem;
+}
+
+.color-hex {
+    font-weight: 700;
     font-family: monospace;
-    font-size: 14px;
-    color: var(--text-secondary);
+    font-size: 1rem;
 }
 
-/* 深色模式适配 */
-@media (prefers-color-scheme: dark) {
-    .bday-color-date {
-        color: var(--text-secondary-dark);
+.color-meta {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.save-color-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    color: var(--text-main);
+}
+
+.color-item:hover .save-color-btn {
+    opacity: 1;
+}
+
+.save-color-btn:hover {
+    color: var(--primary);
+    transform: scale(1.1);
+}
+
+/* Actions Area */
+.actions-area {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.action-btn {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border: none;
+    background: var(--surface-hover);
+    color: var(--text-main);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.action-btn:hover {
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    color: white;
+}
+
+/* Custom Color Input */
+.custom-color-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+}
+
+#customColorInput {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-family: monospace;
+    font-size: 1rem;
+    padding: 0 0.5rem;
+    color: var(--text-main);
+    outline: none;
+}
+
+.preview-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Tooltip */
+.toast-tooltip {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 1000;
+}
+
+.toast-tooltip.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .content-grid {
+        grid-template-columns: 1fr;
     }
-    
-    .bday-color-name {
-        color: var(--text-primary-dark);
+
+    .colors-panel {
+        order: 2;
+        /* Move below image on mobile */
     }
-    
-    .bday-color-desc,
-    .bday-color-hex {
-        color: var(--text-secondary-dark);
+
+    .image-preview-card {
+        order: 1;
     }
 }
 
-/* 移动端适配 */
-@media (max-width: 768px) {
-    .bday-color-date {
-        font-size: 13px;
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
     }
-    
-    .bday-color-name {
-        font-size: 18px;
+
+    .app-header {
+        padding: 0.6rem 1rem;
+        margin-bottom: 1rem;
     }
-    
-    .bday-color-desc {
-        font-size: 13px;
+
+    .brand-logo {
+        font-size: 1.2rem;
+        gap: 0.5rem;
     }
-    
-    .bday-color-hex {
-        font-size: 13px;
+
+    .brand-logo svg {
+        width: 20px;
+        height: 20px;
     }
-} 
+
+    .header-right {
+        gap: 0.25rem;
+    }
+
+    .nav-btn.icon-only {
+        padding: 0.5rem;
+    }
+
+    .dropdown-menu {
+        right: 10px;
+        top: 70px;
+        min-width: 180px;
+        left: auto;
+        max-width: calc(100vw - 20px);
+    }
+
+    .color-item {
+        padding: 0.75rem;
+    }
+
+    .hero-upload {
+        padding: 2rem 1.5rem;
+    }
+
+    .hero-upload h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-upload p {
+        font-size: 0.9rem;
+    }
+}
+
+/* --- Keyframe Animations --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+    }
+}
+
+.animate-pulse {
+    animation: pulse 2s infinite;
+}
