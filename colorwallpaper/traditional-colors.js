@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // --- Theme Initialization ---
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme || (systemDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+    }
+
+    // Initialize theme
+    initTheme();
+
     // 按24节气分类的传统色
     const traditionalColors = {
         // 立春：新生、萌发

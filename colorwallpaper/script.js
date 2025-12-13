@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
             previewImage.onload = function () {
                 try {
                     // Extract colors
-                    const palette = colorThief.getPalette(previewImage, 8, 10);
+                    const palette = colorThief.getPalette(previewImage, 12, 5);
                     const uniqueColors = filterSimilarColors(palette);
 
                     // Update Theme based on dominant color
@@ -299,23 +299,76 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function filterSimilarColors(colors) {
         if (!colors || colors.length === 0) return [];
-        const threshold = 30;
-        const filtered = [colors[0]];
-        for (let i = 1; i < colors.length; i++) {
+
+        // 1. Attach original index to preserve dominance info
+        const indexedColors = colors.map((c, i) => ({ color: c, index: i }));
+
+        // 2. Filter duplicates
+        const threshold = 35; // Slightly relaxed to allow more nuance
+        const filtered = [];
+
+        for (const item of indexedColors) {
             let unique = true;
-            for (let j = 0; j < filtered.length; j++) {
-                if (getColorDistance(colors[i], filtered[j]) < threshold) {
+            for (const existing of filtered) {
+                if (getPerceptualColorDistance(item.color, existing.color) < threshold) {
                     unique = false;
                     break;
                 }
             }
-            if (unique) filtered.push(colors[i]);
+            if (unique) {
+                filtered.push(item);
+            }
         }
-        return filtered.sort((a, b) => { // Sort by brightness
-            const bA = (a[0] * 299 + a[1] * 587 + a[2] * 114) / 1000;
-            const bB = (b[0] * 299 + b[1] * 587 + b[2] * 114) / 1000;
-            return bB - bA;
-        });
+
+        // 3. Smart Sort
+        // We want to favor Dominance (low index) but give a boost to High Saturation
+        return filtered.sort((a, b) => {
+            const scoreA = calculateColorScore(a.color, a.index, colors.length);
+            const scoreB = calculateColorScore(b.color, b.index, colors.length);
+            return scoreB - scoreA; // Descending score
+        }).map(item => item.color); // Extract colors back
+    }
+
+    function calculateColorScore(color, index, total) {
+        const saturation = getColorSaturation(color);
+
+        // Dominance score: 1.0 for first item, decays to 0
+        const dominance = 1 - (index / total);
+
+        // Weight: Dominance is king (0.7), Saturation is queen (0.3)
+        // This ensures we don't put a tiny red pixel above a massive blue sky
+        return (dominance * 0.7) + (saturation * 0.3);
+    }
+
+    // Perceptual color distance (weighted RGB approximation of LAB distance)
+    function getPerceptualColorDistance(c1, c2) {
+        const rMean = (c1[0] + c2[0]) / 2;
+        const r = c1[0] - c2[0];
+        const g = c1[1] - c2[1];
+        const b = c1[2] - c2[2];
+
+        // Weighted Euclidean distance that approximates human perception
+        return Math.sqrt(
+            (2 + rMean / 256) * r * r +
+            4 * g * g +
+            (2 + (255 - rMean) / 256) * b * b
+        );
+    }
+
+    // Calculate color saturation (HSL)
+    function getColorSaturation(rgb) {
+        const r = rgb[0] / 255;
+        const g = rgb[1] / 255;
+        const b = rgb[2] / 255;
+
+        const max = Math.max(r, g, b);
+        const min = Math.min(r, g, b);
+        const l = (max + min) / 2;
+
+        if (max === min) return 0; // Grayscale
+
+        const d = max - min;
+        return l > 0.5 ? d / (2 - max - min) : d / (max + min);
     }
 
     function getColorDistance(c1, c2) {
@@ -330,7 +383,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ctx.fillStyle = rgbStr;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        const fileName = `PureColor-${hexStr.slice(1)}.png`;
+        const fileName = `PureColor - ${hexStr.slice(1)}.png`;
         const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
 
         if ('showSaveFilePicker' in window) {
@@ -357,11 +410,11 @@ document.addEventListener('DOMContentLoaded', function () {
         canvas.width = 3840; canvas.height = 2160;
         const ctx = canvas.getContext('2d');
         const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        colors.forEach((c, i) => grad.addColorStop(i / (colors.length - 1), `rgb(${c[0]},${c[1]},${c[2]})`));
+        colors.forEach((c, i) => grad.addColorStop(i / (colors.length - 1), `rgb(${c[0]}, ${c[1]}, ${c[2]})`));
         ctx.fillStyle = grad;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        const fileName = `Gradient-${Date.now()}.png`;
+        const fileName = `Gradient - ${Date.now()}.png`;
         const blob = await new Promise(r => canvas.toBlob(r, 'image/png'));
 
         // Fallback same as above...

@@ -1,4 +1,15 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // --- Theme Initialization ---
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme || (systemDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+    }
+
+    // Initialize theme
+    initTheme();
+
     // --- Birthday Colors Logic ---
     const birthdayColors = {
         // 一月
@@ -371,36 +382,36 @@ document.addEventListener('DOMContentLoaded', function () {
         // 十二月
         '十二月': [
             { name: "亜麻色", desc: "对美着迷的艺术家", hex: "#d6c6af", month: 12, day: 1 },
-            { name: "", desc: "", hex: "#", month: 2, day: 2 },
-            { name: "", desc: "", hex: "#", month: 2, day: 3 },
-            { name: "", desc: "", hex: "#", month: 2, day: 4 },
-            { name: "", desc: "", hex: "#", month: 2, day: 5 },
-            { name: "", desc: "", hex: "#", month: 2, day: 6 },
-            { name: "", desc: "", hex: "#", month: 2, day: 7 },
-            { name: "", desc: "", hex: "#", month: 2, day: 8 },
-            { name: "", desc: "", hex: "#", month: 2, day: 9 },
-            { name: "", desc: "", hex: "#", month: 2, day: 10 },
-            { name: "", desc: "", hex: "#", month: 2, day: 11 },
-            { name: "", desc: "", hex: "#", month: 2, day: 12 },
-            { name: "", desc: "", hex: "#", month: 2, day: 13 },
-            { name: "", desc: "", hex: "#", month: 2, day: 14 },
-            { name: "", desc: "", hex: "#", month: 2, day: 15 },
-            { name: "", desc: "", hex: "#", month: 2, day: 16 },
-            { name: "", desc: "", hex: "#", month: 2, day: 17 },
-            { name: "", desc: "", hex: "#", month: 2, day: 18 },
-            { name: "", desc: "", hex: "#", month: 2, day: 19 },
-            { name: "", desc: "", hex: "#", month: 2, day: 20 },
-            { name: "", desc: "", hex: "#", month: 2, day: 21 },
-            { name: "", desc: "", hex: "#", month: 2, day: 22 },
-            { name: "", desc: "", hex: "#", month: 2, day: 23 },
-            { name: "", desc: "", hex: "#", month: 2, day: 24 },
-            { name: "", desc: "", hex: "#", month: 2, day: 25 },
-            { name: "", desc: "", hex: "#", month: 2, day: 26 },
-            { name: "", desc: "", hex: "#", month: 2, day: 27 },
-            { name: "", desc: "", hex: "#", month: 2, day: 28 },
-            { name: "", desc: "", hex: "#", month: 2, day: 29 },
-            { name: "", desc: "", hex: "#", month: 2, day: 30 },
-            { name: "", desc: "", hex: "#", month: 2, day: 31 }
+            { name: "蜂蜜甜心", desc: "被能够保证安心感的事物所吸引的人", hex: "#caa980", month: 12, day: 2 },
+            { name: "栗梅", desc: "与其沉浸于空想，不如付诸实践的人", hex: "#852e19", month: 12, day: 3 },
+            { name: "棕褐橄榄色", desc: "大胆且勇敢的人", hex: "#5d5644", month: 12, day: 4 },
+            { name: "黑紫色", desc: "不在意流行，具有深厚教养的学者类型", hex: "#4e4b3a", month: 12, day: 5 },
+            { name: "柠檬灰色", desc: "怀抱着非凡梦想的感性丰富的人", hex: "#e5cc96", month: 12, day: 6 },
+            { name: "淡青柠光", desc: "是一个勤奋工作、流汗努力的认真人", hex: "#e6d89b", month: 12, day: 7 },
+            { name: "菜籽油色", desc: "情绪稳定，值得信赖的人", hex: "#a69425", month: 12, day: 8 },
+            { name: "油黄", desc: "在困境中也不会动摇的踏实之人", hex: "#b4935d", month: 12, day: 9 },
+            { name: "青铜", desc: "不喜欢引人注目的内向的人", hex: "#ac6b25", month: 12, day: 10 },
+            { name: "塞舌尔粉红", desc: "举手投足间尽显优雅的人", hex: "#fbbaa8", month: 12, day: 11 },
+            { name: "鲑鱼色", desc: "不畏困难，勇于行动的创意人", hex: "#f79383", month: 12, day: 12 },
+            { name: "洗涤剂", desc: "给人带来巨大乐趣的善变者", hex: "#f4816f", month: 12, day: 13 },
+            { name: "朱色", desc: "仅仅在那里就能散发魅力的人", hex: "#eb6101", month: 12, day: 14 },
+            { name: "巴顿橙", desc: "总是情绪外向的运动型", hex: "#b16268", month: 12, day: 15 },
+            { name: "米白色", desc: "凭借自己的力量摆脱危机的勇者", hex: "#fdceba", month: 12, day: 16 },
+            { name: "米色", desc: "能够让周围的人感到明亮的人", hex: "#eedcb3", month: 12, day: 17 },
+            { name: "棕金色", desc: "追逐无定形梦想、内心温暖的人", hex: "#b4766d", month: 12, day: 18 },
+            { name: "琥珀色", desc: "讨厌固执且自私的人，诚实的人", hex: "#deb068", month: 12, day: 19 },
+            { name: "石南花", desc: "追求乐趣的幽默人", hex: "#715c61", month: 12, day: 20 },
+            { name: "丁香紫", desc: "追求乐趣的幽默人", hex: "#e0b5d3", month: 12, day: 21 },
+            { name: "紫罗兰色", desc: "充满浪漫情怀的人", hex: "#9079b6", month: 12, day: 22 },
+            { name: "菖蒲色", desc: "梦想着童话世界生活的人", hex: "#674196", month: 12, day: 23 },
+            { name: "茄子", desc: "认真且严肃地行动，是个可靠的人", hex: "#241b36", month: 12, day: 24 },
+            { name: "茄子绀", desc: "是个回避世人目光、性格内向的人", hex: "#824880", month: 12, day: 25 },
+            { name: "金色", desc: "成为强有力的保护者的可靠人物", hex: "#e6b422", month: 12, day: 26 },
+            { name: "萨罗", desc: "自信满满，认为自己就是财富", hex: "#afb293", month: 12, day: 27 },
+            { name: "琼·米耶尔", desc: "是个财运亨通、慷慨大方的人", hex: "#cb981b", month: 12, day: 28 },
+            { name: "芥末色", desc: "拥有充满慈爱的世界观者", hex: "#b2a280", month: 12, day: 29 },
+            { name: "秋叶", desc: "成为许多人坚强后盾的人", hex: "#b26724", month: 12, day: 30 },
+            { name: "绿松石蓝", desc: "个性鲜明的人", hex: "#00afcc", month: 12, day: 31 }
         ]
     };
 
