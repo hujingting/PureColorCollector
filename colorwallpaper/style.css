@@ -460,24 +460,27 @@ button {
 /* Tooltip */
 .toast-tooltip {
     position: fixed;
-    bottom: 2rem;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-    font-size: 0.9rem;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: var(--text-main);
+    color: var(--surface);
+    padding: 1rem 2rem;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-weight: 600;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 1000;
+    z-index: 10000;
+    box-shadow: var(--shadow-hover);
+    pointer-events: none;
 }
 
 .toast-tooltip.show {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    transform: translate(-50%, -50%) scale(1);
 }
 
 /* --- Responsive --- */

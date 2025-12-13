@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // 按月份分类的生日色
+document.addEventListener('DOMContentLoaded', function () {
+    // --- Birthday Colors Logic ---
     const birthdayColors = {
         // 一月
         '一月': [
@@ -406,7 +406,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const colorsList = document.getElementById('birthdayColorsContainer');
     const navScroll = document.querySelector('.nav-scroll');
-    
+
     // 创建导航项
     Object.keys(birthdayColors).forEach((month, index) => {
         const navItem = document.createElement('div');
@@ -414,8 +414,8 @@ document.addEventListener('DOMContentLoaded', function() {
         navItem.textContent = month;
         navItem.addEventListener('click', () => {
             const target = document.getElementById(`month-${index}`);
-            target.scrollIntoView({ behavior: 'smooth' });
-            
+            target.scrollIntoView();
+
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
@@ -522,35 +522,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 显示提示框的函数
     function showTooltip(x, y, text) {
-        let tooltip = document.querySelector('.copy-tooltip');
+        let tooltip = document.querySelector('.toast-tooltip');
         if (!tooltip) {
             tooltip = document.createElement('div');
-            tooltip.className = 'copy-tooltip';
+            tooltip.className = 'toast-tooltip';
             document.body.appendChild(tooltip);
         }
 
         tooltip.textContent = text;
-        tooltip.style.left = `${x}px`;
-        tooltip.style.top = `${y - 30}px`;
         tooltip.classList.add('show');
 
         setTimeout(() => {
             tooltip.classList.remove('show');
-        }, 1500);
+        }, 2000);
     }
 
     // 添加保存4K图片的函数
     async function saveAs4KImage(color) {
         console.info('[Save] 开始生成4K纯色图片:', color.name, color.hex);
-        
+
         const canvas = document.createElement('canvas');
         canvas.width = 3840;
         canvas.height = 2160;
-        
+
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = color.hex;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
+
         // 添加颜色信息水印
         ctx.font = 'bold 60px Arial';
         ctx.fillStyle = isLightColor(color.hex) ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)';
@@ -568,7 +566,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         suggestedName: fileName,
                         types: [{
                             description: 'PNG图片',
-                            accept: {'image/png': ['.png']},
+                            accept: { 'image/png': ['.png'] },
                         }],
                     });
                     const writable = await handle.createWritable();
@@ -594,12 +592,12 @@ document.addEventListener('DOMContentLoaded', function() {
     function isLightColor(hex) {
         // 移除 # 号
         hex = hex.replace('#', '');
-        
+
         // 转换为 RGB
         const r = parseInt(hex.substr(0, 2), 16);
         const g = parseInt(hex.substr(2, 2), 16);
         const b = parseInt(hex.substr(4, 2), 16);
-        
+
         // 计算亮度
         const brightness = (r * 299 + g * 587 + b * 114) / 1000;
         return brightness > 128;

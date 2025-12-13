@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // 按24节气分类的传统色
     const traditionalColors = {
         // 立春：新生、萌发
@@ -558,7 +558,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const colorsList = document.getElementById('traditionalColorsList');
     const navScroll = document.querySelector('.nav-scroll');
-    
+
     // 创建导航项
     Object.keys(traditionalColors).forEach((season, index) => {
         // 创建导航项
@@ -568,8 +568,8 @@ document.addEventListener('DOMContentLoaded', function() {
         navItem.addEventListener('click', () => {
             // 滚动到对应的节气区域
             const target = document.getElementById(`season-${index}`);
-            target.scrollIntoView({ behavior: 'smooth' });
-            
+            target.scrollIntoView();
+
             // 更新激活状态
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
@@ -615,7 +615,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // 点击颜色预览区域复制颜色值
             const preview = card.querySelector('.color-preview');
-            preview.addEventListener('click', () => {
+            preview.addEventListener('click', (event) => {
+                event.stopPropagation();
                 navigator.clipboard.writeText(color.hex)
                     .then(() => {
                         showTooltip(event.clientX, event.clientY, '颜色已复制！');
@@ -674,35 +675,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 显示提示框的函数
     function showTooltip(x, y, text) {
-        let tooltip = document.querySelector('.copy-tooltip');
+        let tooltip = document.querySelector('.toast-tooltip');
         if (!tooltip) {
             tooltip = document.createElement('div');
-            tooltip.className = 'copy-tooltip';
+            tooltip.className = 'toast-tooltip';
             document.body.appendChild(tooltip);
         }
 
         tooltip.textContent = text;
-        tooltip.style.left = `${x}px`;
-        tooltip.style.top = `${y - 30}px`;
         tooltip.classList.add('show');
 
         setTimeout(() => {
             tooltip.classList.remove('show');
-        }, 1500);
+        }, 2000);
     }
 
     // 添加保存4K图片的函数
     async function saveAs4KImage(color) {
         console.info('[Save] 开始生成4K纯色图片:', color.name, color.hex);
-        
+
         const canvas = document.createElement('canvas');
         canvas.width = 3840;  // 4K 宽度
         canvas.height = 2160; // 4K 高度
-        
+
         const ctx = canvas.getContext('2d');
         ctx.fillStyle = color.hex;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
+
         // 添加颜色信息水印
         ctx.font = 'bold 60px Arial';
         ctx.fillStyle = isLightColor(color.rgb) ? 'rgba(0,0,0,0.3)' : 'rgba(255,255,255,0.3)';
@@ -721,7 +720,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         suggestedName: fileName,
                         types: [{
                             description: 'PNG图片',
-                            accept: {'image/png': ['.png']},
+                            accept: { 'image/png': ['.png'] },
                         }],
                     });
                     const writable = await handle.createWritable();
